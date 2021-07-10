@@ -2,6 +2,10 @@
 
 I haven't use anything after Windows Mobile 6, so this is a chance for me to see what's all the hype is about
 
+## Status
+
+<img src="/metro-demo.gif" width="360" alt="Screen recording of the demo app"/>
+
 ## Project Structure
 
 | Module | Purpose |
