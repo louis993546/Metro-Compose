@@ -1,6 +1,6 @@
 # Metro-Compose
 
-I haven't use anything after Windows Mobile 6, so this is a chance for me to see what's all the hype is about
+I haven't use anything after Windows Mobile 6, so this is a chance for me to see what's all the hype ~~is~~ was about
 
 ## Status
 
