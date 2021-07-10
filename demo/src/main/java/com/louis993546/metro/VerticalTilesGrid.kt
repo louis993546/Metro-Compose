@@ -5,31 +5,64 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import timber.log.Timber
 
 fun something(width: Int, height: Int) {
-    TilesGridScopeInstance.whatIsThisList.add(WhatIsThis(width, height))
+    TilesGridScopeInstance.cellList.add(Cell(width, height))
+}
+
+interface VerticalTilesGridScope {
+    @Composable
+    fun s(content: @Composable () -> Unit)
+
+    @Composable
+    fun m(content: @Composable () -> Unit)
+
+    @Composable
+    fun l(content: @Composable () -> Unit)
+}
+
+class VerticalTilesGridScopeImpl : VerticalTilesGridScope {
+    @Composable
+    override fun s(content: @Composable () -> Unit) {
+        content()
+        something(1, 1)
+    }
+
+    @Composable
+    override fun m(content: @Composable () -> Unit) {
+        content()
+        something(2, 2)
+    }
+
+    @Composable
+    override fun l(content: @Composable () -> Unit) {
+        content()
+        something(4, 2)
+    }
+
 }
 
 @Composable
-fun VerticalTilesGrid2(
+fun VerticalTilesGrid(
     modifier: Modifier = Modifier,
     columns: Int = LocalConfiguration.current.screenWidthDp.toColumnCount(),
     gap: Dp = 8.dp,
-    content: @Composable () -> Unit
+    content: @Composable VerticalTilesGridScope.() -> Unit
 ) {
     Layout(
-        content = content,
-        modifier = modifier.verticalScroll(rememberScrollState()), // TODO make this scrollable
+        content = { VerticalTilesGridScopeImpl().content() },
+        modifier = modifier.verticalScroll(rememberScrollState()),
     ) { measurables, constraints ->
         val totalGapWidth = gap.roundToPx() * (columns + 1)
         val cellSize = (constraints.maxWidth - totalGapWidth) / columns
 
         val maxPossibleRowCount = measurables
-            .mapIndexed { index, _ -> TilesGridScopeInstance.whatIsThisList[index].rowCount }
+            .mapIndexed { index, _ -> TilesGridScopeInstance.cellList[index].rowCount }
             .sum()
         val matrix = (0 until maxPossibleRowCount).map {
             ((0 until columns).map { -1 }).toMutableList()
@@ -39,7 +72,7 @@ fun VerticalTilesGrid2(
         var currentColumn = 0
 
         val placeablesWithCoordinates = measurables.mapIndexed { index, measurable ->
-            val whatIsThis = TilesGridScopeInstance.whatIsThisList[index]
+            val whatIsThis = TilesGridScopeInstance.cellList[index]
             val columnCount = whatIsThis.columnCount
             val rowCount = whatIsThis.rowCount
 
@@ -123,3 +156,23 @@ fun VerticalTilesGrid2(
         }
     }
 }
+
+
+class Cell(
+    val columnCount: Int,
+    val rowCount: Int,
+)
+
+object TilesGridScopeInstance {
+    val cellList = mutableListOf<Cell>()
+}
+
+data class PlaceableWithGridCoordinate(
+    val placeable: Placeable,
+    val row: Int,
+    val column: Int,
+    val heightRowCount: Int,
+)
+
+fun Int.toColumnCount(): Int = if (this > 360) 6 else 4
+

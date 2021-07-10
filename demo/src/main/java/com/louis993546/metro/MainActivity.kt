@@ -3,42 +3,37 @@ package com.louis993546.metro
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.Placeable
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 import com.louis993546.metro.ui.theme.MetroDemoTheme
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MetroDemoTheme {
-                VerticalTilesGrid2 {
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "Tile 6").also { something(2, 2) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "Tile 10").also { something(4, 2) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "Tile 13").also { something(2, 2) }
-                    Tile(title = "Tile 14").also { something(2, 2) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "").also { something(1, 1) }
-                    Tile(title = "").also { something(1, 1) }
+            Phone {
+                MetroDemoTheme {
+                    val pagerState = rememberPagerState(pageCount = 2)
+                    HorizontalPager(state = pagerState) { page ->
+                        when (page) {
+                            0 -> HomePage(modifier = Modifier.fillMaxWidth())
+                            1 -> DrawerPage(modifier = Modifier.fillMaxWidth())
+                            else -> error("WTF")
+                        }
+                    }
                 }
             }
         }
@@ -46,7 +41,43 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Tile(
+fun Phone(content: @Composable () -> Unit) {
+    Column {
+        Box(modifier = Modifier.aspectRatio(9f / 16f)) {
+            content()
+        }
+        Row(
+            modifier = Modifier.fillMaxHeight(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                modifier = Modifier.weight(1f),
+                painter = painterResource(id = R.drawable.ic_android_black_24dp),
+                contentDescription = "back",
+                colorFilter = ColorFilter.tint(color = Color.White),
+            )
+            Image(
+                modifier = Modifier.weight(1f),
+                painter = painterResource(id = R.drawable.ic_android_black_24dp),
+                contentDescription = "home",
+                colorFilter = ColorFilter.tint(color = Color.White),
+            )
+            Image(
+                modifier = Modifier.weight(1f),
+                painter = painterResource(id = R.drawable.ic_android_black_24dp),
+                contentDescription = "search",
+                colorFilter = ColorFilter.tint(color = Color.White),
+            )
+        }
+    }
+}
+
+/**
+ * Unlike normal Tile, HomeTile can be rectangle, not just square
+ */
+@Composable
+fun HomeTile(
     modifier: Modifier = Modifier,
     title: String,
     backgroundColor: Color = LocalAccentColor.current,
@@ -56,68 +87,14 @@ fun Tile(
         modifier = modifier.background(color = backgroundColor)
     ) {
         Text(
-            modifier = Modifier.align(Alignment.BottomStart).padding(start = 6.dp, bottom = 2.dp),
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(start = 6.dp, bottom = 2.dp),
             text = title,
             color = textColor,
         )
     }
 }
-
-fun Int.toColumnCount(): Int = if (this > 360) 6 else 4
-
-interface TilesGridScope {
-    fun s(content: @Composable () -> Unit)
-    fun m(content: @Composable () -> Unit)
-    fun l(content: @Composable () -> Unit)
-}
-
-class WhatIsThis(
-    val columnCount: Int,
-    val rowCount: Int,
-//    val content: (index: Int) -> @Composable () -> Unit
-)
-
-object TilesGridScopeInstance : TilesGridScope {
-    val whatIsThisList = mutableListOf<WhatIsThis>()
-
-    override fun s(content: @Composable () -> Unit) {
-        whatIsThisList.add(
-            WhatIsThis(
-                columnCount = 1,
-                rowCount = 1,
-//                content = { @Composable { content() } },
-            )
-        )
-    }
-
-    override fun m(content: () -> Unit) {
-        whatIsThisList.add(
-            WhatIsThis(
-                columnCount = 2,
-                rowCount = 2,
-//                content = { @Composable { content() } },
-            )
-        )
-    }
-
-    override fun l(content: () -> Unit) {
-        whatIsThisList.add(
-            WhatIsThis(
-                columnCount = 4,
-                rowCount = 2,
-//                content = { @Composable { content() } },
-            )
-        )
-    }
-
-}
-
-data class PlaceableWithGridCoordinate(
-    val placeable: Placeable,
-    val row: Int,
-    val column: Int,
-    val heightRowCount: Int,
-)
 
 ///**
 // * TODO icon type?
@@ -148,7 +125,4 @@ fun DefaultPreview() {
 //    MetroDemoTheme {
 //        Greeting("Android")
 //    }
-    LazyColumn() {
-
-    }
 }

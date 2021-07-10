@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.TextUnit
 
 /**
  * Note: If you want it to look more like Metro, you can import Segoe UI font and override it. But
@@ -16,6 +17,7 @@ fun Text(
     modifier: Modifier = Modifier,
     text: String,
     color: Color = LocalTextOnBackgroundColor.current,
+    size: TextUnit = TextUnit.Unspecified,
 ) {
     BasicText(
         modifier = modifier,
@@ -23,6 +25,7 @@ fun Text(
         style = TextStyle.Default.copy(
             fontFamily = fontFamily,
             color = color,
+            fontSize = size,
         ),
     )
 }
