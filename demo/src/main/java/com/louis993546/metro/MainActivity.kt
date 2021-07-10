@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,7 +15,6 @@ import androidx.compose.ui.layout.Placeable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.louis993546.metro.ui.theme.MetroDemoTheme
-import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,16 +22,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             MetroDemoTheme {
                 VerticalTilesGrid2 {
-                    Tile(title = "Tile 1").also { something(1, 1) }
-                    Tile(title = "Tile 2").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
                     Tile(title = "Tile 3").also { something(2, 2) }
-                    Tile(title = "Tile 4").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
                     Tile(title = "Tile 5").also { something(4, 2) }
-                    Tile(title = "Tile 6").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
                     Tile(title = "Tile 7").also { something(2, 2) }
-                    Tile(title = "Tile 8").also { something(1, 1) }
-                    Tile(title = "Tile 9").also { something(1, 1) }
-                    Tile(title = "Tile 10").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
                 }
             }
         }
@@ -49,7 +49,7 @@ fun Tile(
         modifier = modifier.background(color = backgroundColor)
     ) {
         Text(
-            modifier = Modifier.align(Alignment.BottomStart),
+            modifier = Modifier.align(Alignment.BottomStart).padding(start = 6.dp, bottom = 2.dp),
             text = title,
             color = textColor,
         )

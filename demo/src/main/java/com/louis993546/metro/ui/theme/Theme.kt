@@ -6,7 +6,7 @@ import com.louis993546.metro.MetroTheme
 
 @Composable
 fun MetroDemoTheme(content: @Composable () -> Unit) {
-    MetroTheme(accentColor = Color.LightGray) {
+    MetroTheme(accentColor = Color(0xFFA4C400)) {
         content()
     }
 }
