@@ -1,5 +1,7 @@
 package com.louis993546.metro
 
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
@@ -21,7 +23,7 @@ fun VerticalTilesGrid2(
 ) {
     Layout(
         content = content,
-        modifier = modifier, // TODO make this scrollable
+        modifier = modifier.verticalScroll(rememberScrollState()), // TODO make this scrollable
     ) { measurables, constraints ->
         val totalGapWidth = gap.roundToPx() * (columns + 1)
         val cellSize = (constraints.maxWidth - totalGapWidth) / columns

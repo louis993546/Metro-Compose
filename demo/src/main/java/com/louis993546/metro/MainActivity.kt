@@ -24,11 +24,18 @@ class MainActivity : ComponentActivity() {
                 VerticalTilesGrid2 {
                     Tile(title = "").also { something(1, 1) }
                     Tile(title = "").also { something(1, 1) }
-                    Tile(title = "Tile 3").also { something(2, 2) }
                     Tile(title = "").also { something(1, 1) }
-                    Tile(title = "Tile 5").also { something(4, 2) }
                     Tile(title = "").also { something(1, 1) }
-                    Tile(title = "Tile 7").also { something(2, 2) }
+                    Tile(title = "").also { something(1, 1) }
+                    Tile(title = "Tile 6").also { something(2, 2) }
+                    Tile(title = "").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
+                    Tile(title = "Tile 10").also { something(4, 2) }
+                    Tile(title = "").also { something(1, 1) }
+                    Tile(title = "").also { something(1, 1) }
+                    Tile(title = "Tile 13").also { something(2, 2) }
+                    Tile(title = "Tile 14").also { something(2, 2) }
                     Tile(title = "").also { something(1, 1) }
                     Tile(title = "").also { something(1, 1) }
                     Tile(title = "").also { something(1, 1) }

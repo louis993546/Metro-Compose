@@ -13,8 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/metro/src/main/res/font/segoeui.ttf
-/metro/src/main/res/font/segoeuib.ttf
-/metro/src/main/res/font/segoeuil.ttf
-/metro/src/main/res/font/segoeuisl.ttf
-/metro/src/main/res/font/seguisb.ttf
+/metro/src/close/
