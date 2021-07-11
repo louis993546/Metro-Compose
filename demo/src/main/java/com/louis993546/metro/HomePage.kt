@@ -27,13 +27,18 @@ fun HomePage(
             s { HomeTile(iconRes = R.drawable.ic_baseline_local_phone_24) }
             s { HomeTile(iconRes = R.drawable.ic_baseline_message_24) }
             s { HomeTile(iconRes = R.drawable.ic_baseline_map_24) }
-            s { HomeTile() }
+            s {
+                HomeTile(
+                    iconRes = R.drawable.ic_baseline_settings_24,
+                    modifier = Modifier.clickable { navController.navigate(Apps.METRO_SETTINGS) }
+                )
+            }
             s { HomeTile() }
             m {
                 HomeTile(
                     title = "Calculator",
                     iconRes = R.drawable.ic_baseline_calculate_24,
-                    modifier = Modifier.clickable { navController.navigate(Apps.CALCULATOR.id) }
+                    modifier = Modifier.clickable { navController.navigate(Apps.CALCULATOR) }
                 )
             }
             s { HomeTile() }

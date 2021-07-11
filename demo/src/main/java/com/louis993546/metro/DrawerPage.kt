@@ -22,7 +22,7 @@ fun DrawerPage(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
-    val list = appsList.groupBy { it.first().lowercaseChar() }.map { (char, list) ->
+    val list = appsList.sorted().groupBy { it.first().lowercaseChar() }.map { (char, list) ->
         val header = ListItem.Header(char.lowercaseChar())
         val items = list.map { ListItem.App(it) }
 
@@ -167,4 +167,5 @@ val appsList = listOf(
     "Health & Fitness",
     "HERE Drive+",
     "HERE Maps",
+    "Metro Settings",
 )

@@ -28,6 +28,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.louis993546.calculator.CalculatorApp
 import com.louis993546.metro.ui.theme.MetroDemoTheme
+import com.louis993546.metro_settings.MetroSettingsApp
 import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
@@ -46,6 +47,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(Apps.LAUNCHER.id) { Launcher(navController) }
                         composable(Apps.CALCULATOR.id) { CalculatorApp() }
+                        composable(Apps.METRO_SETTINGS.id) { MetroSettingsApp() }
                         // Add new apps here (step 2)
                     }
                 }
@@ -56,8 +58,13 @@ class MainActivity : ComponentActivity() {
 
 enum class Apps(val id: String) {
     LAUNCHER("launcher"),
-    CALCULATOR("calculator")
+    CALCULATOR("calculator"),
+    METRO_SETTINGS("metroSettings")
     // Add new apps here (step 1)
+}
+
+fun NavController.navigate(route: Apps) {
+    this.navigate(route.id)
 }
 
 @ExperimentalPagerApi
