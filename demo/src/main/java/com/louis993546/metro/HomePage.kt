@@ -1,21 +1,19 @@
 package com.louis993546.metro
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.louis993546.metro.ui.theme.MetroDemoTheme
 
 
 @Composable
 fun HomePage(
     modifier: Modifier = Modifier,
+    navController: NavController,
 ) {
     Box(modifier = modifier) {
         // TODO https://stackoverflow.com/questions/68334723/how-to-do-the-wp8-background-effect-in-jetpack-compose
@@ -31,7 +29,13 @@ fun HomePage(
             s { HomeTile(iconRes = R.drawable.ic_baseline_map_24) }
             s { HomeTile() }
             s { HomeTile() }
-            m { HomeTile(title = "Calculator", iconRes = R.drawable.ic_baseline_calculate_24) }
+            m {
+                HomeTile(
+                    title = "Calculator",
+                    iconRes = R.drawable.ic_baseline_calculate_24,
+                    modifier = Modifier.clickable { navController.navigate(Apps.CALCULATOR.id) }
+                )
+            }
             s { HomeTile() }
             s { HomeTile() }
             s { HomeTile() }
@@ -51,6 +55,6 @@ fun HomePage(
 @Composable
 fun PreviewHomePage() {
     MetroDemoTheme {
-        HomePage()
+//        HomePage()
     }
 }

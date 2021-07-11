@@ -21,3 +21,4 @@ rootProject.name = "Metro"
 include ':metro'
 include ':demo'
 include ':calculator'
+include ':metro_settings'

@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,9 +18,15 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.louis993546.calculator.CalculatorApp
 import com.louis993546.metro.ui.theme.MetroDemoTheme
 import timber.log.Timber
 
@@ -29,17 +36,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Phone {
+            val navController = rememberNavController()
+            DeviceFrame(navController = navController) {
                 MetroDemoTheme {
-                    Box(modifier = Modifier.background(color = LocalBackgroundColor.current)) {
-                        val pagerState = rememberPagerState(pageCount = 2)
-                        HorizontalPager(state = pagerState) { page ->
-                            when (page) {
-                                0 -> HomePage(modifier = Modifier.fillMaxWidth())
-                                1 -> DrawerPage(modifier = Modifier.fillMaxWidth())
-                                else -> error("WTF")
-                            }
-                        }
+                    NavHost(
+                        navController = navController,
+                        startDestination = "launcher",
+                        modifier = Modifier.background(color = LocalBackgroundColor.current)
+                    ) {
+                        composable(Apps.LAUNCHER.id) { Launcher(navController) }
+                        composable(Apps.CALCULATOR.id) { CalculatorApp() }
+                        // Add new apps here (step 2)
                     }
                 }
             }
@@ -47,9 +54,35 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+enum class Apps(val id: String) {
+    LAUNCHER("launcher"),
+    CALCULATOR("calculator")
+    // Add new apps here (step 1)
+}
+
+@ExperimentalPagerApi
+@ExperimentalFoundationApi
 @Composable
-fun Phone(content: @Composable () -> Unit) {
-    val ratio = LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
+fun Launcher(
+    navController: NavController,
+) {
+    val pagerState = rememberPagerState(pageCount = 2)
+    HorizontalPager(state = pagerState) { page ->
+        when (page) {
+            0 -> HomePage(modifier = Modifier.fillMaxWidth(), navController = navController)
+            1 -> DrawerPage(modifier = Modifier.fillMaxWidth(), navController = navController)
+            else -> error("WTF")
+        }
+    }
+}
+
+@Composable
+fun DeviceFrame(
+    navController: NavHostController,
+    content: @Composable () -> Unit,
+) {
+    val ratio =
+        LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
     Timber.tag("qqqq").d(ratio.toString())
     val isTallScreen = ratio >= 1.9
 
@@ -68,7 +101,14 @@ fun Phone(content: @Composable () -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        Timber
+                            .tag("qqqq")
+                            .d("back button clicked")
+                        navController.popBackStack()
+                    },
                 painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
                 contentDescription = "back",
                 colorFilter = ColorFilter.tint(color = Color.White),
@@ -123,29 +163,6 @@ fun HomeTile(
         )
     }
 }
-
-///**
-// * TODO icon type?
-// */
-//sealed interface Tile {
-//    val id: String
-//
-//    /**
-//     * 1x1 square
-//     */
-//    data class Small(override val id: String, val icon: Unit) : Tile
-//
-//    /**
-//     * 2x2 square
-//     */
-//    data class Medium(override val id: String, val icon: Unit, val text: String) : Tile
-//
-//    /**
-//     * 4x2 rectangle
-//     */
-//    data class Large(override val id: String, val icon: Unit, val text: String) : Tile
-//}
-
 
 @Preview(showBackground = true)
 @Composable

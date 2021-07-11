@@ -57,10 +57,16 @@ fun CalculatorApp(
         modifier = modifier.padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Text(
-            modifier = Modifier.weight(1f),
-            text = "0"
-        )
+        Box(
+            modifier = Modifier.weight(1f).fillMaxWidth(),
+        ) {
+            Text(
+                modifier = Modifier.align(Alignment.BottomEnd),
+                text = "0",
+                size = 64.sp
+            )
+        }
+
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             CalculatorButton(modifier = Modifier.weight(1f), text = "C")
@@ -99,7 +105,7 @@ fun CalculatorApp(
 
         // TODO see if this is fixable, if not, make my own layout again i guess 🤷
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(2f), text = "0")
+            CalculatorButton(modifier = Modifier.weight(2.1f), text = "0")
             CalculatorButton(modifier = Modifier.weight(1f), text = ".")
             CalculatorButton(
                 modifier = Modifier.weight(1f),
@@ -121,7 +127,7 @@ fun CalculatorButton(
 ) {
     Box(
         modifier = modifier
-            .heightIn(min = 48.dp)
+            .heightIn(min = 64.dp)
             .background(color = backgroundColor),
         contentAlignment = Alignment.Center,
     ) {
