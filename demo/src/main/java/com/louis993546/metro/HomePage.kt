@@ -16,7 +16,7 @@ fun HomePage(
         s { HomeTile(iconRes = R.drawable.ic_baseline_map_24) }
         s { HomeTile() }
         s { HomeTile() }
-        m { HomeTile(title = "Tile 6", iconRes = R.drawable.ic_baseline_calculate_24) }
+        m { HomeTile(title = "Calculator", iconRes = R.drawable.ic_baseline_calculate_24) }
         s { HomeTile() }
         s { HomeTile() }
         s { HomeTile() }
