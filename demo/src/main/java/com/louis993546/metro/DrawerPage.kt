@@ -1,7 +1,9 @@
 package com.louis993546.metro
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,10 +16,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@ExperimentalFoundationApi
 @Composable
 fun DrawerPage(
     modifier: Modifier = Modifier,
 ) {
+    val list = appsList.groupBy { it.first().lowercaseChar() }.map { (char, list) ->
+        val header = ListItem.Header(char.lowercaseChar())
+        val items = list.map { ListItem.App(it) }
+
+        listOf(header) + items
+    }.flatten()
+
     val topMargin = 8.dp
     Row(modifier = modifier) {
         SearchButton(modifier = Modifier.padding(all = topMargin))
@@ -28,22 +38,21 @@ fun DrawerPage(
             contentPadding = PaddingValues(vertical = topMargin),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            // TODO add header
-            items(appsList, key = { it }) { app ->
-                Row {
-                    AppIcon {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(color = LocalAccentColor.current)
-                        )
+            list.forEach { item ->
+                when (item) {
+                    is ListItem.Header -> {
+                        stickyHeader(key = item.char) {
+                            Header(
+                                modifier = Modifier.fillMaxWidth(),
+                                letter = item.char,
+                            )
+                        }
                     }
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        modifier = Modifier.align(Alignment.CenterVertically),
-                        text = app,
-                        size = 28.sp,
-                    )
+                    is ListItem.App -> {
+                        item(key = item.name) {
+                            AppRow(app = item)
+                        }
+                    }
                 }
             }
         }
@@ -53,9 +62,13 @@ fun DrawerPage(
 
 @Composable
 fun SearchButton(modifier: Modifier = Modifier) {
-    CircleButton(modifier = modifier.size(48.dp).padding(4.dp)) {
+    CircleButton(modifier = modifier
+        .size(48.dp)
+        .padding(4.dp)) {
         Image(
-            modifier = Modifier.fillMaxSize().padding(8.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp),
             painter = painterResource(id = R.drawable.ic_baseline_search_24),
             contentDescription = "Search",
             colorFilter = ColorFilter.tint(color = LocalTextOnBackgroundColor.current)
@@ -69,6 +82,56 @@ fun AppIcon(
     content: @Composable BoxScope.() -> Unit,
 ) {
     Box(modifier = modifier.size(48.dp), content = content)
+}
+
+@Composable
+fun AppRow(
+    modifier: Modifier = Modifier,
+    app: ListItem.App,
+) {
+    Row(modifier = modifier) {
+        AppIcon {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = LocalAccentColor.current)
+            )
+        }
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            modifier = Modifier.align(Alignment.CenterVertically),
+            text = app.name,
+            size = 28.sp,
+        )
+    }
+}
+
+@Composable
+fun Header(
+    modifier: Modifier = Modifier,
+    letter: Char,
+) {
+    Box(modifier = modifier) {
+        Box(
+            modifier = Modifier
+                .background(color = LocalBackgroundColor.current)
+                .size(48.dp)
+                .border(width = 2.dp, color = LocalAccentColor.current)
+        ) {
+            Text(
+                modifier = Modifier
+                    .padding(start = 8.dp)
+                    .align(Alignment.BottomStart),
+                text = letter.toString(),
+                size = 24.sp,
+            )
+        }
+    }
+}
+
+sealed interface ListItem {
+    data class Header(val char: Char) : ListItem
+    data class App(val name: String) : ListItem
 }
 
 // https://youtu.be/2p6zmZQRTzE?t=424
