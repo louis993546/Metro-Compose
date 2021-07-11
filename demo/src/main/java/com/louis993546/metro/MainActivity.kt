@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.louis993546.calculator.CalculatorApp
 import com.louis993546.metro.ui.theme.MetroDemoTheme
 
 class MainActivity : ComponentActivity() {
@@ -85,7 +86,7 @@ fun Phone(content: @Composable () -> Unit) {
 fun HomeTile(
     modifier: Modifier = Modifier,
     @DrawableRes iconRes: Int? = null,
-    title: String,
+    title: String = "",
     backgroundColor: Color = LocalAccentColor.current,
     textColor: Color = LocalTextOnAccentColor.current
 ) {
@@ -95,10 +96,10 @@ fun HomeTile(
         iconRes?.let { res ->
             Image(
                 modifier = Modifier
-                    .size(32.dp)
+                    .size(36.dp)
                     .align(Alignment.Center),
                 painter = painterResource(id = res),
-                contentDescription = "",
+                contentDescription = "", // TODO fix me
                 colorFilter = ColorFilter.tint(textColor),
             )
         }

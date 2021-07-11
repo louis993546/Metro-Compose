@@ -89,7 +89,7 @@ fun VerticalTilesGrid(
                         currentColumn += 1
                     }
                 } else {
-                    // this cell is empty, not check if all the necessary cells are empty as well
+                    // this cell is empty, now check if all the necessary cells are empty as well
                     // check if there is enough columns first
                     if ((columns - currentColumn) < columnCount) {
                         currentRow += 1

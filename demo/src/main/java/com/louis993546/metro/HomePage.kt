@@ -11,23 +11,23 @@ fun HomePage(
     modifier: Modifier = Modifier,
 ) {
     VerticalTilesGrid(modifier = modifier) {
-        s { HomeTile(title = "", iconRes = R.drawable.ic_baseline_local_phone_24) }
-        s { HomeTile(title = "", iconRes = R.drawable.ic_baseline_message_24) }
-        s { HomeTile(title = "", iconRes = R.drawable.ic_baseline_map_24) }
-        s { HomeTile(title = "") }
-        s { HomeTile(title = "") }
-        m { HomeTile(title = "Tile 6") }
-        s { HomeTile(title = "") }
-        s { HomeTile(title = "") }
-        s { HomeTile(title = "") }
+        s { HomeTile(iconRes = R.drawable.ic_baseline_local_phone_24) }
+        s { HomeTile(iconRes = R.drawable.ic_baseline_message_24) }
+        s { HomeTile(iconRes = R.drawable.ic_baseline_map_24) }
+        s { HomeTile() }
+        s { HomeTile() }
+        m { HomeTile(title = "Tile 6", iconRes = R.drawable.ic_baseline_calculate_24) }
+        s { HomeTile() }
+        s { HomeTile() }
+        s { HomeTile() }
         l { HomeTile(title = "Tile 10") }
-        s { HomeTile(title = "") }
-        s { HomeTile(title = "") }
+        s { HomeTile() }
+        s { HomeTile() }
         m { HomeTile(title = "Tile 13") }
         m { HomeTile(title = "Tile 14") }
-        s { HomeTile(title = "") }
-        s { HomeTile(title = "") }
-        s { HomeTile(title = "") }
+        s { HomeTile() }
+        s { HomeTile() }
+        s { HomeTile() }
     }
 }
 

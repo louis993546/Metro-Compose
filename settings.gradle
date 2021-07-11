@@ -18,5 +18,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Metro"
-include ':demo'
 include ':metro'
+include ':demo'
+include ':calculator'
