@@ -63,7 +63,7 @@ fun MetroSettingsApp(
         ) {
             itemsIndexed(
                 listOf("about", "open-source licenses"),
-                key = { i, item -> item }
+                key = { _, item -> item }
             ) { index, title ->
                 Text(
                     text = title,

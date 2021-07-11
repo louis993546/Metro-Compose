@@ -1,6 +1,5 @@
-package com.louis993546.metro
+package com.louis993546.metro.demo
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable

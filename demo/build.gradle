@@ -8,11 +8,12 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.louis993546.metro"
+        applicationId "com.louis993546.metro.demo"
         minSdk 23
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
+        def number = System.getenv("GITHUB_RUN_NUMBER") ?: 1
+        versionCode number.toInteger()
+        versionName "${number}.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -22,7 +23,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }

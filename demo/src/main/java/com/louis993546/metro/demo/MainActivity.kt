@@ -1,4 +1,4 @@
-package com.louis993546.metro
+package com.louis993546.metro.demo
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -27,7 +27,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.louis993546.calculator.CalculatorApp
-import com.louis993546.metro.ui.theme.MetroDemoTheme
+import com.louis993546.metro.*
+import com.louis993546.metro.demo.theme.MetroDemoTheme
 import com.louis993546.metro_settings.MetroSettingsApp
 import timber.log.Timber
 

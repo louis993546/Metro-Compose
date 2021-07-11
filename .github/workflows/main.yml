@@ -1,4 +1,4 @@
-name: PR
+name: Main
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Debug APK
-          path: demo/build/outputs/apk/debug/app-debug.apk
+          path: demo/build/outputs/apk/debug/demo-debug.apk
 #   release:
 #     runs-on: ubuntu-latest
 #     steps:
@@ -52,5 +52,5 @@ jobs:
 #         with:
 #           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
 #           packageName: com.louis993546.metro.demo
-#           releaseFiles: demo/build/outputs/bundle/release/app-release.aab
+#           releaseFiles: demo/build/outputs/bundle/release/demo-release.aab
 #           track: beta

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.louis993546.metro">
+    package="com.louis993546.metro.demo">
 
     <application
         android:name=".App"

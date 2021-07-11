@@ -1,4 +1,4 @@
-package com.louis993546.metro
+package com.louis993546.metro.demo
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -7,8 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.louis993546.metro.ui.theme.MetroDemoTheme
-
+import com.louis993546.metro.demo.theme.MetroDemoTheme
 
 @Composable
 fun HomePage(

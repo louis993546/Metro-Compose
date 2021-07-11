@@ -1,4 +1,4 @@
-package com.louis993546.metro
+package com.louis993546.metro.demo
 
 import android.app.Application
 import timber.log.Timber
