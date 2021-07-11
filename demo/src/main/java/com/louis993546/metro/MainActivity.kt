@@ -122,7 +122,9 @@ fun DeviceFrame(
                 colorFilter = ColorFilter.tint(color = Color.White),
             )
             Image(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(1f).clickable {
+                    navController.popBackStack(route = Apps.LAUNCHER.id, inclusive = false)
+                },
                 painter = painterResource(id = R.drawable.ic_android_black_24dp),
                 contentDescription = "home",
                 colorFilter = ColorFilter.tint(color = Color.White),
