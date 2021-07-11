@@ -11,9 +11,9 @@ fun HomePage(
     modifier: Modifier = Modifier,
 ) {
     VerticalTilesGrid(modifier = modifier) {
-        s { HomeTile(title = "") }
-        s { HomeTile(title = "") }
-        s { HomeTile(title = "") }
+        s { HomeTile(title = "", iconRes = R.drawable.ic_baseline_local_phone_24) }
+        s { HomeTile(title = "", iconRes = R.drawable.ic_baseline_message_24) }
+        s { HomeTile(title = "", iconRes = R.drawable.ic_baseline_map_24) }
         s { HomeTile(title = "") }
         s { HomeTile(title = "") }
         m { HomeTile(title = "Tile 6") }

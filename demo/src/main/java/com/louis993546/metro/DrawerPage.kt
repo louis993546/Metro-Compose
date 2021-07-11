@@ -1,16 +1,16 @@
 package com.louis993546.metro
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -51,19 +51,14 @@ fun DrawerPage(
 
 }
 
-/**
- * TODO replace me with an icon
- */
 @Composable
 fun SearchButton(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .size(48.dp)
-            .wrapContentSize(Alignment.Center)
-            .clip(CircleShape)
-    ) {
-        Box(
-            modifier = Modifier.fillMaxSize().background(color = Color.White)
+    CircleButton(modifier = modifier.size(48.dp).padding(4.dp)) {
+        Image(
+            modifier = Modifier.fillMaxSize().padding(8.dp),
+            painter = painterResource(id = R.drawable.ic_baseline_search_24),
+            contentDescription = "Search",
+            colorFilter = ColorFilter.tint(color = LocalTextOnBackgroundColor.current)
         )
     }
 }

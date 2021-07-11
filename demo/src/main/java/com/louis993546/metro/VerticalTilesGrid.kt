@@ -174,5 +174,5 @@ data class PlaceableWithGridCoordinate(
     val heightRowCount: Int,
 )
 
-fun Int.toColumnCount(): Int = if (this > 360) 6 else 4
+fun Int.toColumnCount(): Int = if (this > 411) 6 else 4
 

@@ -3,6 +3,7 @@ package com.louis993546.metro
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -26,12 +27,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             Phone {
                 MetroDemoTheme {
-                    val pagerState = rememberPagerState(pageCount = 2)
-                    HorizontalPager(state = pagerState) { page ->
-                        when (page) {
-                            0 -> HomePage(modifier = Modifier.fillMaxWidth())
-                            1 -> DrawerPage(modifier = Modifier.fillMaxWidth())
-                            else -> error("WTF")
+                    Box(modifier = Modifier.background(color = LocalBackgroundColor.current)) {
+                        val pagerState = rememberPagerState(pageCount = 2)
+                        HorizontalPager(state = pagerState) { page ->
+                            when (page) {
+                                0 -> HomePage(modifier = Modifier.fillMaxWidth())
+                                1 -> DrawerPage(modifier = Modifier.fillMaxWidth())
+                                else -> error("WTF")
+                            }
                         }
                     }
                 }
@@ -42,18 +45,20 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Phone(content: @Composable () -> Unit) {
-    Column {
+    Column{
         Box(modifier = Modifier.aspectRatio(9f / 16f)) {
             content()
         }
         Row(
-            modifier = Modifier.fillMaxHeight(),
+            modifier = Modifier
+                .fillMaxHeight()
+                .background(color = Color.Black), // like capacitive buttons,
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 modifier = Modifier.weight(1f),
-                painter = painterResource(id = R.drawable.ic_android_black_24dp),
+                painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
                 contentDescription = "back",
                 colorFilter = ColorFilter.tint(color = Color.White),
             )
@@ -65,7 +70,7 @@ fun Phone(content: @Composable () -> Unit) {
             )
             Image(
                 modifier = Modifier.weight(1f),
-                painter = painterResource(id = R.drawable.ic_android_black_24dp),
+                painter = painterResource(id = R.drawable.ic_baseline_search_24),
                 contentDescription = "search",
                 colorFilter = ColorFilter.tint(color = Color.White),
             )
@@ -79,6 +84,7 @@ fun Phone(content: @Composable () -> Unit) {
 @Composable
 fun HomeTile(
     modifier: Modifier = Modifier,
+    @DrawableRes iconRes: Int? = null,
     title: String,
     backgroundColor: Color = LocalAccentColor.current,
     textColor: Color = LocalTextOnAccentColor.current
@@ -86,6 +92,17 @@ fun HomeTile(
     Box(
         modifier = modifier.background(color = backgroundColor)
     ) {
+        iconRes?.let { res ->
+            Image(
+                modifier = Modifier
+                    .size(32.dp)
+                    .align(Alignment.Center),
+                painter = painterResource(id = res),
+                contentDescription = "",
+                colorFilter = ColorFilter.tint(textColor),
+            )
+        }
+
         Text(
             modifier = Modifier
                 .align(Alignment.BottomStart)
