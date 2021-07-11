@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import com.louis993546.calculator.CalculatorApp
 import com.louis993546.metro.ui.theme.MetroDemoTheme
+import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
     @ExperimentalFoundationApi
@@ -49,8 +49,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Phone(content: @Composable () -> Unit) {
-    val isTallScreen =
-        (LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()) >= 2
+    val ratio = LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
+    Timber.tag("qqqq").d(ratio.toString())
+    val isTallScreen = ratio >= 1.9
 
     Column {
         Box(
