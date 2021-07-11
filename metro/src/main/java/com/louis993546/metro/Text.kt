@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 
 /**
@@ -18,6 +19,7 @@ fun Text(
     text: String,
     color: Color = LocalTextOnBackgroundColor.current,
     size: TextUnit = TextUnit.Unspecified,
+    weight: FontWeight = FontWeight.Normal,
 ) {
     BasicText(
         modifier = modifier,
@@ -26,6 +28,7 @@ fun Text(
             fontFamily = fontFamily,
             color = color,
             fontSize = size,
+            fontWeight = weight,
         ),
     )
 }

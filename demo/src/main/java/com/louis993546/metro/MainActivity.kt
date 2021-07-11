@@ -91,12 +91,13 @@ fun DeviceFrame(
     val ratio =
         LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
     Timber.tag("qqqq").d(ratio.toString())
-    val isTallScreen = ratio >= 1.9
+    val isTallScreen = ratio >= 1.8
 
     Column {
         Box(
             modifier = Modifier
-                .run { if (isTallScreen) this.aspectRatio(9f / 16f) else this }
+                // Lumia 920 has 1280 * 768 screen
+                .run { if (isTallScreen) this.aspectRatio(9f / 15f) else this }
         ) {
             content()
         }
