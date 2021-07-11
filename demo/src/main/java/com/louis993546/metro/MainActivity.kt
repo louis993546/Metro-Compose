@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,8 +49,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Phone(content: @Composable () -> Unit) {
-    Column{
-        Box(modifier = Modifier.aspectRatio(9f / 16f)) {
+    val isTallScreen =
+        (LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()) >= 2
+
+    Column {
+        Box(
+            modifier = Modifier
+                .run { if (isTallScreen) this.aspectRatio(9f / 16f) else this }
+        ) {
             content()
         }
         Row(
