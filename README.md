@@ -10,14 +10,14 @@ hype ~~is~~ was about
 ## Project Structure
 
 | Module  | Purpose                                                                      |
-|---------|------------------------------------------------------------------------------|
+| ------- | ---------------------------------------------------------------------------- |
 | `demo`  | Build a simplified Windows Phone 8.1 UI                                      |
 | `metro` | The library that allows others to build Metro-ish apps using Jetpack Compose |
 
 And these are the list of build-in "apps"
 
 | Module           | App                                              |
-|------------------|--------------------------------------------------|  
+| ---------------- | ------------------------------------------------ |
 | `metro_settings` | Settings and information for the demo app itself |
 | `calculator`     | Calculator                                       |
 
