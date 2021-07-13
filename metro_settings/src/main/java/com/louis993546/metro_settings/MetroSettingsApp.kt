@@ -1,5 +1,8 @@
 package com.louis993546.metro_settings
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -11,6 +14,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,16 +37,23 @@ fun MetroSettingsApp(
         )
 
         Pages(
-            modifier = Modifier.weight(1f).padding(top = 8.dp),
-            pageTitles = listOf("about", "open-source licenses")
+            modifier = Modifier
+                .weight(1f)
+                .padding(top = 8.dp),
+            pageTitles = listOf("settings", "about", "open-source licenses")
         ) { page ->
             when (page) {
-                0 -> AboutUs(
+                0 -> Settings(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
-                1 -> OpenSourceLicenses(
+                1 -> AboutUs(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                )
+                2 -> OpenSourceLicenses(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
@@ -50,6 +61,7 @@ fun MetroSettingsApp(
             }
         }
 
+        val context = LocalContext.current
         ApplicationBar(
             modifier = Modifier.fillMaxWidth(),
             count = 1,
@@ -62,7 +74,28 @@ fun MetroSettingsApp(
                     colorFilter = ColorFilter.tint(color = LocalTextOnButtonColor.current)
                 )
             }
-        ) { TODO("on click") }
+        ) {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.louis993546.metro.demo")
+                putExtra(Intent.EXTRA_TITLE, "Metro Demo on Play Store")
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            context.startActivity(shareIntent)
+        }
+    }
+}
+
+@Composable
+fun Settings(
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier = modifier.fillMaxHeight()) {
+        Text(text = "TODO Real browser, or in-app fake IE")
+        Text(text = "TODO typography")
+        Text(text = "TODO screen ratio (e.g. 15:9 like 920, 16:9, or full screen)")
     }
 }
 
@@ -86,15 +119,28 @@ fun OpenSourceLicenses(
     }
 }
 
+private fun Context.startBrowserActivity(uri: String) {
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
+}
+
 @Composable
 fun OpenSourceLicenseRow(
     modifier: Modifier = Modifier,
     library: Library,
 ) {
-    Column(modifier = modifier.clickable { TODO("Open Browser") }) {
-        Text(text = library.name)
+    val context = LocalContext.current
+    Column(
+        modifier = modifier.clickable { library.url?.let { context.startBrowserActivity(it) } },
+    ) {
+        Text(
+            text = library.name,
+            size = 24.sp,
+        )
         // TODO only show the full license when click
-//        Text(text = library.license ?: "") // TODO maybe this should not be nullable?
+        Text(
+            text = library.license ?: "", // TODO maybe this should not be nullable?
+            modifier = Modifier.padding(top = 8.dp)
+        )
     }
 }
 
