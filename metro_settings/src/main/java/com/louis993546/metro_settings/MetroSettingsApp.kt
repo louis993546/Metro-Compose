@@ -11,7 +11,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
@@ -23,6 +27,10 @@ import com.louis993546.metro.ApplicationBar
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.Pages
 import com.louis993546.metro.Text
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import com.louis993546.metro.MessageBox
 
 @ExperimentalPagerApi
 @Composable
@@ -77,7 +85,10 @@ fun MetroSettingsApp(
         ) {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.louis993546.metro.demo")
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    "https://play.google.com/store/apps/details?id=com.louis993546.metro.demo"
+                )
                 putExtra(Intent.EXTRA_TITLE, "Metro Demo on Play Store")
                 type = "text/plain"
             }
@@ -129,18 +140,34 @@ fun OpenSourceLicenseRow(
     library: Library,
 ) {
     val context = LocalContext.current
+    var openDialog by remember { mutableStateOf(false) }
+
     Column(
         modifier = modifier.clickable { library.url?.let { context.startBrowserActivity(it) } },
     ) {
         Text(
             text = library.name,
             size = 24.sp,
+            modifier = Modifier.clickable { openDialog = true }
         )
-        // TODO only show the full license when click
-        Text(
-            text = library.license ?: "", // TODO maybe this should not be nullable?
-            modifier = Modifier.padding(top = 8.dp)
-        )
+    }
+
+    if (openDialog) {
+        MessageBox(onDismissRequest = { openDialog = false }) {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                Text(
+                    text = "I need a button component",
+                    modifier = Modifier.run {
+                        if (library.url.isNullOrEmpty()) this
+                        else this.clickable { context.startBrowserActivity(library.url) }
+                    },
+                )
+                Text(
+                    text = library.license ?: "", // TODO maybe this should not be nullable?
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
+        }
     }
 }
 
