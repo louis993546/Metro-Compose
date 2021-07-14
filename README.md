@@ -9,7 +9,15 @@ It's currently on open testing on Play Store
 
 ## Status
 
+### The demo app
+
 <img src="/metro-demo.gif" width="360" alt="Screen recording of the demo app"/>
+
+### The library
+
+For the time being, the library is published to GitHub Packages
+[over here](https://github.com/louis993546/Metro-Compose/packages/896987)
+
 
 ## Project Structure
 
