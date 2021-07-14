@@ -107,6 +107,7 @@ fun Settings(
         Text(text = "TODO Real browser, or in-app fake IE")
         Text(text = "TODO typography")
         Text(text = "TODO screen ratio (e.g. 15:9 like 920, 16:9, or full screen)")
+        Text(text = "TODO override 4 or 6 columns")
     }
 }
 
