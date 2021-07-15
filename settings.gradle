@@ -5,10 +5,14 @@ pluginManagement {
         mavenCentral()
     }
     plugins {
-        id 'com.android.application' version '7.1.0-alpha03'
-        id 'com.android.library' version '7.1.0-alpha03'
-        id 'org.jetbrains.kotlin.android' version '1.5.10'
+        id "com.android.application" version "7.1.0-alpha03"
+        id "com.android.library" version "7.1.0-alpha03"
+        id "org.jetbrains.kotlin.android" version "1.5.10"
+        id "com.gradle.enterprise" version "3.6.3"
     }
+}
+plugins {
+    id "com.gradle.enterprise"
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -17,10 +21,22 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+        publishAlways()
+        if (System.getenv("CI")) {
+            tag "CI"
+        } else {
+            tag "Local"
+        }
+    }
+}
 rootProject.name = "Metro"
-include ':metro'
-include ':demo'
-include ':calculator'
-include ':metro_settings'
-include ':settings'
-include ':browser'
+include ":metro"
+include ":demo"
+include ":calculator"
+include ":metro_settings"
+include ":settings"
+include ":browser"
