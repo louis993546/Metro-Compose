@@ -21,7 +21,15 @@ android {
         }
     }
 
+    signingConfigs {
+        debug {
+            storeFile rootProject.file("debug.keystore")
+        }
+    }
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
