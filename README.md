@@ -18,6 +18,10 @@ It's currently on open testing on Play Store
 For the time being, the library is published to GitHub Packages
 [over here](https://github.com/louis993546/Metro-Compose/packages/896987)
 
+| `metro` version | Compose version |
+| --------------- | --------------- |
+| 0.10.0 - 0.12.0 | 1.0.0-rc01      |
+| 0.13.0          | 1.0.0-rc02      |
 
 ## Project Structure
 
