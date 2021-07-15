@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -25,6 +26,10 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+/**
+ * TODO [pageTitles] should contain each page title
+ * TODO it'd be great if [pageTitles] can be some enum
+ */
 @ExperimentalPagerApi
 @Composable
 fun Pages(
@@ -85,4 +90,19 @@ fun Pages(
             }
         }
     }
+}
+
+/**
+ * Is this an actual component? Or should this be part of [Pages]?
+ */
+@Composable
+fun TitleBar(
+    modifier: Modifier = Modifier,
+    title: String,
+) {
+    Text(
+        text = title,
+        size = 20.sp,
+        modifier = modifier.padding(all = 8.dp),
+    )
 }

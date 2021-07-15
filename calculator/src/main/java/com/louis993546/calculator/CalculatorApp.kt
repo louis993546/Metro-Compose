@@ -129,7 +129,7 @@ fun CalculatorApp(
 
 
 @Composable
-fun CalculatorButton(
+internal fun CalculatorButton(
     modifier: Modifier = Modifier,
     backgroundColor: Color = LocalButtonColor.current,
     textColor: Color = LocalTextOnButtonColor.current,

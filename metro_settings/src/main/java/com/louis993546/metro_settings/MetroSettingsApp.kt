@@ -31,6 +31,7 @@ import com.louis993546.metro.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import com.louis993546.metro.MessageBox
+import com.louis993546.metro.TitleBar
 
 @ExperimentalPagerApi
 @Composable
@@ -38,16 +39,11 @@ fun MetroSettingsApp(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
-        Text(
-            text = "METRO SETTINGS",
-            size = 20.sp,
-            modifier = Modifier.padding(top = 8.dp, start = 8.dp, end = 8.dp),
-        )
+        TitleBar(title = "METRO SETTINGS")
 
         Pages(
             modifier = Modifier
-                .weight(1f)
-                .padding(top = 8.dp),
+                .weight(1f),
             pageTitles = listOf("settings", "about", "open-source licenses")
         ) { page ->
             when (page) {
@@ -100,7 +96,7 @@ fun MetroSettingsApp(
 }
 
 @Composable
-fun Settings(
+internal fun Settings(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxHeight()) {
@@ -112,7 +108,7 @@ fun Settings(
 }
 
 @Composable
-fun AboutUs(
+internal fun AboutUs(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.fillMaxHeight()) {
@@ -121,7 +117,7 @@ fun AboutUs(
 }
 
 @Composable
-fun OpenSourceLicenses(
+internal fun OpenSourceLicenses(
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(modifier = modifier) {
@@ -136,7 +132,7 @@ private fun Context.startBrowserActivity(uri: String) {
 }
 
 @Composable
-fun OpenSourceLicenseRow(
+internal fun OpenSourceLicenseRow(
     modifier: Modifier = Modifier,
     library: Library,
 ) {

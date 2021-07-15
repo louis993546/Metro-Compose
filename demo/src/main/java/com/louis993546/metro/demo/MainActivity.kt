@@ -40,6 +40,7 @@ import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.LocalTextOnAccentColor
 import com.louis993546.metro.Text
 import com.louis993546.metro.demo.theme.MetroDemoTheme
+import com.louis993546.metro.settings.Settings
 import com.louis993546.metro_settings.MetroSettingsApp
 import timber.log.Timber
 
@@ -60,6 +61,7 @@ class MainActivity : ComponentActivity() {
                         composable(Apps.LAUNCHER.id) { Launcher(navController) }
                         composable(Apps.CALCULATOR.id) { CalculatorApp() }
                         composable(Apps.METRO_SETTINGS.id) { MetroSettingsApp() }
+                        composable(Apps.SETTINGS.id) { Settings() }
                         // Add new apps here (step 2)
                     }
                 }
@@ -71,7 +73,8 @@ class MainActivity : ComponentActivity() {
 enum class Apps(val id: String) {
     LAUNCHER("launcher"),
     CALCULATOR("calculator"),
-    METRO_SETTINGS("metroSettings")
+    METRO_SETTINGS("metroSettings"),
+    SETTINGS("settings")
     // Add new apps here (step 1)
 }
 
@@ -134,9 +137,11 @@ fun DeviceFrame(
                 colorFilter = ColorFilter.tint(color = Color.White),
             )
             Image(
-                modifier = Modifier.weight(1f).clickable {
-                    navController.popBackStack(route = Apps.LAUNCHER.id, inclusive = false)
-                },
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        navController.popBackStack(route = Apps.LAUNCHER.id, inclusive = false)
+                    },
                 painter = painterResource(id = R.drawable.ic_android_black_24dp),
                 contentDescription = "home",
                 colorFilter = ColorFilter.tint(color = Color.White),

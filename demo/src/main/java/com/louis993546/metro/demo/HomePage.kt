@@ -47,7 +47,13 @@ fun HomePage(
             s { HomeTile() }
             s { HomeTile() }
             m { HomeTile(title = "Tile 13") }
-            m { HomeTile(title = "Tile 14") }
+            m {
+                HomeTile(
+                    title = "Settings",
+                    iconRes = R.drawable.ic_baseline_settings_24,
+                    modifier = Modifier.clickable { navController.navigate(Apps.SETTINGS) },
+                )
+            }
             s { HomeTile() }
             s { HomeTile() }
             s { HomeTile() }
