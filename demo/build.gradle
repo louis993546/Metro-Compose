@@ -61,6 +61,7 @@ dependencies {
     implementation project(path: ':calculator')
     implementation project(path: ':metro_settings')
     implementation project(path: ':settings')
+    implementation project(path: ':browser')
     //endregion
 
     testImplementation "junit:junit:4.13.2"

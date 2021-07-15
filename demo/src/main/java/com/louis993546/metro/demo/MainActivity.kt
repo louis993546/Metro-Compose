@@ -39,6 +39,7 @@ import com.louis993546.metro.LocalAccentColor
 import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.LocalTextOnAccentColor
 import com.louis993546.metro.Text
+import com.louis993546.metro.browser.Browser
 import com.louis993546.metro.demo.theme.MetroDemoTheme
 import com.louis993546.metro.settings.Settings
 import com.louis993546.metro_settings.MetroSettingsApp
@@ -62,6 +63,7 @@ class MainActivity : ComponentActivity() {
                         composable(Apps.CALCULATOR.id) { CalculatorApp() }
                         composable(Apps.METRO_SETTINGS.id) { MetroSettingsApp() }
                         composable(Apps.SETTINGS.id) { Settings() }
+                        composable(Apps.BROWSER.id) { Browser() }
                         // Add new apps here (step 2)
                     }
                 }
@@ -74,7 +76,8 @@ enum class Apps(val id: String) {
     LAUNCHER("launcher"),
     CALCULATOR("calculator"),
     METRO_SETTINGS("metroSettings"),
-    SETTINGS("settings")
+    SETTINGS("settings"),
+    BROWSER("browser")
     // Add new apps here (step 1)
 }
 
@@ -105,7 +108,6 @@ fun DeviceFrame(
 ) {
     val ratio =
         LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
-    Timber.tag("qqqq").d(ratio.toString())
     val isTallScreen = ratio >= 1.8
 
     Column {
@@ -126,12 +128,7 @@ fun DeviceFrame(
             Image(
                 modifier = Modifier
                     .weight(1f)
-                    .clickable {
-                        Timber
-                            .tag("qqqq")
-                            .d("back button clicked")
-                        navController.popBackStack()
-                    },
+                    .clickable { navController.popBackStack() },
                 painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
                 contentDescription = "back",
                 colorFilter = ColorFilter.tint(color = Color.White),

@@ -18,10 +18,10 @@ It's currently on open testing on Play Store
 For the time being, the library is published to GitHub Packages
 [over here](https://github.com/louis993546/Metro-Compose/packages/896987)
 
-| `metro` version | Compose version |
-| --------------- | --------------- |
-| 0.10.0 - 0.12.0 | 1.0.0-rc01      |
-| 0.13.0          | 1.0.0-rc02      |
+| `metro` version  | Compose version |
+| ---------------- | --------------- |
+| 0.10.0 - 0.12.0  | 1.0.0-rc01      |
+| 0.13.0 to latest | 1.0.0-rc02      |
 
 ## Project Structure
 
@@ -36,6 +36,8 @@ And these are the list of build-in "apps"
 | ---------------- | ------------------------------------------------ |
 | `metro_settings` | Settings and information for the demo app itself |
 | `calculator`     | Calculator                                       |
+| `settings`       | Settings app from WP8 itself                     |
+| `browser`        | Fake Internet Explorer                           |
 
 ## Contribution
 

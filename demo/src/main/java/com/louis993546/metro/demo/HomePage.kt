@@ -32,7 +32,12 @@ fun HomePage(
                     modifier = Modifier.clickable { navController.navigate(Apps.METRO_SETTINGS) }
                 )
             }
-            s { HomeTile() }
+            s {
+                HomeTile(
+                    iconRes = R.drawable.outline_public_24,
+                    modifier = Modifier.clickable { navController.navigate(Apps.BROWSER) }
+                )
+            }
             m {
                 HomeTile(
                     title = "Calculator",

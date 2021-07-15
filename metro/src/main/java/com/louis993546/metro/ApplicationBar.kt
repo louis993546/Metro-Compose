@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -19,7 +20,7 @@ fun ApplicationBar(
     icon: @Composable (index: Int) -> Unit,
     onButtonClicked: (index: Int) -> Unit,
 ) {
-    ApplicationBar(modifier = modifier) {
+    ApplicationBar(modifier = modifier.defaultMinSize(minHeight = 36.dp)) {
         (0 until count).forEach { index ->
             CircleButton(
                 modifier = Modifier.size(36.dp).clickable { onButtonClicked(index) }
@@ -31,6 +32,9 @@ fun ApplicationBar(
     }
 }
 
+/**
+ * TODO create a version that has minimize button
+ */
 @Composable
 fun ApplicationBar(
     modifier: Modifier = Modifier,
