@@ -52,11 +52,11 @@ fun VerticalTilesGrid(
     modifier: Modifier = Modifier,
     columns: Int = LocalConfiguration.current.screenWidthDp.toColumnCount(),
     gap: Dp = 8.dp,
-    content: @Composable VerticalTilesGridScope.() -> Unit
+    content: @Composable VerticalTilesGridScope.() -> Unit,
 ) {
     Layout(
+        modifier = modifier,
         content = { VerticalTilesGridScopeImpl().content() },
-        modifier = modifier.verticalScroll(rememberScrollState()),
     ) { measurables, constraints ->
         val totalGapWidth = gap.roundToPx() * (columns + 1)
         val cellSize = (constraints.maxWidth - totalGapWidth) / columns

@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,7 +45,7 @@ import com.louis993546.metro.browser.Browser
 import com.louis993546.metro.demo.theme.MetroDemoTheme
 import com.louis993546.metro.settings.Settings
 import com.louis993546.metro_settings.MetroSettingsApp
-import timber.log.Timber
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     @ExperimentalFoundationApi
@@ -91,10 +93,17 @@ fun NavController.navigate(route: Apps) {
 fun Launcher(
     navController: NavController,
 ) {
+    val scope2 = rememberCoroutineScope()
     val pagerState = rememberPagerState(pageCount = 2)
-    HorizontalPager(state = pagerState) { page ->
+    HorizontalPager(
+        state = pagerState,
+    ) { page ->
         when (page) {
-            0 -> HomePage(modifier = Modifier.fillMaxWidth(), navController = navController)
+            0 -> HomePage(modifier = Modifier.fillMaxWidth(), navController = navController) {
+                scope2.launch {
+                    pagerState.animateScrollToPage(1)
+                }
+            }
             1 -> DrawerPage(modifier = Modifier.fillMaxWidth(), navController = navController)
             else -> error("WTF")
         }
@@ -113,6 +122,7 @@ fun DeviceFrame(
     Column {
         Box(
             modifier = Modifier
+                .border(color = Color.White, width = 1.dp)
                 // Lumia 920 has 1280 * 768 screen
                 .run { if (isTallScreen) this.aspectRatio(9f / 15f) else this }
         ) {
