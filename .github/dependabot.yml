@@ -9,7 +9,10 @@ updates:
     directory: "/" # this means root of the repo for almost everything
     schedule:
       interval: "daily"
-  
+    ignore:
+      # KGP depends on compose version
+      - dependency-name: "kotlin-gradle-plugin"
+
   - package-ecosystem: "github-actions"
     directory: "/" # and this is the exception. this means this dot github directory
     schedule:
