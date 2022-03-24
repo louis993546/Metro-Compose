@@ -42,7 +42,7 @@ fun Pages(
         val scope2 = rememberCoroutineScope()
 
         val listState = rememberLazyListState()
-        val pagerState = rememberPagerState(pageCount = pageTitles.size)
+        val pagerState = rememberPagerState()
         // TODO connect scrollState and pagerState together somehow
 
         LaunchedEffect(pagerState) {
@@ -84,6 +84,7 @@ fun Pages(
         HorizontalPager(
             modifier = Modifier.weight(1f),
             state = pagerState,
+            count = pageTitles.size,
         ) { page ->
             Box(modifier = Modifier.fillMaxWidth()) {
                 this.page(page)

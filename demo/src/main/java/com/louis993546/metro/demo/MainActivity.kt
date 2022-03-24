@@ -48,8 +48,7 @@ import com.louis993546.metro_settings.MetroSettingsApp
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    @ExperimentalFoundationApi
-    @ExperimentalPagerApi
+    @OptIn(ExperimentalPagerApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -87,16 +86,17 @@ fun NavController.navigate(route: Apps) {
     this.navigate(route.id)
 }
 
-@ExperimentalPagerApi
-@ExperimentalFoundationApi
+
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun Launcher(
     navController: NavController,
 ) {
     val scope2 = rememberCoroutineScope()
-    val pagerState = rememberPagerState(pageCount = 2)
+    val pagerState = rememberPagerState()
     HorizontalPager(
         state = pagerState,
+        count = 2,
     ) { page ->
         when (page) {
             0 -> HomePage(modifier = Modifier.fillMaxWidth(), navController = navController) {

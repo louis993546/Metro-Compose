@@ -31,7 +31,7 @@ import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.LocalTextOnBackgroundColor
 import com.louis993546.metro.Text
 
-@ExperimentalFoundationApi
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DrawerPage(
     modifier: Modifier = Modifier,
