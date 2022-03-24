@@ -61,6 +61,7 @@ jobs:
           packageName: com.louis993546.metro.demo
           releaseFiles: demo/build/outputs/bundle/release/demo-release.aab
           track: beta
+          status: completed
   lib-api-check:
     runs-on: ubuntu-latest
     steps:
