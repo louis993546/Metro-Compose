@@ -49,17 +49,7 @@ And these are the list of build-in "apps"
 
 ## Contribution
 
-### Bugs
-
-(WIP)
-
-### Feature Requests
-
-(WIP)
-
-### Add New App
-
-(WIP, need to make the home screen useable first)
+See [CONTRIBUTIONS](CONTRIBUTIONS.md)
 
 ## LICENSE
 
