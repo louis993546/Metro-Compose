@@ -34,7 +34,8 @@ apiValidation {
             "calendar",
             "launcher",
             "apps",
-            "radio"
+            "radio",
+            "app_row"
     ]
 }
 
