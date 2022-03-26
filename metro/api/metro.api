@@ -66,6 +66,10 @@ public final class com/louis993546/metro/PagesKt {
 	public static final fun TitleBar (Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 }
 
+public final class com/louis993546/metro/TextFieldKt {
+	public static final fun TextField (Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+}
+
 public final class com/louis993546/metro/TextKt {
 	public static final fun Text-jxWH9Kg (Landroidx/compose/ui/Modifier;Ljava/lang/String;JJLandroidx/compose/ui/text/font/FontWeight;Landroidx/compose/runtime/Composer;II)V
 }
