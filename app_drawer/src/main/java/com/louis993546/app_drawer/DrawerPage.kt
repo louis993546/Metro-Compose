@@ -1,4 +1,4 @@
-package com.louis993546.metro.demo
+package com.louis993546.app_drawer
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -24,18 +24,19 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import com.louis993546.apps.Apps
 import com.louis993546.metro.CircleButton
 import com.louis993546.metro.LocalAccentColor
 import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.LocalTextOnBackgroundColor
 import com.louis993546.metro.Text
+import com.louis993546.metro.app_drawer.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DrawerPage(
     modifier: Modifier = Modifier,
-    navController: NavController,
+    onAppClick: (Apps) -> Unit,
 ) {
     val list = appsList.sorted().groupBy { it.first().lowercaseChar() }.map { (char, list) ->
         val header = ListItem.Header(char.lowercaseChar())

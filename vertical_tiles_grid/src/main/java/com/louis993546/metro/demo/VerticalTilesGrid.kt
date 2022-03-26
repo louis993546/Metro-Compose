@@ -61,9 +61,9 @@ fun VerticalTilesGrid(
         val totalGapWidth = gap.roundToPx() * (columns + 1)
         val cellSize = (constraints.maxWidth - totalGapWidth) / columns
 
-        val maxPossibleRowCount = measurables
-            .mapIndexed { index, _ -> TilesGridScopeInstance.cellList[index].rowCount }
-            .sum()
+        val maxPossibleRowCount = List(measurables.size) { index ->
+            TilesGridScopeInstance.cellList[index].rowCount
+        }.sum()
         val matrix = (0 until maxPossibleRowCount).map {
             ((0 until columns).map { -1 }).toMutableList()
         }.toMutableList()

@@ -3,8 +3,6 @@ package com.louis993546.metro.demo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -16,8 +14,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -26,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -36,11 +31,12 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.louis993546.app_drawer.DrawerPage
+import com.louis993546.apps.Apps
 import com.louis993546.calculator.CalculatorApp
-import com.louis993546.metro.LocalAccentColor
+import com.louis993546.calendar.Calendar
+import com.louis993546.launcher.HomePage
 import com.louis993546.metro.LocalBackgroundColor
-import com.louis993546.metro.LocalTextOnAccentColor
-import com.louis993546.metro.Text
 import com.louis993546.metro.browser.Browser
 import com.louis993546.metro.demo.theme.MetroDemoTheme
 import com.louis993546.metro.settings.Settings
@@ -65,21 +61,13 @@ class MainActivity : ComponentActivity() {
                         composable(Apps.METRO_SETTINGS.id) { MetroSettingsApp() }
                         composable(Apps.SETTINGS.id) { Settings() }
                         composable(Apps.BROWSER.id) { Browser() }
+                        composable(Apps.CALENDAR.id) { Calendar() }
                         // Add new apps here (step 2)
                     }
                 }
             }
         }
     }
-}
-
-enum class Apps(val id: String) {
-    LAUNCHER("launcher"),
-    CALCULATOR("calculator"),
-    METRO_SETTINGS("metroSettings"),
-    SETTINGS("settings"),
-    BROWSER("browser")
-    // Add new apps here (step 1)
 }
 
 fun NavController.navigate(route: Apps) {
@@ -98,13 +86,17 @@ fun Launcher(
         state = pagerState,
         count = 2,
     ) { page ->
+        val navigate: (Apps) -> Unit = { app -> navController.navigate(app) }
         when (page) {
-            0 -> HomePage(modifier = Modifier.fillMaxWidth(), navController = navController) {
-                scope2.launch {
-                    pagerState.animateScrollToPage(1)
-                }
-            }
-            1 -> DrawerPage(modifier = Modifier.fillMaxWidth(), navController = navController)
+            0 -> HomePage(
+                modifier = Modifier.fillMaxWidth(),
+                onArrowClick = { scope2.launch { pagerState.animateScrollToPage(1) } },
+                onAppClick = navigate,
+            )
+            1 -> DrawerPage(
+                modifier = Modifier.fillMaxWidth(),
+                onAppClick = navigate,
+            )
             else -> error("WTF")
         }
     }
@@ -161,47 +153,4 @@ fun DeviceFrame(
             )
         }
     }
-}
-
-/**
- * Unlike normal Tile, HomeTile can be rectangle, not just square
- */
-@Composable
-fun HomeTile(
-    modifier: Modifier = Modifier,
-    @DrawableRes iconRes: Int? = null,
-    title: String = "",
-    backgroundColor: Color = LocalAccentColor.current,
-    textColor: Color = LocalTextOnAccentColor.current
-) {
-    Box(
-        modifier = modifier.background(color = backgroundColor)
-    ) {
-        iconRes?.let { res ->
-            Image(
-                modifier = Modifier
-                    .size(36.dp)
-                    .align(Alignment.Center),
-                painter = painterResource(id = res),
-                contentDescription = "", // TODO fix me
-                colorFilter = ColorFilter.tint(textColor),
-            )
-        }
-
-        Text(
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(start = 6.dp, bottom = 2.dp),
-            text = title,
-            color = textColor,
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-//    MetroDemoTheme {
-//        Greeting("Android")
-//    }
 }

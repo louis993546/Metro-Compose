@@ -19,25 +19,32 @@ For the time being, the library is published to GitHub Packages
 [over here](https://github.com/louis993546/Metro-Compose/packages/896987)
 
 | `metro` version  | Compose version |
-| ---------------- | --------------- |
+|------------------|-----------------|
 | 0.10.0 - 0.12.0  | 1.0.0-rc01      |
 | 0.13.0 to latest | 1.0.0-rc02      |
 
 ## Project Structure
 
-| Module  | Purpose                                                                      |
-| ------- | ---------------------------------------------------------------------------- |
-| `demo`  | Build a simplified Windows Phone 8.1 UI                                      |
-| `metro` | The library that allows others to build Metro-ish apps using Jetpack Compose |
+| Module                | Purpose                                                                      |
+|-----------------------|------------------------------------------------------------------------------|
+| `demo`                | Build a simplified Windows Phone 8.1 UI                                      |
+| `metro`               | The library that allows others to build Metro-ish apps using Jetpack Compose |
+| `apps`                | Just a Kotlin class that keeps list of apps. So kinda registry situation     |
+| `vertical_tiles_grid` | The thing that makes the 4-column grid thing possible                        |
 
 And these are the list of build-in "apps"
 
 | Module           | App                                              |
-| ---------------- | ------------------------------------------------ |
+|------------------|--------------------------------------------------|
 | `metro_settings` | Settings and information for the demo app itself |
 | `calculator`     | Calculator                                       |
+| `calendar`       | Calendar                                         |
 | `settings`       | Settings app from WP8 itself                     |
 | `browser`        | Fake Internet Explorer                           |
+| `radio`          | Radio app                                        |
+| `app_drawer`     | Display list of apps                             |
+| `app_search`     | Allow searching of apps                          |
+| `launcher`       | Controls what the home screen grid shows         |
 
 ## Contribution
 

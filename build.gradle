@@ -28,7 +28,13 @@ apiValidation {
             "calculator",
             "demo",
             "metro_settings",
-            "settings"
+            "settings",
+            "app_drawer",
+            "app_search",
+            "calendar",
+            "launcher",
+            "apps",
+            "radio"
     ]
 }
 
