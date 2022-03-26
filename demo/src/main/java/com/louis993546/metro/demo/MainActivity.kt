@@ -1,6 +1,8 @@
 package com.louis993546.metro.demo
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -15,12 +17,18 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -109,6 +117,8 @@ fun DeviceFrame(
     navController: NavHostController,
     content: @Composable () -> Unit,
 ) {
+    val isKeyboardOpen by keyboardAsState()
+
     val ratio =
         LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
     val isTallScreen = ratio >= 1.8
@@ -118,7 +128,12 @@ fun DeviceFrame(
             modifier = Modifier
                 .border(color = Color.White, width = 1.dp)
                 // Lumia 920 has 1280 * 768 screen
-                .run { if (isTallScreen) this.aspectRatio(9f / 15f) else this }
+                .run {
+                    if (isTallScreen && isKeyboardOpen == Keyboard.Closed)
+                        this.aspectRatio(9f / 15f)
+                    else
+                        this
+                }
         ) {
             content()
         }
@@ -156,3 +171,36 @@ fun DeviceFrame(
         }
     }
 }
+
+//region Keyboard State
+//https://stackoverflow.com/a/69533584/2384934
+enum class Keyboard {
+    Opened, Closed
+}
+
+@Composable
+fun keyboardAsState(): State<Keyboard> {
+    val keyboardState = remember { mutableStateOf(Keyboard.Closed) }
+    val view = LocalView.current
+    DisposableEffect(view) {
+        val onGlobalListener = ViewTreeObserver.OnGlobalLayoutListener {
+            val rect = Rect()
+            view.getWindowVisibleDisplayFrame(rect)
+            val screenHeight = view.rootView.height
+            val keypadHeight = screenHeight - rect.bottom
+            keyboardState.value = if (keypadHeight > screenHeight * 0.15) {
+                Keyboard.Opened
+            } else {
+                Keyboard.Closed
+            }
+        }
+        view.viewTreeObserver.addOnGlobalLayoutListener(onGlobalListener)
+
+        onDispose {
+            view.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalListener)
+        }
+    }
+
+    return keyboardState
+}
+//endregion
