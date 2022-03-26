@@ -1,0 +1,58 @@
+public final class com/louis993546/metro/demo/Cell {
+	public static final field $stable I
+	public fun <init> (II)V
+	public final fun getColumnCount ()I
+	public final fun getRowCount ()I
+}
+
+public final class com/louis993546/metro/demo/PlaceableWithGridCoordinate {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/ui/layout/Placeable;III)V
+	public final fun component1 ()Landroidx/compose/ui/layout/Placeable;
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun copy (Landroidx/compose/ui/layout/Placeable;III)Lcom/louis993546/metro/demo/PlaceableWithGridCoordinate;
+	public static synthetic fun copy$default (Lcom/louis993546/metro/demo/PlaceableWithGridCoordinate;Landroidx/compose/ui/layout/Placeable;IIIILjava/lang/Object;)Lcom/louis993546/metro/demo/PlaceableWithGridCoordinate;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getColumn ()I
+	public final fun getHeightRowCount ()I
+	public final fun getPlaceable ()Landroidx/compose/ui/layout/Placeable;
+	public final fun getRow ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/louis993546/metro/demo/TilesGridScopeInstance {
+	public static final field $stable I
+	public static final field INSTANCE Lcom/louis993546/metro/demo/TilesGridScopeInstance;
+	public final fun getCellList ()Ljava/util/List;
+}
+
+public final class com/louis993546/metro/demo/VerticalTilesGridKt {
+	public static final fun VerticalTilesGrid-942rkJo (Landroidx/compose/ui/Modifier;IFLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun something (II)V
+	public static final fun toColumnCount (I)I
+}
+
+public abstract interface class com/louis993546/metro/demo/VerticalTilesGridScope {
+	public abstract fun l (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun m (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun s (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/louis993546/metro/demo/VerticalTilesGridScopeImpl : com/louis993546/metro/demo/VerticalTilesGridScope {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun l (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun m (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun s (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/louis993546/metro/vertical_tiles_grid/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
