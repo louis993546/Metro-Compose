@@ -32,6 +32,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.louis993546.app_drawer.DrawerPage
+import com.louis993546.app_search.AppSearch
 import com.louis993546.apps.Apps
 import com.louis993546.calculator.CalculatorApp
 import com.louis993546.calendar.Calendar
@@ -62,6 +63,7 @@ class MainActivity : ComponentActivity() {
                         composable(Apps.SETTINGS.id) { Settings() }
                         composable(Apps.BROWSER.id) { Browser() }
                         composable(Apps.CALENDAR.id) { Calendar() }
+                        composable(Apps.APP_SEARCH.id) { AppSearch(apps = Apps.values().asList()) }
                         // Add new apps here (step 2)
                     }
                 }

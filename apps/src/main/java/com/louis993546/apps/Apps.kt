@@ -6,6 +6,7 @@ enum class Apps(val id: String) {
     METRO_SETTINGS("metroSettings"),
     SETTINGS("settings"),
     BROWSER("browser"),
-    CALENDAR("calendar")
+    CALENDAR("calendar"),
+    APP_SEARCH("appSearch")
     // Add new apps here (step 1)
 }

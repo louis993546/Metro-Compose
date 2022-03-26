@@ -4,5 +4,4 @@ plugins {
 
 dependencies {
     implementation project(path: ":apps")
-    implementation project(path: ":app_row")
 }
