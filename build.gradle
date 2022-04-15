@@ -35,7 +35,8 @@ apiValidation {
             "launcher",
             "apps",
             "radio",
-            "app_row"
+            "app_row",
+            "wordle"
     ]
 }
 

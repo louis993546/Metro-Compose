@@ -7,6 +7,7 @@ enum class Apps(val id: String) {
     SETTINGS("settings"),
     BROWSER("browser"),
     CALENDAR("calendar"),
-    APP_SEARCH("appSearch")
+    APP_SEARCH("appSearch"),
+    WORDLE("wordle"),
     // Add new apps here (step 1)
 }

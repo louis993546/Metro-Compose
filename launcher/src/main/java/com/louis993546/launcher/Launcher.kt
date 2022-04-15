@@ -96,7 +96,9 @@ fun HomePage(
             }
             s {
                 HomeTile(
-                    title = "Podcast"
+                    title = "Wordle",
+                    iconRes = R.drawable.ic_baseline_calculate_24,
+                    modifier = Modifier.clickable { onAppClick(Apps.WORDLE) }
                 )
             }
             m {

@@ -31,11 +31,14 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -50,6 +53,7 @@ import com.louis993546.metro.browser.Browser
 import com.louis993546.metro.demo.theme.MetroDemoTheme
 import com.louis993546.metro.settings.Settings
 import com.louis993546.metro_settings.MetroSettingsApp
+import com.louis993546.wordle.WordleApp
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -65,13 +69,14 @@ class MainActivity : ComponentActivity() {
                         startDestination = Apps.LAUNCHER.id,
                         modifier = Modifier.background(color = LocalBackgroundColor.current)
                     ) {
-                        composable(Apps.LAUNCHER.id) { Launcher(navController) }
-                        composable(Apps.CALCULATOR.id) { CalculatorApp() }
-                        composable(Apps.METRO_SETTINGS.id) { MetroSettingsApp() }
-                        composable(Apps.SETTINGS.id) { Settings() }
-                        composable(Apps.BROWSER.id) { Browser() }
-                        composable(Apps.CALENDAR.id) { Calendar() }
-                        composable(Apps.APP_SEARCH.id) { AppSearch(apps = Apps.values().asList()) }
+                        composable(Apps.LAUNCHER) { Launcher(navController) }
+                        composable(Apps.CALCULATOR) { CalculatorApp() }
+                        composable(Apps.METRO_SETTINGS) { MetroSettingsApp() }
+                        composable(Apps.SETTINGS) { Settings() }
+                        composable(Apps.BROWSER) { Browser() }
+                        composable(Apps.CALENDAR) { Calendar() }
+                        composable(Apps.APP_SEARCH) { AppSearch(apps = Apps.values().asList()) }
+                        composable(Apps.WORDLE) { WordleApp() }
                         // Add new apps here (step 2)
                     }
                 }
@@ -80,10 +85,16 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+private fun NavGraphBuilder.composable(
+    apps: Apps,
+    content: @Composable (NavBackStackEntry) -> Unit
+) {
+    composable(route = apps.id, content = content)
+}
+
 fun NavController.navigate(route: Apps) {
     this.navigate(route.id)
 }
-
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
