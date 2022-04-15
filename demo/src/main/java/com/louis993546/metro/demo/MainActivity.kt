@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
                 MetroDemoTheme {
                     NavHost(
                         navController = navController,
-                        startDestination = "launcher",
+                        startDestination = Apps.LAUNCHER.id,
                         modifier = Modifier.background(color = LocalBackgroundColor.current)
                     ) {
                         composable(Apps.LAUNCHER.id) { Launcher(navController) }
