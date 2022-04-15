@@ -56,7 +56,7 @@ fun HomePage(
             s {
                 HomeTile(
                     title = "FM Radio",
-                    iconRes = R.drawable.ic_baseline_calculate_24,
+                    iconRes = R.drawable.ic_baseline_radio_24,
                     modifier = Modifier.clickable { TODO() }
                 )
             }
@@ -70,7 +70,7 @@ fun HomePage(
             s {
                 HomeTile(
                     title = "Camera",
-                    iconRes = R.drawable.ic_baseline_calculate_24,
+                    iconRes = R.drawable.ic_baseline_photo_camera_24,
                     modifier = Modifier.clickable { TODO() }
                 )
             }
