@@ -38,7 +38,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navigation
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -135,6 +134,8 @@ fun DeviceFrame(
     val isTallScreen = ratio >= 1.8
 
     Column {
+        // TODO maybe in future I can look into custom overscroll behaviour?
+        // CompositionLocalProvider( LocalOverScrollConfiguration provides null ) { }
         Box(
             modifier = Modifier
                 .border(color = Color.White, width = 1.dp)
