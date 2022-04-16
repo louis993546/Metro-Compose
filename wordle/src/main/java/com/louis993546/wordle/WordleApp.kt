@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.louis993546.metro.Text
 
@@ -82,9 +83,12 @@ fun GuessCell(
     modifier: Modifier = Modifier,
     state: GuessCellState = GuessCellState.Empty,
 ) {
+    val cellWidth = LocalConfiguration.current.screenWidthDp / 6
+    // TODO figure out how to get parent size, and then min it with width
+
     Box(
         modifier = modifier
-            .size(64.dp) // TODO figure out how to set this dynamically
+            .size(cellWidth.dp)
             .border(
                 width = 2.dp,
                 color = when (state) {
@@ -195,7 +199,7 @@ fun KeyboardRow(
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(
-            space = 8.dp,
+            space = 8.dp, // TODO for smaller screens, replace this with smaller number
             alignment = Alignment.CenterHorizontally,
         ),
         content = content,
@@ -208,10 +212,12 @@ fun Key(
     width: KeyWidth = KeyWidth.M,
     content: @Composable BoxScope.() -> Unit,
 ) {
+    val widthBase = (LocalConfiguration.current.screenWidthDp - 16) / 14
+
     Box(
         modifier = modifier
-            .height(56.dp)
-            .width((width.factor * 28).dp)
+            .height((widthBase * 2).dp)
+            .width((width.factor * widthBase).dp)
             .background(color = Color.Gray),
         content = content,
         contentAlignment = Alignment.Center,
