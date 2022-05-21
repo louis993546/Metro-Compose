@@ -22,8 +22,8 @@ For the time being, the library is published to GitHub Packages
 |------------------|-----------------|
 | 0.10.0 - 0.12.0  | 1.0.0-rc01      |
 | 0.13.0 to 0.25.0 | 1.0.0-rc02      |
-| 0.26.0 to 0.XX.0 | 1.1.1           |
-| 0.XX.0 to latest | 1.2.0-beta02    |
+| 0.26.0 to 0.49.0 | 1.1.1           |
+| 0.50.0 to latest | 1.2.0-beta02    |
 
 ## Project Structure
 
