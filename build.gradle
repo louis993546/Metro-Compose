@@ -1,19 +1,19 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        compose_version = "1.2.0-beta02"
+        compose_version = "1.2.0-rc01"
         accompanist_version = "0.23.1"
         kotlin_version = "1.6.21"
 
-        compile_sdk_version = 31
-        build_tool_version = "31.0.0"
+        compile_sdk_version = 32
+        build_tool_version = "32.0.0"
     }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.0-alpha02'
+        classpath 'com.android.tools.build:gradle:7.4.0-alpha05'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }

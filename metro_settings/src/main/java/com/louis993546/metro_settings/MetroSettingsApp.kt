@@ -14,8 +14,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
@@ -25,12 +27,9 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.louis993546.metro.ApplicationBar
 import com.louis993546.metro.LocalTextOnButtonColor
+import com.louis993546.metro.MessageBox
 import com.louis993546.metro.Pages
 import com.louis993546.metro.Text
-
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import com.louis993546.metro.MessageBox
 import com.louis993546.metro.TitleBar
 
 @ExperimentalPagerApi

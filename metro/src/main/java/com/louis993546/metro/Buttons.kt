@@ -15,7 +15,8 @@ fun CircleButton(
     content: @Composable () -> Unit,
 ) {
     Box(
-        modifier = modifier.clip(CircleShape)
+        modifier = modifier
+            .clip(CircleShape)
             .border(width = 2.dp, color = LocalTextOnBackgroundColor.current, shape = CircleShape),
         contentAlignment = Alignment.Center,
     ) {

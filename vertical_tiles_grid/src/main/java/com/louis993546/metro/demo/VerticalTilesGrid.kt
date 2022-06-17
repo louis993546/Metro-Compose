@@ -94,7 +94,8 @@ fun VerticalTilesGrid(
                         currentColumn = 0
                     } else {
                         // For now, only needs to check cells same row on the right
-                        val cellsToCheck = matrix[currentRow].subList(currentColumn, currentColumn + columnCount)
+                        val cellsToCheck =
+                            matrix[currentRow].subList(currentColumn, currentColumn + columnCount)
                         if (cellsToCheck.any { it != -1 }) {
                             currentRow += 1
                             currentColumn = 0
@@ -132,8 +133,10 @@ fun VerticalTilesGrid(
         }
 
         val totalRowCount = placeablesWithCoordinates.maxByOrNull { it.row }?.row ?: 0
-        val tallestLastRowRowCount = placeablesWithCoordinates.filter { it.row == totalRowCount }.maxByOrNull { it.heightRowCount }?.heightRowCount ?: 1
-        val totalHeight = ((totalRowCount + 1) * cellSize) + ((totalRowCount + 2) * gap.roundToPx()) + ((tallestLastRowRowCount - 1) * cellSize)
+        val tallestLastRowRowCount = placeablesWithCoordinates.filter { it.row == totalRowCount }
+            .maxByOrNull { it.heightRowCount }?.heightRowCount ?: 1
+        val totalHeight =
+            ((totalRowCount + 1) * cellSize) + ((totalRowCount + 2) * gap.roundToPx()) + ((tallestLastRowRowCount - 1) * cellSize)
 
         layout(
             width = constraints.maxWidth,

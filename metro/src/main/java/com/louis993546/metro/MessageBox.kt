@@ -36,7 +36,9 @@ fun MessageBox(
             )
 
             // Push the visible part of the dialog to the top
-            Spacer(modifier = Modifier.weight(1f).defaultMinSize(minHeight = 32.dp))
+            Spacer(modifier = Modifier
+                .weight(1f)
+                .defaultMinSize(minHeight = 32.dp))
         }
     }
 }

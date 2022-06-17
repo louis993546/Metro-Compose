@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -34,16 +33,20 @@ fun WordleApp(
 ) {
     // TODO load some meta data saved on device (e.g. history, color blind mode)
     val guessState by remember { mutableStateOf(WordleGuessState.EMPTY) }
-    val keyboardState = remember { mutableStateMapOf<Char, GuessKeyState>() }
+//    val keyboardState = remember { mutableStateMapOf<Char, GuessKeyState>() }
 
     Column(modifier = modifier.fillMaxSize()) {
         GuessGrid(
-            modifier = Modifier.fillMaxWidth().weight(1f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
             state = guessState,
         )
         Keyboard(
-            modifier = Modifier.fillMaxWidth().padding(8.dp),
-            state = keyboardState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+//            state = keyboardState,
             onKeyPressed = {
                 when (it) {
                     is KeyPress.Action -> TODO()
@@ -138,7 +141,7 @@ enum class KeyAction {
 @Composable
 fun Keyboard(
     modifier: Modifier = Modifier,
-    state: Map<Char, GuessKeyState>,
+//    state: Map<Char, GuessKeyState>,
     onKeyPressed: (KeyPress) -> Unit,
 ) {
     Column(
@@ -245,7 +248,7 @@ data class GuessRowState(
 }
 
 enum class GuessKeyState {
-//    Unknown, // this is the default
+    //    Unknown, // this is the default
     Wrong,
     WrongPosition,
     Correct

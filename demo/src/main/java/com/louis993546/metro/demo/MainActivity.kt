@@ -55,8 +55,8 @@ import com.louis993546.metro_settings.MetroSettingsApp
 import com.louis993546.wordle.WordleApp
 import kotlinx.coroutines.launch
 
+@ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalPagerApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -95,7 +95,8 @@ fun NavController.navigate(route: Apps) {
     this.navigate(route.id)
 }
 
-@OptIn(ExperimentalPagerApi::class)
+//@OptIn(ExperimentalPagerApi::class)
+@ExperimentalPagerApi
 @Composable
 fun Launcher(
     navController: NavController,

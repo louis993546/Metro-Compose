@@ -25,14 +25,14 @@ fun Settings(
 
 @Composable
 fun SystemPage(
-    modifier: Modifier = Modifier,
+//    modifier: Modifier = Modifier,
 ) {
 
 }
 
 @Composable
 fun ApplicationsPage(
-    modifier: Modifier = Modifier,
+//    modifier: Modifier = Modifier,
 ) {
 
 }

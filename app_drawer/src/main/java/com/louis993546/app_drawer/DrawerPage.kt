@@ -81,10 +81,11 @@ fun SearchButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
-    CircleButton(modifier = modifier
-        .size(48.dp)
-        .padding(4.dp)
-        .clickable(onClick = onClick)
+    CircleButton(
+        modifier = modifier
+            .size(48.dp)
+            .padding(4.dp)
+            .clickable(onClick = onClick)
     ) {
         Image(
             modifier = Modifier

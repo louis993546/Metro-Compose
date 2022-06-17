@@ -68,7 +68,9 @@ fun CalculatorApp(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Box(
-            modifier = Modifier.weight(1f).fillMaxWidth(),
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth(),
         ) {
             Text(
                 modifier = Modifier.align(Alignment.BottomEnd),

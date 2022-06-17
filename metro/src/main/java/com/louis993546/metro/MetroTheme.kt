@@ -10,7 +10,8 @@ import androidx.compose.ui.graphics.luminance
 val LocalAccentColor = compositionLocalOf<Color> { error("No accent color found!") }
 val LocalBackgroundColor = compositionLocalOf<Color> { error("No background color found") }
 val LocalTextOnAccentColor = compositionLocalOf<Color> { error("No text on accent color found") }
-val LocalTextOnBackgroundColor = compositionLocalOf<Color> { error("No text on background color found") }
+val LocalTextOnBackgroundColor =
+    compositionLocalOf<Color> { error("No text on background color found") }
 val LocalButtonColor = compositionLocalOf<Color> { error("No button color found") }
 val LocalTextOnButtonColor = compositionLocalOf<Color> { error("No text on button color found") }
 
