@@ -24,7 +24,8 @@ For the time being, the library is published to GitHub Packages
 | 0.13.0 to 0.25.0 | 1.0.0-rc02      |
 | 0.26.0 to 0.49.0 | 1.1.1           |
 | 0.50.0 to 0.52.0 | 1.2.0-beta02    |
-| 0.53.0 to latest | 1.2.0-rc01      |
+| 0.53.0           | 1.2.0-rc01      |
+| 0.54.0 to latest | 1.2.0-rc02      |
 
 ## Project Structure
 
@@ -37,17 +38,19 @@ For the time being, the library is published to GitHub Packages
 
 And these are the list of build-in "apps"
 
-| Module           | App                                              |
-|------------------|--------------------------------------------------|
-| `metro_settings` | Settings and information for the demo app itself |
-| `calculator`     | Calculator                                       |
-| `calendar`       | Calendar                                         |
-| `settings`       | Settings app from WP8 itself                     |
-| `browser`        | Fake Internet Explorer                           |
-| `radio`          | Radio app                                        |
-| `app_drawer`     | Display list of apps                             |
-| `app_search`     | Allow searching of apps                          |
-| `launcher`       | Controls what the home screen grid shows         |
+| Module           | App                                                  |
+|------------------|------------------------------------------------------|
+| `app_drawer`     | Display list of apps                                 |
+| `app_row`        | Display a row of app                                 |
+| `app_search`     | Allow searching of apps                              |
+| `browser`        | Fake Internet Explorer                               |
+| `calculator`     | Calculator                                           |
+| `calendar`       | Calendar                                             |
+| `launcher`       | Controls what the home screen grid shows             |
+| `metro_settings` | Settings and information for the demo app itself     |
+| `radio`          | Radio app                                            |
+| `settings`       | Settings app from WP8 itself                         |
+| `wordle`         | The game that was popular and then got bought by NYT |
 
 ## Contribution
 

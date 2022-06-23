@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -55,6 +56,7 @@ import com.louis993546.metro_settings.MetroSettingsApp
 import com.louis993546.wordle.WordleApp
 import kotlinx.coroutines.launch
 
+@ExperimentalFoundationApi
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,7 +97,7 @@ fun NavController.navigate(route: Apps) {
     this.navigate(route.id)
 }
 
-//@OptIn(ExperimentalPagerApi::class)
+@ExperimentalFoundationApi
 @ExperimentalPagerApi
 @Composable
 fun Launcher(
@@ -142,7 +144,7 @@ fun DeviceFrame(
                 .border(color = Color.White, width = 1.dp)
                 // Lumia 920 has 1280 * 768 screen
                 .run {
-                    if (isTallScreen && isKeyboardOpen == Keyboard.Closed)
+                    if (isTallScreen && isKeyboardOpen == Keyboard.Closed) // TODO allow this to be turn off
                         this.aspectRatio(9f / 15f)
                     else
                         this

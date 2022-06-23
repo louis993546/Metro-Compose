@@ -8,8 +8,8 @@ android {
     buildToolsVersion "$build_tool_version"
 
     defaultConfig {
-        minSdk 23
-        targetSdk 31
+        minSdk min_sdk_version
+        targetSdk compile_sdk_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace "com.louis993546.metro.demo"
+    compileSdk compile_sdk_version
 
-    compileSdk 32
     buildToolsVersion "$build_tool_version"
 
     defaultConfig {
         applicationId "com.louis993546.metro.demo"
-        minSdk 23
-        targetSdk 32
+        minSdk min_sdk_version
+        targetSdk compile_sdk_version
         def number = System.getenv("GITHUB_RUN_NUMBER") ?: 1
         versionCode number.toInteger()
         versionName "${number}.0.0"
