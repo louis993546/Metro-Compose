@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,13 +23,15 @@ import com.louis993546.metro.LocalButtonColor
 import com.louis993546.metro.LocalTextOnAccentColor
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.Text
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 fun CalculatorApp(
     modifier: Modifier = Modifier,
 ) {
 //    val items = remember { mutableStateListOf<Option>(Option.Number.Integer(0)) }
-//    var text by remember { mutableStateOf("0") }
+    var text by remember { mutableStateOf("0") }
 
 //    fun something(newOption: Option) {
 //        val lastOption = items.last()
@@ -74,7 +80,7 @@ fun CalculatorApp(
         ) {
             Text(
                 modifier = Modifier.align(Alignment.BottomEnd),
-                text = "0",
+                text = text,
                 size = 64.sp
             )
         }
@@ -166,3 +172,39 @@ internal fun CalculatorButton(
 //    Multiply,
 //    Divide
 //}
+
+internal interface Calculator {
+    val display: Flow<String>
+
+    fun digit(i: Int)
+
+    fun decimal()
+
+    fun operation(op: Operation)
+
+    enum class Operation {
+        Plus, Minus, Multiplier, Divide, Equal
+    }
+}
+
+internal class CalculatorImpl : Calculator {
+    // TODO it needs to have something observable as a state of the display
+    private val _display = MutableStateFlow("0")
+    override val display: Flow<String> = _display
+
+    override fun digit(i: Int) {
+        _display.value = if (_display.value != "0") {
+            "${_display.value}$i"
+        } else {
+            i.toString()
+        }
+    }
+
+    override fun decimal() {
+        TODO("Not yet implemented")
+    }
+
+    override fun operation(op: Calculator.Operation) {
+        TODO("Not yet implemented")
+    }
+}
