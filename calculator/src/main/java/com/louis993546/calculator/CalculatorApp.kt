@@ -51,6 +51,8 @@ fun CalculatorApp(
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.End,
             ) {
+                // TODO adjust text size accordingly
+                //  https://stackoverflow.com/questions/63971569/androidautosizetexttype-in-jetpack-compose
                 display.small?.run {
                     Text(text = this, size = 16.sp)
                 }
@@ -210,7 +212,15 @@ internal class CalculatorImpl : Calculator {
 
     private var displayNeedToBeOverrideByNextValue = false
 
+    // TODO see if regex would be a better option (perf)
+    private val String.digitCount: Int
+        get() = this.count { it.digitToIntOrNull() != null }
+
     override fun digit(i: Int) {
+        if (_display.value.big.digitCount >= 16) {
+            return
+        }
+
         val bigValue = when {
             displayNeedToBeOverrideByNextValue -> {
                 displayNeedToBeOverrideByNextValue = false
@@ -224,7 +234,13 @@ internal class CalculatorImpl : Calculator {
     }
 
     override fun decimal() {
-        TODO("Not yet implemented")
+        if (_display.value.big.contains('.')) {
+            // nothing
+        } else {
+            _display.value = _display.value.copy(
+                big = "${_display.value.big}."
+            )
+        }
     }
 
     override fun operation(op: Calculator.Operation) {

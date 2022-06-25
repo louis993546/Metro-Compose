@@ -76,15 +76,50 @@ internal class CalculatorImplTest {
 //    fun `click on MC reset memory only`() = runTest {  }
 
     // TODO click on . makes it show up the first time
+    @Test
+    fun `click on decimal makes it show up`() = runTest {
+        calculator.run {
+            decimal()
+
+            assertEquals("0.", display.first().big)
+        }
+    }
 
     // TODO click on . when it already exist does nothing
+    @Test
+    fun `click on decimal again does nothing`() = runTest {
+        calculator.run {
+            decimal()
+            decimal()
+
+            assertEquals("0.", display.first().big)
+        }
+    }
 
     // TODO at some point type in a full addition works
 
     // TODO make sure divide by 0 does not crash the whole thing
 
-    // TODO there should be some kind of limit of how many character it supports
+    @Test
+    fun `max 16 digits`() = runTest {
+        calculator.run {
+            repeat(17) {
+                digit(1)
+            }
 
-//    @Test
-//    fun ``() = runTest {  }
+            assertEquals("1111111111111111", display.first().big)
+        }
+    }
+
+    @Test
+    fun `the 17th char can be decimal`() = runTest {
+        calculator.run {
+            repeat(17) {
+                digit(1)
+            }
+            decimal()
+
+            assertEquals("1111111111111111.", display.first().big)
+        }
+    }
 }
