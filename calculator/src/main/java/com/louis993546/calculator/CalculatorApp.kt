@@ -78,7 +78,7 @@ fun CalculatorApp(
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             CalculatorButton(modifier = Modifier.weight(1f), text = "⌫") {
-                TODO()
+                calculator.operation(Calculator.Operation.Backspace)
             }
             CalculatorButton(modifier = Modifier.weight(1f), text = "±") {
                 TODO()
@@ -251,6 +251,12 @@ internal class CalculatorImpl : Calculator {
                 _display.value = _display.value.copy(
                     small = "${_display.value.big}+"
                 )
+            }
+            Calculator.Operation.Backspace -> {
+                val newValue = _display.value.big.dropLast(1)
+                    .let { it.ifEmpty { "0" } }
+
+                _display.value = _display.value.copy(big = newValue)
             }
             else -> TODO()
         }

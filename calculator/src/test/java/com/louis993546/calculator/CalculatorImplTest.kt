@@ -94,6 +94,15 @@ internal class CalculatorImplTest {
 
             assertEquals("0.", display.first().big)
         }
+
+        calculator.run {
+            digit(1)
+            decimal()
+            digit(2)
+            decimal()
+
+            assertEquals("1.2", display.first().big)
+        }
     }
 
     // TODO at some point type in a full addition works
@@ -120,6 +129,52 @@ internal class CalculatorImplTest {
             decimal()
 
             assertEquals("1111111111111111.", display.first().big)
+        }
+    }
+
+    @Test
+    fun `backspace removes previous char`() = runTest {
+        calculator.run {
+            digit(1)
+            digit(2)
+            digit(3)
+
+            operation(Calculator.Operation.Backspace)
+
+            assertEquals("12", display.first().big)
+        }
+    }
+
+    @Test
+    fun `backspace on last digit turns it into 0`() = runTest {
+        calculator.run {
+            digit(1)
+            digit(2)
+            digit(3)
+
+            operation(Calculator.Operation.Backspace)
+            operation(Calculator.Operation.Backspace)
+            operation(Calculator.Operation.Backspace)
+
+            assertEquals("0", display.first().big)
+        }
+    }
+
+    @Test
+    fun `backspace too many times and it will still be 0`() = runTest {
+        calculator.run {
+            digit(1)
+            digit(2)
+            digit(3)
+
+            operation(Calculator.Operation.Backspace)
+            operation(Calculator.Operation.Backspace)
+            operation(Calculator.Operation.Backspace)
+            operation(Calculator.Operation.Backspace)
+            operation(Calculator.Operation.Backspace)
+            operation(Calculator.Operation.Backspace)
+
+            assertEquals("0", display.first().big)
         }
     }
 }
