@@ -4,6 +4,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
@@ -75,7 +76,6 @@ internal class CalculatorImplTest {
 //    @Test
 //    fun `click on MC reset memory only`() = runTest {  }
 
-    // TODO click on . makes it show up the first time
     @Test
     fun `click on decimal makes it show up`() = runTest {
         calculator.run {
@@ -85,7 +85,6 @@ internal class CalculatorImplTest {
         }
     }
 
-    // TODO click on . when it already exist does nothing
     @Test
     fun `click on decimal again does nothing`() = runTest {
         calculator.run {
@@ -106,6 +105,18 @@ internal class CalculatorImplTest {
     }
 
     // TODO at some point type in a full addition works
+    @Test
+    fun `one plus one works`() = runTest {
+        calculator.run {
+            digit(1)
+            operation(Calculator.Operation.Plus)
+            digit(1)
+            operation(Calculator.Operation.Equal)
+
+            assertEquals("2", display.first().big)
+            assertNull(display.first().small)
+        }
+    }
 
     // TODO make sure divide by 0 does not crash the whole thing
 

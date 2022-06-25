@@ -15,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.louis993546.metro.LocalAccentColor
@@ -22,8 +23,6 @@ import com.louis993546.metro.LocalButtonColor
 import com.louis993546.metro.LocalTextOnAccentColor
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.Text
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 
 /*
  * TODO hack. How can i "remember" an instance of calculator? Like this would break if I want to
@@ -149,13 +148,12 @@ fun CalculatorApp(
                 backgroundColor = LocalAccentColor.current,
                 textColor = LocalTextOnAccentColor.current,
                 text = "=",
-            ) {
-                TODO()
-            }
+            ) { calculator.operation(Calculator.Operation.Equal) }
         }
     }
 }
 
+// TODO on press, change the color to theme color or fallback color
 
 @Composable
 internal fun CalculatorButton(
@@ -169,7 +167,11 @@ internal fun CalculatorButton(
         modifier = modifier
             .heightIn(min = 64.dp)
             .background(color = backgroundColor)
-            .clickable(onClick = onClick),
+            .clickable(
+                onClick = onClick,
+                role = Role.Button,
+                onClickLabel = text,
+            ),
         contentAlignment = Alignment.Center,
     ) {
         Text(
@@ -177,88 +179,5 @@ internal fun CalculatorButton(
             size = 24.sp,
             color = textColor,
         )
-    }
-}
-
-internal interface Calculator {
-    val display: Flow<Display>
-
-    fun digit(i: Int)
-
-    fun decimal()
-
-    fun operation(op: Operation)
-
-    enum class Operation {
-        Plus, Minus, Multiplier, Divide, Equal,
-        // TODO should these all just be operation? or should i split it out to sth else?
-        C, MC, MR, Mplus, Backspace
-    }
-}
-
-data class Display(
-    val big: String,
-    val small: String?,
-) {
-    companion object {
-        val empty = Display(big = "0", small = null)
-    }
-}
-
-internal class CalculatorImpl : Calculator {
-    // TODO it needs to have something observable as a state of the display
-    private val _display = MutableStateFlow(Display.empty)
-    override val display: Flow<Display> = _display
-
-    private var displayNeedToBeOverrideByNextValue = false
-
-    // TODO see if regex would be a better option (perf)
-    private val String.digitCount: Int
-        get() = this.count { it.digitToIntOrNull() != null }
-
-    override fun digit(i: Int) {
-        if (_display.value.big.digitCount >= 16) {
-            return
-        }
-
-        val bigValue = when {
-            displayNeedToBeOverrideByNextValue -> {
-                displayNeedToBeOverrideByNextValue = false
-                i.toString()
-            }
-            _display.value.big != "0" -> { "${_display.value.big}$i" }
-            else -> { i.toString() }
-        }
-
-        _display.value = _display.value.copy(big = bigValue)
-    }
-
-    override fun decimal() {
-        if (_display.value.big.contains('.')) {
-            // nothing
-        } else {
-            _display.value = _display.value.copy(
-                big = "${_display.value.big}."
-            )
-        }
-    }
-
-    override fun operation(op: Calculator.Operation) {
-        when (op) {
-            Calculator.Operation.C -> { _display.value = Display.empty }
-            Calculator.Operation.Plus -> {
-                displayNeedToBeOverrideByNextValue = true
-                _display.value = _display.value.copy(
-                    small = "${_display.value.big}+"
-                )
-            }
-            Calculator.Operation.Backspace -> {
-                val newValue = _display.value.big.dropLast(1)
-                    .let { it.ifEmpty { "0" } }
-
-                _display.value = _display.value.copy(big = newValue)
-            }
-            else -> TODO()
-        }
     }
 }
