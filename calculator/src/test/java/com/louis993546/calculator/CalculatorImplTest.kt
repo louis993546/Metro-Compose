@@ -13,7 +13,7 @@ internal class CalculatorImplTest {
 
     @Test
     fun `starts at 0`() = runTest {
-        val value = calculator.display.first()
+        val value = calculator.display.first().big
 
         assertEquals("0", value)
     }
@@ -24,7 +24,7 @@ internal class CalculatorImplTest {
             val value = calculator.run {
                 digit(it)
 
-                display.first()
+                display.first().big
             }
 
             assertEquals(it.toString(), value)
@@ -39,22 +39,52 @@ internal class CalculatorImplTest {
                     digit(d.digitToInt())
                 }
 
-                display.first()
+                display.first().big
             }
 
             assertEquals(it.toString(), value)
         }
     }
 
-    // TODO click on operations does NOT change the display
+    @Test
+    fun `click on add move the current big display up`() = runTest {
+        calculator.run {
+            // 35
+            digit(3)
+            digit(5)
 
-    // TODO click on reset clears the display
+            // +
+            operation(Calculator.Operation.Plus)
 
-    // TODO click on . (TODO check what does the phone do at the moment)
+            assertEquals("35", display.first().big)
+            assertEquals("35+", display.first().small)
+        }
+    }
+
+    @Test
+    fun `click on C reset everything`() = runTest {
+        calculator.run {
+            digit(6)
+            assertEquals("6", display.first().big)
+
+            operation(Calculator.Operation.C)
+            assertEquals("0", display.first().big)
+        }
+    }
+
+//    @Test
+//    fun `click on MC reset memory only`() = runTest {  }
+
+    // TODO click on . makes it show up the first time
+
+    // TODO click on . when it already exist does nothing
 
     // TODO at some point type in a full addition works
 
     // TODO make sure divide by 0 does not crash the whole thing
 
     // TODO there should be some kind of limit of how many character it supports
+
+//    @Test
+//    fun ``() = runTest {  }
 }
