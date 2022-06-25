@@ -1,6 +1,7 @@
 package com.louis993546.calculator
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,10 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,48 +25,17 @@ import com.louis993546.metro.Text
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
+/*
+ * TODO hack. How can i "remember" an instance of calculator? Like this would break if I want to
+ *  have multiple instances of calculator
+ */
+private val calculator: Calculator = CalculatorImpl()
+
 @Composable
 fun CalculatorApp(
     modifier: Modifier = Modifier,
 ) {
-//    val items = remember { mutableStateListOf<Option>(Option.Number.Integer(0)) }
-    var text by remember { mutableStateOf("0") }
-
-//    fun something(newOption: Option) {
-//        val lastOption = items.last()
-//        val (prev, new) = when {
-//            (lastOption is Option.Number.Floating && newOption is Option.Number.Floating) ||
-//                    (lastOption is Option.Operation && newOption is Option.Operation)
-//            -> lastOption to null
-//
-//            (lastOption is Option.Operation) || (newOption is Option.Operation)
-//            -> lastOption to newOption
-//            (lastOption is Option.Number.Integer && newOption is Option.Number.Integer) -> {
-//                val lastInt = lastOption.int
-//                val newInt = newOption.int
-//                Option.Number.Integer(lastInt + newInt) to null
-//            }
-//            (lastOption is Option.Number.Integer && newOption is Option.Number.Floating) -> {
-//                Option.Number.Floating(lastOption.int.toFloat() + newOption.float) to null
-//            }
-//            (lastOption is Option.Number.Floating && newOption is Option.Number.Integer) -> {
-//                Option.Number.Floating(lastOption.float + newOption.int.toFloat()) to null
-//            }
-//            else -> error("WTF")
-//        }
-//        items[items.lastIndex] = prev
-//        new?.let { items.add(it) }
-//
-//        text = items[items.lastIndex].toString()
-//    }
-//
-//    fun calculate() {
-//        val ints = items.filterIsInstance<Option.Number.Integer>().map { it.int }
-//        val floats = items.filterIsInstance<Option.Number.Floating>().map { it.float }
-//
-//        val sum = ints.sum() + floats.sum()
-//        text = sum.toString()
-//    }
+    val display by calculator.display.collectAsState(initial = Display.empty)
 
     Column(
         modifier = modifier.padding(8.dp),
@@ -78,59 +46,110 @@ fun CalculatorApp(
                 .weight(1f)
                 .fillMaxWidth(),
         ) {
-            Text(
+            Column(
                 modifier = Modifier.align(Alignment.BottomEnd),
-                text = text,
-                size = 64.sp
-            )
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.End,
+            ) {
+                display.small?.run {
+                    Text(text = this, size = 16.sp)
+                }
+                Text(text = display.big, size = 64.sp)
+            }
         }
 
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "C")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "MC")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "MR")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "M+")
+            CalculatorButton(modifier = Modifier.weight(1f), text = "C") {
+                calculator.operation(Calculator.Operation.C)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "MC") {
+                TODO()
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "MR") {
+                TODO()
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "M+") {
+                TODO()
+            }
         }
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "⌫")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "±")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "%")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "÷")
+            CalculatorButton(modifier = Modifier.weight(1f), text = "⌫") {
+                TODO()
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "±") {
+                TODO()
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "%") {
+                TODO()
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "÷") {
+                TODO()
+            }
         }
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "7")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "8")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "9")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "×")
+            CalculatorButton(modifier = Modifier.weight(1f), text = "7") {
+                calculator.digit(7)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "8") {
+                calculator.digit(8)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "9") {
+                calculator.digit(9)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "×") {
+                TODO()
+            }
         }
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "4")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "5")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "6")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "-")
+            CalculatorButton(modifier = Modifier.weight(1f), text = "4") {
+                calculator.digit(4)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "5") {
+                calculator.digit(5)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "6") {
+                calculator.digit(6)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "-") {
+                TODO()
+            }
         }
 
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "1")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "2")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "3")
-            CalculatorButton(modifier = Modifier.weight(1f), text = "+")
+            CalculatorButton(modifier = Modifier.weight(1f), text = "1") {
+                calculator.digit(1)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "2") {
+                calculator.digit(2)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "3") {
+                calculator.digit(3)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = "+") {
+                calculator.operation(Calculator.Operation.Plus)
+            }
         }
 
         // TODO see if this is fixable, if not, make my own layout again i guess 🤷
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(2.1f), text = "0")
-            CalculatorButton(modifier = Modifier.weight(1f), text = ".")
+            CalculatorButton(modifier = Modifier.weight(2.1f), text = "0") {
+                calculator.digit(0)
+            }
+            CalculatorButton(modifier = Modifier.weight(1f), text = ".") {
+                calculator.decimal()
+            }
             CalculatorButton(
                 modifier = Modifier.weight(1f),
                 backgroundColor = LocalAccentColor.current,
                 textColor = LocalTextOnAccentColor.current,
                 text = "=",
-            )
+            ) {
+                TODO()
+            }
         }
     }
 }
@@ -142,11 +161,13 @@ internal fun CalculatorButton(
     backgroundColor: Color = LocalButtonColor.current,
     textColor: Color = LocalTextOnButtonColor.current,
     text: String,
+    onClick: () -> Unit,
 ) {
     Box(
         modifier = modifier
             .heightIn(min = 64.dp)
-            .background(color = backgroundColor),
+            .background(color = backgroundColor)
+            .clickable(onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
         Text(
@@ -157,24 +178,8 @@ internal fun CalculatorButton(
     }
 }
 
-//sealed interface Option {
-//    sealed interface Number : Option {
-//        data class Integer(val int: Int) : Number
-//        data class Floating(val float: Float) : Number
-//    }
-//
-//    data class Operation(val symbol: Symbol) : Option
-//}
-//
-//enum class Symbol {
-//    Plus,
-//    Minus,
-//    Multiply,
-//    Divide
-//}
-
 internal interface Calculator {
-    val display: Flow<String>
+    val display: Flow<Display>
 
     fun digit(i: Int)
 
@@ -183,21 +188,39 @@ internal interface Calculator {
     fun operation(op: Operation)
 
     enum class Operation {
-        Plus, Minus, Multiplier, Divide, Equal
+        Plus, Minus, Multiplier, Divide, Equal,
+        // TODO should these all just be operation? or should i split it out to sth else?
+        C, MC, MR, Mplus, Backspace
+    }
+}
+
+data class Display(
+    val big: String,
+    val small: String?,
+) {
+    companion object {
+        val empty = Display(big = "0", small = null)
     }
 }
 
 internal class CalculatorImpl : Calculator {
     // TODO it needs to have something observable as a state of the display
-    private val _display = MutableStateFlow("0")
-    override val display: Flow<String> = _display
+    private val _display = MutableStateFlow(Display.empty)
+    override val display: Flow<Display> = _display
+
+    private var displayNeedToBeOverrideByNextValue = false
 
     override fun digit(i: Int) {
-        _display.value = if (_display.value != "0") {
-            "${_display.value}$i"
-        } else {
-            i.toString()
+        val bigValue = when {
+            displayNeedToBeOverrideByNextValue -> {
+                displayNeedToBeOverrideByNextValue = false
+                i.toString()
+            }
+            _display.value.big != "0" -> { "${_display.value.big}$i" }
+            else -> { i.toString() }
         }
+
+        _display.value = _display.value.copy(big = bigValue)
     }
 
     override fun decimal() {
@@ -205,6 +228,15 @@ internal class CalculatorImpl : Calculator {
     }
 
     override fun operation(op: Calculator.Operation) {
-        TODO("Not yet implemented")
+        when (op) {
+            Calculator.Operation.C -> { _display.value = Display.empty }
+            Calculator.Operation.Plus -> {
+                displayNeedToBeOverrideByNextValue = true
+                _display.value = _display.value.copy(
+                    small = "${_display.value.big}+"
+                )
+            }
+            else -> TODO()
+        }
     }
 }
