@@ -2,7 +2,6 @@ package com.louis993546.calculator
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import java.util.regex.Pattern
 
 internal class CalculatorImpl : Calculator {
     private val _display = MutableStateFlow(Display.empty)
@@ -75,6 +74,11 @@ internal class CalculatorImpl : Calculator {
         )
     }
 
+    /**
+     * TODO this most likely need to be some kind of convert to AST, and then something process the
+     *  AST and figure out all the order and executions
+     *  or i can just use this: https://github.com/RotBolt/KParser
+     */
     private fun wolframAlpha(formula: String): String {
         return formula.split('+').sumOf { it.toInt() }.toString()
     }
