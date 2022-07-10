@@ -7,13 +7,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Composable
-fun rememberCalculator(): Calculator {
-    return rememberSaveable(saver = CalculatorImpl.Saver) {
-        CalculatorImpl()
-    }
+fun rememberCalculator(): Calculator = rememberSaveable(saver = CalculatorImpl.Saver) {
+    CalculatorImpl()
 }
 
 internal class CalculatorImpl(

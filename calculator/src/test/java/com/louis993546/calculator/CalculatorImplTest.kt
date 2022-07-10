@@ -1,11 +1,9 @@
 package com.louis993546.calculator
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 
-@ExperimentalCoroutinesApi
 internal class CalculatorImplTest {
     private val calculator: Calculator
         get() = CalculatorImpl()
