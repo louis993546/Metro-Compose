@@ -1,19 +1,36 @@
 package com.louis993546.calculator
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
+import android.os.Parcelable
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import kotlinx.android.parcel.Parcelize
 
-internal class CalculatorImpl : Calculator {
-    private val _display = MutableStateFlow(Display.empty)
-    override val display: Flow<Display> = _display
+@Composable
+fun rememberCalculator(): Calculator {
+    return rememberSaveable(saver = CalculatorImpl.Saver) {
+        CalculatorImpl()
+    }
+}
 
-    private var displayNeedToBeOverrideByNextValue = false
+internal class CalculatorImpl(
+    initial: CalculatorSavable? = null,
+) : Calculator {
+    internal var displayNeedToBeOverrideByNextValue: Boolean by mutableStateOf(
+        initial?.displayNeedToBeOverrideByNextValue ?: false
+    )
+
+    override var smallDisplay: String? by mutableStateOf(initial?.smallDisplay)
+    override var bigDisplay: String by mutableStateOf(initial?.bigDisplay ?: "0")
 
     private val String.digitCount: Int
         get() = count { it.digitToIntOrNull() != null }
 
     override fun digit(i: Int) {
-        if (_display.value.big.digitCount >= 16) {
+        if (bigDisplay.digitCount >= 16) {
             return
         }
 
@@ -22,26 +39,31 @@ internal class CalculatorImpl : Calculator {
                 displayNeedToBeOverrideByNextValue = false
                 i.toString()
             }
-            _display.value.big != "0" -> { "${_display.value.big}$i" }
-            else -> { i.toString() }
+            bigDisplay != "0" -> {
+                "${bigDisplay}$i"
+            }
+            else -> {
+                i.toString()
+            }
         }
 
-        _display.value = _display.value.copy(big = bigValue)
+        bigDisplay = bigValue
     }
 
     override fun decimal() {
-        if (_display.value.big.contains('.')) {
+        if (bigDisplay.contains('.')) {
             // nothing
         } else {
-            _display.value = _display.value.copy(
-                big = "${_display.value.big}."
-            )
+            bigDisplay = "${bigDisplay}."
         }
     }
 
     override fun operation(op: Calculator.Operation) {
         when (op) {
-            Calculator.Operation.C -> { _display.value = Display.empty }
+            Calculator.Operation.C -> {
+                smallDisplay = null
+                bigDisplay = "0"
+            }
             Calculator.Operation.Plus -> plus()
             Calculator.Operation.Backspace -> backspace()
             Calculator.Operation.Equal -> equal()
@@ -51,35 +73,53 @@ internal class CalculatorImpl : Calculator {
 
     private fun plus() {
         displayNeedToBeOverrideByNextValue = true
-        _display.value = _display.value.copy(
-            small = "${_display.value.big}+"
-        )
+        smallDisplay = "${bigDisplay}+"
 
         // TODO save what is the display representing maybe?
     }
 
     private fun backspace() {
-        val newValue = _display.value.big.dropLast(1)
+        bigDisplay = bigDisplay.dropLast(1)
             .let { it.ifEmpty { "0" } }
-
-        _display.value = _display.value.copy(big = newValue)
     }
 
     private fun equal() {
-        val formula = "${_display.value.small}${_display.value.big}"
+        val formula = "${smallDisplay}${bigDisplay}"
 
-        _display.value = Display(
-            big = wolframAlpha(formula),
-            small = null
-        )
+        smallDisplay = null
+        bigDisplay = wolframAlpha(formula)
     }
 
     /**
      * TODO this most likely need to be some kind of convert to AST, and then something process the
      *  AST and figure out all the order and executions
      *  or i can just use this: https://github.com/RotBolt/KParser
+     *
+     *  TODO currently this only supports int addition. cause if i enable double addition, it will
+     *   always add the extra dot zero to end of just int addition
      */
     private fun wolframAlpha(formula: String): String {
         return formula.split('+').sumOf { it.toInt() }.toString()
     }
+
+    @Parcelize
+    internal data class CalculatorSavable(
+        val smallDisplay: String?,
+        val bigDisplay: String,
+        val displayNeedToBeOverrideByNextValue: Boolean,
+    ) : Parcelable
+
+    companion object {
+        val Saver: Saver<CalculatorImpl, CalculatorSavable> = Saver(
+            save = {
+                CalculatorSavable(
+                    smallDisplay = it.smallDisplay,
+                    bigDisplay = it.bigDisplay,
+                    displayNeedToBeOverrideByNextValue = it.displayNeedToBeOverrideByNextValue,
+                )
+            },
+            restore = { CalculatorImpl(it) },
+        )
+    }
 }
+

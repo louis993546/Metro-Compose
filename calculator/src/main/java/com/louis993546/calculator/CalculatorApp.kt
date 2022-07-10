@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,17 +22,11 @@ import com.louis993546.metro.LocalTextOnAccentColor
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.Text
 
-/*
- * TODO hack. How can i "remember" an instance of calculator? Like this would break if I want to
- *  have multiple instances of calculator
- */
-private val calculator: Calculator = CalculatorImpl()
-
 @Composable
 fun CalculatorApp(
     modifier: Modifier = Modifier,
 ) {
-    val display by calculator.display.collectAsState(initial = Display.empty)
+    val calculator: Calculator = rememberCalculator()
 
     Column(
         modifier = modifier.padding(8.dp),
@@ -52,10 +44,10 @@ fun CalculatorApp(
             ) {
                 // TODO adjust text size accordingly
                 //  https://stackoverflow.com/questions/63971569/androidautosizetexttype-in-jetpack-compose
-                display.small?.run {
+                calculator.smallDisplay?.run {
                     Text(text = this, size = 16.sp)
                 }
-                Text(text = display.big, size = 64.sp)
+                Text(text = calculator.bigDisplay, size = 64.sp)
             }
         }
 

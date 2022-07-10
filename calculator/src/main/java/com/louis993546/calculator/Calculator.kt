@@ -1,9 +1,8 @@
 package com.louis993546.calculator
 
-import kotlinx.coroutines.flow.Flow
-
-internal interface Calculator {
-    val display: Flow<Display>
+interface Calculator {
+    val smallDisplay: String?
+    val bigDisplay: String
 
     fun digit(i: Int)
 
@@ -15,14 +14,5 @@ internal interface Calculator {
         Plus, Minus, Multiplier, Divide, Equal,
         // TODO should these all just be operation? or should i split it out to sth else?
         C, MC, MR, Mplus, Backspace
-    }
-}
-
-data class Display(
-    val big: String,
-    val small: String?,
-) {
-    companion object {
-        val empty = Display(big = "0", small = null)
     }
 }
