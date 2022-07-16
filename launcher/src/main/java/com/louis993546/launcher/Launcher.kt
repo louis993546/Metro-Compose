@@ -71,7 +71,7 @@ fun HomePage(
                 HomeTile(
                     title = "Camera",
                     iconRes = R.drawable.ic_baseline_photo_camera_24,
-                    modifier = Modifier.clickable { TODO() }
+                    modifier = Modifier.clickable { onAppClick(Apps.CAMERA) }
                 )
             }
             s {

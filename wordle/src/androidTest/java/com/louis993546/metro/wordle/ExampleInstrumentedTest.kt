@@ -1,4 +1,4 @@
-package com.louis993546.wordle
+package com.louis993546.metro.wordle
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

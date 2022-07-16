@@ -38,7 +38,8 @@ apiValidation {
             "apps",
             "radio",
             "app_row",
-            "wordle"
+            "wordle",
+            "camera"
     ]
 }
 

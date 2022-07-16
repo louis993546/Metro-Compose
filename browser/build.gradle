@@ -2,6 +2,10 @@ plugins {
     id 'metro-app-library-convention'
 }
 
+android {
+    namespace "com.louis993546.metro.browser"
+}
+
 dependencies {
     implementation "com.google.accompanist:accompanist-webview:$accompanist_version"
 }

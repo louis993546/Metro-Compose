@@ -20,7 +20,7 @@ For the time being, the library is published to GitHub Packages
 
 | `metro` version  | Compose version |
 |------------------|-----------------|
-| 0.10.0 - 0.12.0  | 1.0.0-rc01      |
+| 0.10.0 to 0.12.0 | 1.0.0-rc01      |
 | 0.13.0 to 0.25.0 | 1.0.0-rc02      |
 | 0.26.0 to 0.49.0 | 1.1.1           |
 | 0.50.0 to 0.52.0 | 1.2.0-beta02    |
@@ -51,6 +51,7 @@ And these are the list of build-in "apps"
 | `radio`          | Radio app                                            |
 | `settings`       | Settings app from WP8 itself                         |
 | `wordle`         | The game that was popular and then got bought by NYT |
+| `camera`         | 📷                                                   |
 
 ## Contribution
 

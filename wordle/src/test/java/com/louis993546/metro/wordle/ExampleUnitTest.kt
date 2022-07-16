@@ -1,4 +1,4 @@
-package com.louis993546.wordle
+package com.louis993546.metro.wordle
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

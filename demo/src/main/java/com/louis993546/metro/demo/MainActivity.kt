@@ -1,5 +1,6 @@
 package com.louis993546.metro.demo
 
+import android.graphics.Camera
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.ViewTreeObserver
@@ -52,8 +53,8 @@ import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.browser.Browser
 import com.louis993546.metro.demo.theme.MetroDemoTheme
 import com.louis993546.metro.settings.Settings
+import com.louis993546.metro.wordle.WordleApp
 import com.louis993546.metro_settings.MetroSettingsApp
-import com.louis993546.wordle.WordleApp
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
@@ -78,6 +79,7 @@ class MainActivity : ComponentActivity() {
                         composable(Apps.CALENDAR) { Calendar() }
                         composable(Apps.APP_SEARCH) { AppSearch(apps = Apps.values().asList()) }
                         composable(Apps.WORDLE) { WordleApp() }
+                        composable(Apps.CAMERA) { Camera() }
                         // Add new apps here (step 2)
                     }
                 }

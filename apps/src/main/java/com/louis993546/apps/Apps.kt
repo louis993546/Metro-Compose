@@ -9,5 +9,6 @@ enum class Apps(val id: String) {
     CALENDAR("calendar"),
     APP_SEARCH("appSearch"),
     WORDLE("wordle"),
+    CAMERA("camera"),
     // Add new apps here (step 1)
 }
