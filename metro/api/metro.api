@@ -71,7 +71,7 @@ public final class com/louis993546/metro/TextFieldKt {
 }
 
 public final class com/louis993546/metro/TextKt {
-	public static final fun Text-jxWH9Kg (Landroidx/compose/ui/Modifier;Ljava/lang/String;JJLandroidx/compose/ui/text/font/FontWeight;Landroidx/compose/runtime/Composer;II)V
+	public static final fun Text-19tTp10 (Landroidx/compose/ui/Modifier;Ljava/lang/String;JJLandroidx/compose/ui/text/font/FontWeight;ILandroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/louis993546/metro/TileKt {

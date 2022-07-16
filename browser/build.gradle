@@ -1,3 +1,7 @@
 plugins {
     id 'metro-app-library-convention'
 }
+
+dependencies {
+    implementation "com.google.accompanist:accompanist-webview:$accompanist_version"
+}

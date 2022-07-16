@@ -20,6 +20,7 @@ fun Text(
     color: Color = LocalTextOnBackgroundColor.current,
     size: TextUnit = TextUnit.Unspecified,
     weight: FontWeight = FontWeight.Normal,
+    maxLine: Int = Int.MAX_VALUE,
 ) {
     BasicText(
         modifier = modifier,
@@ -30,6 +31,7 @@ fun Text(
             fontSize = size,
             fontWeight = weight,
         ),
+        maxLines = maxLine,
     )
 }
 

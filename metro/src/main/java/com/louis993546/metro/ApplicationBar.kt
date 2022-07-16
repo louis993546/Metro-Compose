@@ -3,9 +3,11 @@ package com.louis993546.metro
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -44,8 +46,9 @@ fun ApplicationBar(
 ) {
     Row(
         modifier = modifier
+            .height(IntrinsicSize.Min)
             .background(LocalButtonColor.current)
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp, horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(
             16.dp,
             alignment = Alignment.CenterHorizontally
