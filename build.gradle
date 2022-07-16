@@ -45,7 +45,7 @@ apiValidation {
 }
 
 doctor {
-    disallowMultipleDaemons = true
+    disallowMultipleDaemons = (System.getenv("CI") == "false")
     GCWarningThreshold = 0.10f
     GCFailThreshold = 0.9f
     failOnEmptyDirectories = true
