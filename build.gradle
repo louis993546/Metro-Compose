@@ -22,6 +22,7 @@ buildscript {
 
 plugins {
     id "org.jetbrains.kotlinx.binary-compatibility-validator" version "0.11.0"
+    id "com.osacky.doctor" version "0.8.1"
 }
 
 apiValidation {
@@ -42,6 +43,24 @@ apiValidation {
             "camera"
     ]
 }
+
+doctor {
+    disallowMultipleDaemons = true
+    GCWarningThreshold = 0.10f
+    GCFailThreshold = 0.9f
+    failOnEmptyDirectories = true
+    warnWhenJetifierEnabled = true
+    negativeAvoidanceThreshold = 500
+    warnWhenNotUsingParallelGC = true
+    disallowCleanTaskDependencies = true
+    warnIfKotlinCompileDaemonFallback = true
+    javaHome {
+        ensureJavaHomeMatches = true
+        ensureJavaHomeIsSet = true
+        failOnError.set(true)
+    }
+}
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir
