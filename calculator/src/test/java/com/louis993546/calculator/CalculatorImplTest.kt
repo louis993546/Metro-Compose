@@ -114,6 +114,19 @@ internal class CalculatorImplTest {
         }
     }
 
+    @Test
+    fun `three minus one works`() {
+        calculator.run {
+            digit(3)
+            operation(Calculator.Operation.Minus)
+            digit(1)
+            operation(Calculator.Operation.Equal)
+
+            assertEquals("2", bigDisplay)
+            assertNull(smallDisplay)
+        }
+    }
+
     // TODO make sure divide by 0 does not crash the whole thing
 
     @Test

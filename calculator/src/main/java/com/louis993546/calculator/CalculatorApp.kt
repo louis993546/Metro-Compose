@@ -108,7 +108,7 @@ fun CalculatorApp(
                 calculator.digit(6)
             }
             CalculatorButton(modifier = Modifier.weight(1f), text = "-") {
-                TODO()
+                calculator.operation(Calculator.Operation.Minus)
             }
         }
 

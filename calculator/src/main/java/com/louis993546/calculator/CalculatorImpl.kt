@@ -65,6 +65,7 @@ internal class CalculatorImpl(
             Calculator.Operation.Plus -> plus()
             Calculator.Operation.Backspace -> backspace()
             Calculator.Operation.Equal -> equal()
+            Calculator.Operation.Minus -> minus()
             else -> TODO()
         }
     }
@@ -74,6 +75,11 @@ internal class CalculatorImpl(
         smallDisplay = "${bigDisplay}+"
 
         // TODO save what is the display representing maybe?
+    }
+
+    private fun minus() {
+        displayNeedToBeOverrideByNextValue = true
+        smallDisplay = "${bigDisplay}-"
     }
 
     private fun backspace() {
@@ -96,9 +102,16 @@ internal class CalculatorImpl(
      *  TODO currently this only supports int addition. cause if i enable double addition, it will
      *   always add the extra dot zero to end of just int addition
      */
-    private fun wolframAlpha(formula: String): String {
-        return formula.split('+').sumOf { it.toInt() }.toString()
-    }
+    private fun wolframAlpha(
+        formula: String,
+    ): String = formula.split('+')
+        .sumOf { it.toIntOrNull() ?: wolframAlpha2(formula).toInt() }
+        .toString()
+
+    private fun wolframAlpha2(formula: String): String = formula.split('-')
+        .map { it.toInt() }
+        .reduce { acc, s -> acc - s }
+        .toString()
 
     @Parcelize
     internal data class CalculatorSavable(
