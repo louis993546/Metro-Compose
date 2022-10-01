@@ -11,37 +11,65 @@ jobs:
   debug:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: "Checkout Repo"
         uses: actions/checkout@v3
-      - name: Setup Java 11
+      - name: "Setup Java 11"
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: 11
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
-      - name: Assemble Debug
+      - name: "Assemble Debug"
         run: ./gradlew assembleDebug
-      - name: Upload Debug APK to GitHub
+      - name: "Upload Debug APK to GitHub"
         uses: actions/upload-artifact@v3
         with:
           name: Debug APK
           path: demo/build/outputs/apk/debug/demo-debug.apk
-  release-app:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: "Checkout Repo"
         uses: actions/checkout@v3
-      - name: Setup Java 11
+      - name: "Setup Java 11"
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: 11
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
-      - name: Generate Release AAB
+      - name: "Lint"
+        run: ./gradlew lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Repo"
+        uses: actions/checkout@v3
+      - name: "Setup Java 11"
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 11
+      - name: "Validate Gradle wrapper"
+        uses: gradle/wrapper-validation-action@v1
+      - name: "Test"
+        run: ./gradlew test
+  release-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Repo"
+        uses: actions/checkout@v3
+      - name: "Setup Java 11"
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 11
+      - name: "Validate Gradle wrapper"
+        uses: gradle/wrapper-validation-action@v1
+      - name: "Generate Release AAB"
         run: ./gradlew bundleRelease
-      - name: Sign Android release
+      - name: "Sign Android release"
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: demo/build/outputs/bundle/release
@@ -49,12 +77,12 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-      - name: Upload Release AAB to GitHub
+      - name: "Upload Release AAB to GitHub"
         uses: actions/upload-artifact@v3
         with:
           name: Release AAB
           path: demo/build/outputs/bundle/release/demo-release.aab
-      - name: Upload Release AAB to Play Store
+      - name: "Upload Release AAB to Play Store"
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
@@ -65,16 +93,16 @@ jobs:
   lib-api-check:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: "Checkout Repo"
         uses: actions/checkout@v3
-      - name: Setup Java 11
+      - name: "Setup Java 11"
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: 11
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
-      - name: Check API
+      - name: "Check API"
         run: ./gradlew :metro:apiCheck
   publish-lib:
     runs-on: ubuntu-latest
@@ -82,16 +110,16 @@ jobs:
       contents: read
       packages: write
     steps:
-      - name: Checkout Repo
+      - name: "Checkout Repo"
         uses: actions/checkout@v3
-      - name: Setup Java 11
+      - name: "Setup Java 11"
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
           java-version: 11
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
-      - name: Publish package
+      - name: "Publish package"
         run: ./gradlew publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
