@@ -45,7 +45,7 @@ And these are the list of build-in "apps"
 |------------------|------------------------------------------------------|
 | `appDrawer`      | Display list of apps                                 |
 | `appRow`         | Display a row of app                                 |
-| `app_search`     | Allow searching of apps                              |
+| `appSearch`      | Allow searching of apps                              |
 | `browser`        | Fake Internet Explorer                               |
 | `calculator`     | Calculator                                           |
 | `calendar`       | Calendar                                             |

@@ -44,7 +44,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.louis993546.appDrawer.DrawerPage
-import com.louis993546.app_search.AppSearch
+import com.louis993546.appSearch.AppSearch
 import com.louis993546.apps.Apps
 import com.louis993546.calculator.CalculatorApp
 import com.louis993546.calendar.Calendar

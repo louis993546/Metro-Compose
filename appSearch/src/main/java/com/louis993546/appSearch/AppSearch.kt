@@ -1,4 +1,4 @@
-package com.louis993546.app_search
+package com.louis993546.appSearch
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

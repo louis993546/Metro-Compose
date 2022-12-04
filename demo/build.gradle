@@ -70,7 +70,7 @@ dependencies {
     //region Apps
     implementation project(path: ":apps")
     implementation project(path: ":appDrawer")
-    implementation project(path: ":app_search")
+    implementation project(path: ":appSearch")
     implementation project(path: ":browser")
     implementation project(path: ":calculator")
     implementation project(path: ":calendar")
