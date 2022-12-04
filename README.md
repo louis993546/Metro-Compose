@@ -43,8 +43,8 @@ And these are the list of build-in "apps"
 
 | Module           | App                                                  |
 |------------------|------------------------------------------------------|
-| `app_drawer`     | Display list of apps                                 |
-| `appRow`        | Display a row of app                                 |
+| `appDrawer`      | Display list of apps                                 |
+| `appRow`         | Display a row of app                                 |
 | `app_search`     | Allow searching of apps                              |
 | `browser`        | Fake Internet Explorer                               |
 | `calculator`     | Calculator                                           |

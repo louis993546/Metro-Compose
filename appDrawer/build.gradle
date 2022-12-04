@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace "com.louis993546.metro.app_drawer"
+    namespace "com.louis993546.metro.appDrawer"
 }
 
 dependencies {

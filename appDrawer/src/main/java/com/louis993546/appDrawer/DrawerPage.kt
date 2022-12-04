@@ -1,4 +1,4 @@
-package com.louis993546.app_drawer
+package com.louis993546.appDrawer
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -29,7 +29,7 @@ import com.louis993546.metro.LocalAccentColor
 import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.LocalTextOnBackgroundColor
 import com.louis993546.metro.Text
-import com.louis993546.metro.app_drawer.R
+import com.louis993546.metro.appDrawer.R
 
 @ExperimentalFoundationApi
 @Composable

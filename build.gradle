@@ -34,7 +34,7 @@ apiValidation {
             "demo",
             "metro_settings",
             "settings",
-            "app_drawer",
+            "appDrawer",
             "app_search",
             "calendar",
             "launcher",
