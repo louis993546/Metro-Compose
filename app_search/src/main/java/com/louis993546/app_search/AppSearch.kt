@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.unit.dp
-import com.louis993546.app_row.AppRow
+import com.louis993546.appRow.AppRow
 import com.louis993546.apps.Apps
 import com.louis993546.metro.TextField
 

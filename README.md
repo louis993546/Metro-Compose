@@ -44,7 +44,7 @@ And these are the list of build-in "apps"
 | Module           | App                                                  |
 |------------------|------------------------------------------------------|
 | `app_drawer`     | Display list of apps                                 |
-| `app_row`        | Display a row of app                                 |
+| `appRow`        | Display a row of app                                 |
 | `app_search`     | Allow searching of apps                              |
 | `browser`        | Fake Internet Explorer                               |
 | `calculator`     | Calculator                                           |

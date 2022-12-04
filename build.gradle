@@ -40,7 +40,7 @@ apiValidation {
             "launcher",
             "apps",
             "radio",
-            "app_row",
+            "appRow",
             "wordle",
             "camera"
     ]

@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace "com.louis993546.metro.app_row"
+    namespace "com.louis993546.metro.appRow"
 }
 
 dependencies {

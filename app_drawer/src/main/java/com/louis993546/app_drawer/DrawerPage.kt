@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.louis993546.app_row.AppRow
+import com.louis993546.appRow.AppRow
 import com.louis993546.apps.Apps
 import com.louis993546.metro.CircleButton
 import com.louis993546.metro.LocalAccentColor

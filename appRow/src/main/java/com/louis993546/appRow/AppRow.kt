@@ -1,4 +1,4 @@
-package com.louis993546.app_row
+package com.louis993546.appRow
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
