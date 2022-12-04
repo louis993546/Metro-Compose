@@ -131,7 +131,7 @@ fun Launcher(
 fun DeviceFrame(
     navController: NavHostController,
     tallScreenRatio: Float = 1.8f,
-    lumia920Ratio: Float = 0.6, // Lumia 920 has 768 * 1280 screen
+    lumia920Ratio: Float = 0.6f, // Lumia 920 has 768 * 1280 screen
     content: @Composable () -> Unit,
 ) {
     val isKeyboardOpen by keyboardAsState()
@@ -198,7 +198,7 @@ enum class Keyboard {
 
 @Composable
 fun keyboardAsState(
-    bufferPercentage: Float = 0.15,
+    bufferPercentage: Float = 0.15f,
 ): State<Keyboard> {
     val keyboardState = remember { mutableStateOf(Keyboard.Closed) }
     val view = LocalView.current
