@@ -22,6 +22,7 @@ import com.louis993546.metro.LocalTextOnAccentColor
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.Text
 
+@Suppress("MagicNumber")
 @Composable
 fun CalculatorApp(
     modifier: Modifier = Modifier,
