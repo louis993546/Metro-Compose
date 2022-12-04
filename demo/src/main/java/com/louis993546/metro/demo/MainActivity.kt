@@ -130,13 +130,15 @@ fun Launcher(
 @Composable
 fun DeviceFrame(
     navController: NavHostController,
+    tallScreenRatio: Float = 1.8f,
+    lumia920Ratio: Float = 0.6, // Lumia 920 has 768 * 1280 screen
     content: @Composable () -> Unit,
 ) {
     val isKeyboardOpen by keyboardAsState()
 
     val ratio =
         LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
-    val isTallScreen = ratio >= 1.8
+    val isTallScreen = ratio >= tallScreenRatio
 
     Column {
         // TODO maybe in future I can look into custom overscroll behaviour?
@@ -144,10 +146,9 @@ fun DeviceFrame(
         Box(
             modifier = Modifier
                 .border(color = Color.White, width = 1.dp)
-                // Lumia 920 has 1280 * 768 screen
                 .run {
                     if (isTallScreen && isKeyboardOpen == Keyboard.Closed) // TODO allow this to be turn off
-                        this.aspectRatio(9f / 15f)
+                        this.aspectRatio(lumia920Ratio)
                     else
                         this
                 }
@@ -196,7 +197,9 @@ enum class Keyboard {
 }
 
 @Composable
-fun keyboardAsState(): State<Keyboard> {
+fun keyboardAsState(
+    bufferPercentage: Float = 0.15,
+): State<Keyboard> {
     val keyboardState = remember { mutableStateOf(Keyboard.Closed) }
     val view = LocalView.current
     DisposableEffect(view) {
@@ -205,7 +208,7 @@ fun keyboardAsState(): State<Keyboard> {
             view.getWindowVisibleDisplayFrame(rect)
             val screenHeight = view.rootView.height
             val keypadHeight = screenHeight - rect.bottom
-            keyboardState.value = if (keypadHeight > screenHeight * 0.15) {
+            keyboardState.value = if (keypadHeight > screenHeight * bufferPercentage) {
                 Keyboard.Opened
             } else {
                 Keyboard.Closed
