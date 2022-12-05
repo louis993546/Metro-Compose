@@ -52,13 +52,14 @@ fun CalculatorApp(
             }
         }
 
-        KeyPad()
+        KeyPad(calculator = calculator)
     }
 }
 
 @Composable
 fun KeyPad(
     modifier: Modifier = Modifier,
+    calculator: Calculator,
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         CalculatorButton(modifier = Modifier.weight(1f), text = "C") {
@@ -90,12 +91,18 @@ fun KeyPad(
         }
     }
 
-    NumPad()
+    NumPad(calculator = calculator)
 }
 
 @Composable
-fun NumPad() {
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+fun NumPad(
+    modifier: Modifier = Modifier,
+    calculator: Calculator,
+) {
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
         CalculatorButton(modifier = Modifier.weight(1f), text = "7") {
             calculator.digit(7)
         }
