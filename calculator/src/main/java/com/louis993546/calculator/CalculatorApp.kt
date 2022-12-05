@@ -22,7 +22,6 @@ import com.louis993546.metro.LocalTextOnAccentColor
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.Text
 
-@Suppress("MagicNumber")
 @Composable
 fun CalculatorApp(
     modifier: Modifier = Modifier,
@@ -94,6 +93,7 @@ fun KeyPad(
     NumPad(calculator = calculator)
 }
 
+@Suppress("MagicNumber")
 @Composable
 fun NumPad(
     modifier: Modifier = Modifier,
@@ -103,14 +103,10 @@ fun NumPad(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        CalculatorButton(modifier = Modifier.weight(1f), text = "7") {
-            calculator.digit(7)
-        }
-        CalculatorButton(modifier = Modifier.weight(1f), text = "8") {
-            calculator.digit(8)
-        }
-        CalculatorButton(modifier = Modifier.weight(1f), text = "9") {
-            calculator.digit(9)
+        listOf(7, 8, 9).forEach { digit -> 
+            CalculatorButton(modifier = Modifier.weight(1f), text = digit.toString()) {
+                calculator.digit(digit)
+            }
         }
         CalculatorButton(modifier = Modifier.weight(1f), text = "×") {
             TODO()
@@ -118,14 +114,10 @@ fun NumPad(
     }
 
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        CalculatorButton(modifier = Modifier.weight(1f), text = "4") {
-            calculator.digit(4)
-        }
-        CalculatorButton(modifier = Modifier.weight(1f), text = "5") {
-            calculator.digit(5)
-        }
-        CalculatorButton(modifier = Modifier.weight(1f), text = "6") {
-            calculator.digit(6)
+        listOf(4, 5, 6).forEach { digit -> 
+            CalculatorButton(modifier = Modifier.weight(1f), text = digit.toString()) {
+                calculator.digit(digit)
+            }
         }
         CalculatorButton(modifier = Modifier.weight(1f), text = "-") {
             calculator.operation(Calculator.Operation.Minus)
@@ -133,14 +125,10 @@ fun NumPad(
     }
 
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        CalculatorButton(modifier = Modifier.weight(1f), text = "1") {
-            calculator.digit(1)
-        }
-        CalculatorButton(modifier = Modifier.weight(1f), text = "2") {
-            calculator.digit(2)
-        }
-        CalculatorButton(modifier = Modifier.weight(1f), text = "3") {
-            calculator.digit(3)
+        listOf(1, 2, 3).forEach { digit -> 
+            CalculatorButton(modifier = Modifier.weight(1f), text = digit.toString()) {
+                calculator.digit(digit)
+            }
         }
         CalculatorButton(modifier = Modifier.weight(1f), text = "+") {
             calculator.operation(Calculator.Operation.Plus)
