@@ -1,4 +1,4 @@
-package com.louis993546.metro_settings
+package com.louis993546.metroSettings
 
 import android.content.Context
 import android.content.Intent

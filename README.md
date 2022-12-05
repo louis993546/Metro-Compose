@@ -50,7 +50,7 @@ And these are the list of build-in "apps"
 | `calculator`     | Calculator                                           |
 | `calendar`       | Calendar                                             |
 | `launcher`       | Controls what the home screen grid shows             |
-| `metro_settings` | Settings and information for the demo app itself     |
+| `metroSettings`  | Settings and information for the demo app itself     |
 | `radio`          | Radio app                                            |
 | `settings`       | Settings app from WP8 itself                         |
 | `wordle`         | The game that was popular and then got bought by NYT |

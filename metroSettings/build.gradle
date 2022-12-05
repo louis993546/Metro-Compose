@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace "com.louis993546.metro_settings"
+    namespace "com.louis993546.metroSettings"
 }

@@ -32,7 +32,7 @@ apiValidation {
             "browser",
             "calculator",
             "demo",
-            "metro_settings",
+            "metroSettings",
             "settings",
             "appDrawer",
             "appSearch",
