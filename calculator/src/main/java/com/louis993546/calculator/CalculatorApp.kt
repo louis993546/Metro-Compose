@@ -52,97 +52,108 @@ fun CalculatorApp(
             }
         }
 
+        KeyPad()
+    }
+}
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "C") {
-                calculator.operation(Calculator.Operation.C)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "MC") {
-                TODO()
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "MR") {
-                TODO()
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "M+") {
-                TODO()
-            }
+@Composable
+fun KeyPad(
+    modifier: Modifier = Modifier,
+) {
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        CalculatorButton(modifier = Modifier.weight(1f), text = "C") {
+            calculator.operation(Calculator.Operation.C)
         }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "MC") {
+            TODO()
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "MR") {
+            TODO()
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "M+") {
+            TODO()
+        }
+    }
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "⌫") {
-                calculator.operation(Calculator.Operation.Backspace)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "±") {
-                TODO()
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "%") {
-                TODO()
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "÷") {
-                TODO()
-            }
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        CalculatorButton(modifier = Modifier.weight(1f), text = "⌫") {
+            calculator.operation(Calculator.Operation.Backspace)
         }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "±") {
+            TODO()
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "%") {
+            TODO()
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "÷") {
+            TODO()
+        }
+    }
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "7") {
-                calculator.digit(7)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "8") {
-                calculator.digit(8)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "9") {
-                calculator.digit(9)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "×") {
-                TODO()
-            }
-        }
+    NumPad()
+}
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "4") {
-                calculator.digit(4)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "5") {
-                calculator.digit(5)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "6") {
-                calculator.digit(6)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "-") {
-                calculator.operation(Calculator.Operation.Minus)
-            }
+@Composable
+fun NumPad() {
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        CalculatorButton(modifier = Modifier.weight(1f), text = "7") {
+            calculator.digit(7)
         }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "8") {
+            calculator.digit(8)
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "9") {
+            calculator.digit(9)
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "×") {
+            TODO()
+        }
+    }
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(1f), text = "1") {
-                calculator.digit(1)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "2") {
-                calculator.digit(2)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "3") {
-                calculator.digit(3)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = "+") {
-                calculator.operation(Calculator.Operation.Plus)
-            }
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        CalculatorButton(modifier = Modifier.weight(1f), text = "4") {
+            calculator.digit(4)
         }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "5") {
+            calculator.digit(5)
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "6") {
+            calculator.digit(6)
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "-") {
+            calculator.operation(Calculator.Operation.Minus)
+        }
+    }
 
-        // TODO see if this is fixable, if not, make my own layout again i guess 🤷
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            CalculatorButton(modifier = Modifier.weight(2.1f), text = "0") {
-                calculator.digit(0)
-            }
-            CalculatorButton(modifier = Modifier.weight(1f), text = ".") {
-                calculator.decimal()
-            }
-            CalculatorButton(
-                modifier = Modifier.weight(1f),
-                backgroundColor = LocalAccentColor.current,
-                textColor = LocalTextOnAccentColor.current,
-                text = "=",
-            ) { calculator.operation(Calculator.Operation.Equal) }
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        CalculatorButton(modifier = Modifier.weight(1f), text = "1") {
+            calculator.digit(1)
         }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "2") {
+            calculator.digit(2)
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "3") {
+            calculator.digit(3)
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = "+") {
+            calculator.operation(Calculator.Operation.Plus)
+        }
+    }
+
+    // TODO see if this is fixable, if not, make my own layout again i guess 🤷
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        CalculatorButton(modifier = Modifier.weight(2.1f), text = "0") {
+            calculator.digit(0)
+        }
+        CalculatorButton(modifier = Modifier.weight(1f), text = ".") {
+            calculator.decimal()
+        }
+        CalculatorButton(
+            modifier = Modifier.weight(1f),
+            backgroundColor = LocalAccentColor.current,
+            textColor = LocalTextOnAccentColor.current,
+            text = "=",
+        ) { calculator.operation(Calculator.Operation.Equal) }
     }
 }
 
