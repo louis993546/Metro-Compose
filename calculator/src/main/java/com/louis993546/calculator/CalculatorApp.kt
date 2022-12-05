@@ -57,7 +57,6 @@ fun CalculatorApp(
 
 @Composable
 fun KeyPad(
-    modifier: Modifier = Modifier,
     calculator: Calculator,
 ) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -96,11 +95,9 @@ fun KeyPad(
 @Suppress("MagicNumber")
 @Composable
 fun NumPad(
-    modifier: Modifier = Modifier,
     calculator: Calculator,
 ) {
     Row(
-        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         listOf(7, 8, 9).forEach { digit -> 
