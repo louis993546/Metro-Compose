@@ -28,7 +28,15 @@ For the time being, the library is published to GitHub Packages
 | 0.54.0 to 0.66.0 | 1.2.0-rc02      |
 | 0.67.0 to 0.69.0 | 1.3.0-beta01    |
 | 0.70.0 to 0.73.0 | 1.3.0-beta03    |
-| 0.74.0 to latest | 1.3.0-rc01      |
+| 0.74.0 to 0.79.0 | 1.3.0-rc01      |
+
+And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://developer.android.com/jetpack/compose/setup#bom-version-mapping) instead.
+
+
+| `metro` version  | BoM version |
+|------------------|-------------|
+| 0.80.0 to latest | 22.11.00    |
+
 
 ## Project Structure
 

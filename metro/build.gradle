@@ -39,14 +39,18 @@ android {
 }
 
 dependencies {
-    api "androidx.compose.ui:ui:$compose_version"
-    api "androidx.compose.foundation:foundation:$compose_version"
-    api "androidx.compose.ui:ui-tooling:$compose_version"
+    def composeBom = platform("androidx.compose:compose-bom:$compose_bom_version")
+    implementation composeBom
+    androidTestImplementation composeBom
+
+    api "androidx.compose.ui:ui"
+    api "androidx.compose.foundation:foundation"
+    api "androidx.compose.ui:ui-tooling"
     api "com.google.accompanist:accompanist-pager:$accompanist_version"
     testImplementation "junit:junit:4.13.2"
-    androidTestImplementation "androidx.test.ext:junit:1.1.3"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
-    androidTestApi "androidx.compose.ui:ui-test-junit4:$compose_version"
+    androidTestImplementation "androidx.test.ext:junit:1.1.4"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.0"
+    androidTestApi "androidx.compose.ui:ui-test-junit4"
 }
 
 afterEvaluate {
