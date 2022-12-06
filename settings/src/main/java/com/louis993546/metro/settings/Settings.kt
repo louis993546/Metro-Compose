@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.louis993546.metro.Pages
+import com.louis993546.metro.Text
 import com.louis993546.metro.TitleBar
 
 @ExperimentalPagerApi
@@ -25,14 +26,14 @@ fun Settings(
 
 @Composable
 fun SystemPage(
-//    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
 ) {
-
+    Text(text = "TBD", modifier = modifier)
 }
 
 @Composable
 fun ApplicationsPage(
-//    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
 ) {
-
+    Text(text = "TBD", modifier = modifier)
 }
