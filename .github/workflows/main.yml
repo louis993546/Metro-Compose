@@ -21,7 +21,7 @@ jobs:
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Assemble Debug"
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug --no-daemon
       - name: "Upload Debug APK to GitHub"
         uses: actions/upload-artifact@v3
         with:
@@ -40,7 +40,7 @@ jobs:
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Lint"
-        run: ./gradlew lint
+        run: ./gradlew lint --no-daemon
   test:
     runs-on: ubuntu-latest
     steps:
@@ -54,7 +54,7 @@ jobs:
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Test"
-        run: ./gradlew test
+        run: ./gradlew test --no-daemon
   release-app:
     runs-on: ubuntu-latest
     steps:
@@ -68,7 +68,7 @@ jobs:
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Generate Release AAB"
-        run: ./gradlew bundleRelease
+        run: ./gradlew bundleRelease --no-daemon
       - name: "Sign Android release"
         uses: r0adkll/sign-android-release@v1
         with:
@@ -103,7 +103,7 @@ jobs:
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Check API"
-        run: ./gradlew :metro:apiCheck
+        run: ./gradlew :metro:apiCheck --no-daemon
   publish-lib:
     runs-on: ubuntu-latest
     permissions:
@@ -120,6 +120,6 @@ jobs:
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Publish package"
-        run: ./gradlew publish
+        run: ./gradlew publish --no-daemon
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
