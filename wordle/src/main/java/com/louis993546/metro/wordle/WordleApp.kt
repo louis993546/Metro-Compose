@@ -86,6 +86,7 @@ fun GuessCell(
     modifier: Modifier = Modifier,
     state: GuessCellState = GuessCellState.Empty,
 ) {
+    @Suppress("MagicNumber")
     val cellWidth = LocalConfiguration.current.screenWidthDp / 6
     // TODO figure out how to get parent size, and then min it with width
 
@@ -215,6 +216,7 @@ fun Key(
     width: KeyWidth = KeyWidth.M,
     content: @Composable BoxScope.() -> Unit,
 ) {
+    @Suppress("MagicNumber")
     val widthBase = (LocalConfiguration.current.screenWidthDp - 16) / 14
 
     Box(

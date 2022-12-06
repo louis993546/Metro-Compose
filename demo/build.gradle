@@ -75,7 +75,7 @@ dependencies {
     implementation project(path: ":calculator")
     implementation project(path: ":calendar")
     implementation project(path: ":launcher")
-    implementation project(path: ":metro_settings")
+    implementation project(path: ":metroSettings")
     implementation project(path: ":radio")
     implementation project(path: ":settings")
     implementation project(path: ":wordle")

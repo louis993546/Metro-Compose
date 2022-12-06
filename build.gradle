@@ -16,7 +16,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.0-alpha08'
+        classpath 'com.android.tools.build:gradle:8.0.0-alpha09'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -32,7 +32,7 @@ apiValidation {
             "browser",
             "calculator",
             "demo",
-            "metro_settings",
+            "metroSettings",
             "settings",
             "appDrawer",
             "appSearch",

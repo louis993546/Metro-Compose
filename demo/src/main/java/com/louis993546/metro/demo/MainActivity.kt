@@ -54,7 +54,7 @@ import com.louis993546.metro.browser.Browser
 import com.louis993546.metro.demo.theme.MetroDemoTheme
 import com.louis993546.metro.settings.Settings
 import com.louis993546.metro.wordle.WordleApp
-import com.louis993546.metro_settings.MetroSettingsApp
+import com.louis993546.metroSettings.MetroSettingsApp
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
