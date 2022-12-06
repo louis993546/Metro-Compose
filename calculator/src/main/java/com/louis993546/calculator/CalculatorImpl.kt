@@ -14,6 +14,7 @@ fun rememberCalculator(): Calculator = rememberSaveable(saver = CalculatorImpl.S
     CalculatorImpl()
 }
 
+@Suppress("MagicNumber")
 internal class CalculatorImpl(
     initial: CalculatorSavable? = null,
 ) : Calculator {

@@ -1,6 +1,7 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
+    id "io.gitlab.arturbosch.detekt"
 }
 
 android {
@@ -68,13 +69,13 @@ dependencies {
 
     //region Apps
     implementation project(path: ":apps")
-    implementation project(path: ":app_drawer")
-    implementation project(path: ":app_search")
+    implementation project(path: ":appDrawer")
+    implementation project(path: ":appSearch")
     implementation project(path: ":browser")
     implementation project(path: ":calculator")
     implementation project(path: ":calendar")
     implementation project(path: ":launcher")
-    implementation project(path: ":metro_settings")
+    implementation project(path: ":metroSettings")
     implementation project(path: ":radio")
     implementation project(path: ":settings")
     implementation project(path: ":wordle")

@@ -27,6 +27,10 @@ import com.louis993546.metro.Text
 import com.louis993546.metro.demo.VerticalTilesGrid
 import com.louis993546.metro.launcher.R
 
+/**
+ * Suppress LongMethod, as in long run, this whole thing should be configurable by the users
+ */
+@Suppress("LongMethod")
 @Composable
 fun HomePage(
     modifier: Modifier = Modifier,

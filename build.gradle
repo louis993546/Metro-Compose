@@ -16,7 +16,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.0.0-alpha08'
+        classpath 'com.android.tools.build:gradle:8.0.0-alpha09'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -24,6 +24,7 @@ buildscript {
 plugins {
     id "org.jetbrains.kotlinx.binary-compatibility-validator" version "0.12.1"
     id "com.osacky.doctor" version "0.8.1"
+    id "io.gitlab.arturbosch.detekt" version "1.22.0"
 }
 
 apiValidation {
@@ -31,15 +32,15 @@ apiValidation {
             "browser",
             "calculator",
             "demo",
-            "metro_settings",
+            "metroSettings",
             "settings",
-            "app_drawer",
-            "app_search",
+            "appDrawer",
+            "appSearch",
             "calendar",
             "launcher",
             "apps",
             "radio",
-            "app_row",
+            "appRow",
             "wordle",
             "camera"
     ]

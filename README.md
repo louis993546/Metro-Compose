@@ -43,14 +43,14 @@ And these are the list of build-in "apps"
 
 | Module           | App                                                  |
 |------------------|------------------------------------------------------|
-| `app_drawer`     | Display list of apps                                 |
-| `app_row`        | Display a row of app                                 |
-| `app_search`     | Allow searching of apps                              |
+| `appDrawer`      | Display list of apps                                 |
+| `appRow`         | Display a row of app                                 |
+| `appSearch`      | Allow searching of apps                              |
 | `browser`        | Fake Internet Explorer                               |
 | `calculator`     | Calculator                                           |
 | `calendar`       | Calendar                                             |
 | `launcher`       | Controls what the home screen grid shows             |
-| `metro_settings` | Settings and information for the demo app itself     |
+| `metroSettings`  | Settings and information for the demo app itself     |
 | `radio`          | Radio app                                            |
 | `settings`       | Settings app from WP8 itself                         |
 | `wordle`         | The game that was popular and then got bought by NYT |
