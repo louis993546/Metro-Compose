@@ -1,4 +1,4 @@
-package com.louis993546.metroSettings
+package com.louis993546.metro.metroSettings
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.louis993546.metroSettings.test", appContext.packageName)
+        assertEquals("com.louis993546.metro.metroSettings.test", appContext.packageName)
     }
 }

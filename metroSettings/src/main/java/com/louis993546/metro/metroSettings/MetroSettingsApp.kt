@@ -1,4 +1,4 @@
-package com.louis993546.metroSettings
+package com.louis993546.metro.metroSettings
 
 import android.content.Context
 import android.content.Intent
@@ -12,16 +12,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -31,11 +36,16 @@ import com.louis993546.metro.MessageBox
 import com.louis993546.metro.Pages
 import com.louis993546.metro.Text
 import com.louis993546.metro.TitleBar
+import kotlinx.coroutines.launch
 
+/**
+ * TODO refactor the whole thing so that MetroSettings is internal to this app itself
+ */
 @ExperimentalPagerApi
 @Composable
 fun MetroSettingsApp(
     modifier: Modifier = Modifier,
+    dataSource: MetroSettingsDataSource,
 ) {
     Column(modifier = modifier) {
         TitleBar(title = "METRO SETTINGS")
@@ -46,11 +56,7 @@ fun MetroSettingsApp(
             pageTitles = listOf("settings", "about", "open-source licenses")
         ) { page ->
             when (page) {
-                0 -> Settings(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                )
+                0 -> SettingsPage(dataSource = dataSource)
                 1 -> AboutUs(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -95,13 +101,72 @@ fun MetroSettingsApp(
 }
 
 @Composable
+fun SettingsPage(
+    modifier: Modifier = Modifier,
+    dataSource: MetroSettingsDataSource,
+) {
+    val scope = rememberCoroutineScope()
+    val configuration by dataSource.getConfiguration()
+        .collectAsState(initial = MetroSettingsConfiguration.INITIAL)
+
+
+    Settings(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        isTallScreenRatio = configuration.isTallScreenRatio,
+        frameRatio = configuration.frameRatio,
+    ) { field, textValue ->
+        when (field) {
+            MetroSettingsField.IS_TALL_SCREEN_RATIO -> scope.launch {
+                dataSource.setTallScreenRatio(textValue.toFloat())
+            }
+            MetroSettingsField.FRAME_RATIO -> scope.launch {
+                val floatValue = textValue.toFloatOrNull()
+                if (floatValue == null) {
+                    dataSource.clearFrameRatio()
+                } else {
+                    dataSource.setFrameRatio(floatValue)
+                }
+            }
+        }
+    }
+}
+
+enum class MetroSettingsField {
+    IS_TALL_SCREEN_RATIO,
+    FRAME_RATIO
+}
+
+/**
+ * TODO Metro version of TextField
+ */
+@Composable
 internal fun Settings(
     modifier: Modifier = Modifier,
+    isTallScreenRatio: Float,
+    frameRatio: Float?,
+    onConfigChange: (MetroSettingsField, String) -> Unit,
 ) {
     Column(modifier = modifier.fillMaxHeight()) {
         Text(text = "TODO Real browser, or in-app fake IE")
         Text(text = "TODO typography")
-        Text(text = "TODO screen ratio (e.g. 15:9 like 920, 16:9, or full screen)")
+        Text(text = "isTallScreenRatio")
+        BasicTextField(
+            value = isTallScreenRatio.toString(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            onValueChange = {
+                onConfigChange(MetroSettingsField.IS_TALL_SCREEN_RATIO, it)
+            },
+        )
+        Text(text = "frameRatio")
+        BasicTextField(
+            value = frameRatio?.toString() ?: "",
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            onValueChange = {
+                onConfigChange(MetroSettingsField.FRAME_RATIO, it)
+            },
+        )
         Text(text = "TODO override 4 or 6 columns")
     }
 }
