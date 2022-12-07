@@ -45,21 +45,21 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import com.louis993546.appDrawer.DrawerPage
-import com.louis993546.appSearch.AppSearch
-import com.louis993546.apps.Apps
-import com.louis993546.calculator.CalculatorApp
-import com.louis993546.calendar.Calendar
-import com.louis993546.launcher.HomePage
+import com.louis993546.metro.demo.appDrawer.DrawerPage
+import com.louis993546.metro.demo.appSearch.AppSearch
+import com.louis993546.metro.demo.apps.Apps
+import com.louis993546.metro.demo.calculator.CalculatorApp
+import com.louis993546.metro.demo.calendar.Calendar
+import com.louis993546.metro.demo.launcher.HomePage
 import com.louis993546.metro.LocalBackgroundColor
-import com.louis993546.metro.browser.Browser
+import com.louis993546.metro.demo.browser.Browser
 import com.louis993546.metro.demo.theme.MetroDemoTheme
-import com.louis993546.metro.settings.Settings
-import com.louis993546.metro.wordle.WordleApp
-import com.louis993546.metro.metroSettings.MetroSettingsApp
-import com.louis993546.metro.metroSettings.MetroSettingsConfiguration
-import com.louis993546.metro.metroSettings.MetroSettingsDataSource
-import com.louis993546.metro.metroSettings.metroSettingsDataSource
+import com.louis993546.metro.demo.settings.Settings
+import com.louis993546.metro.demo.wordle.WordleApp
+import com.louis993546.metro.demo.metroSettings.MetroSettingsApp
+import com.louis993546.metro.demo.metroSettings.MetroSettingsConfiguration
+import com.louis993546.metro.demo.metroSettings.MetroSettingsDataSource
+import com.louis993546.metro.demo.metroSettings.metroSettingsDataSource
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi

@@ -29,20 +29,20 @@ plugins {
 
 apiValidation {
     ignoredProjects += [
-            "browser",
-            "calculator",
             "demo",
-            "metroSettings",
-            "settings",
-            "appDrawer",
-            "appSearch",
-            "calendar",
-            "launcher",
-            "apps",
-            "radio",
-            "appRow",
-            "wordle",
-            "camera"
+            "demoApps",
+            "demoAppDrawer",
+            "demoAppRow",
+            "demoAppSearch",
+            "demoBrowser",
+            "demoCalculator",
+            "demoCalendar",
+            "demoCamera",
+            "demoLauncher",
+            "demoMetroSettings",
+            "demoRadio",
+            "demoSettings",
+            "demoWordle"
     ]
 }
 
