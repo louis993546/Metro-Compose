@@ -1,2 +1,3 @@
 #!/bin/sh
 ./gradlew apiCheck
+./gradlew detekt

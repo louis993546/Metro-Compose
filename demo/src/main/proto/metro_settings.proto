@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "com.louis993546.metro.demo";
+option java_multiple_files = true;
+
+message MetroSettings {
+  float is_tall_screen_ratio = 1;
+  optional float frame_ratio = 2;
+}

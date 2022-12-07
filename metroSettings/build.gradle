@@ -5,3 +5,7 @@ plugins {
 android {
     namespace "com.louis993546.metroSettings"
 }
+
+//dependencies {
+//    implementation "androidx.datastore:datastore:$datastore_version"
+//}

@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -64,7 +66,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            DeviceFrame(navController = navController) {
+            val metroSettings = LocalContext.current.settingsDataStore
+            val metroSettingsState by metroSettings.data.collectAsState(
+                initial = MetroSettingsSerializer.defaultValue,
+            )
+
+            DeviceFrame(
+                navController = navController,
+                isTallScreenRatio = metroSettingsState.isTallScreenRatio,
+                frameRatio = metroSettingsState.frameRatio,
+            ) {
                 MetroDemoTheme {
                     NavHost(
                         navController = navController,
@@ -73,7 +84,11 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(Apps.LAUNCHER) { Launcher(navController) }
                         composable(Apps.CALCULATOR) { CalculatorApp() }
-                        composable(Apps.METRO_SETTINGS) { MetroSettingsApp() }
+                        composable(Apps.METRO_SETTINGS) {
+                            MetroSettingsApp(
+                                // TODO metro settings so that it can read and modify it
+                            )
+                        }
                         composable(Apps.SETTINGS) { Settings() }
                         composable(Apps.BROWSER) { Browser() }
                         composable(Apps.CALENDAR) { Calendar() }
@@ -130,15 +145,15 @@ fun Launcher(
 @Composable
 fun DeviceFrame(
     navController: NavHostController,
-    tallScreenRatio: Float = 1.8f,
-    lumia920Ratio: Float = 0.6f, // Lumia 920 has 768 * 1280 screen
+    isTallScreenRatio: Float,
+    frameRatio: Float,
     content: @Composable () -> Unit,
 ) {
     val isKeyboardOpen by keyboardAsState()
 
     val ratio =
         LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
-    val isTallScreen = ratio >= tallScreenRatio
+    val isTallScreen = ratio >= isTallScreenRatio
 
     Column {
         // TODO maybe in future I can look into custom overscroll behaviour?
@@ -148,7 +163,7 @@ fun DeviceFrame(
                 .border(color = Color.White, width = 1.dp)
                 .run {
                     if (isTallScreen && isKeyboardOpen == Keyboard.Closed) // TODO allow this to be turn off
-                        this.aspectRatio(lumia920Ratio)
+                        this.aspectRatio(frameRatio)
                     else
                         this
                 }
