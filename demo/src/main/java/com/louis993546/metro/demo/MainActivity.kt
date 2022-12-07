@@ -56,7 +56,10 @@ import com.louis993546.metro.browser.Browser
 import com.louis993546.metro.demo.theme.MetroDemoTheme
 import com.louis993546.metro.settings.Settings
 import com.louis993546.metro.wordle.WordleApp
-import com.louis993546.metroSettings.MetroSettingsApp
+import com.louis993546.metro.metroSettings.MetroSettingsApp
+import com.louis993546.metro.metroSettings.MetroSettingsConfiguration
+import com.louis993546.metro.metroSettings.MetroSettingsDataSource
+import com.louis993546.metro.metroSettings.metroSettingsDataSource
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
@@ -66,16 +69,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            val metroSettings = LocalContext.current.settingsDataStore
-            val metroSettingsState by metroSettings.data.collectAsState(
-                initial = MetroSettingsSerializer.defaultValue,
-            )
-            val scope = rememberCoroutineScope()
+            val metroSettings = LocalContext.current.metroSettingsDataSource
 
             DeviceFrame(
                 navController = navController,
-                isTallScreenRatio = metroSettingsState.isTallScreenRatio,
-                frameRatio = metroSettingsState.frameRatio,
+                metroSettingsDataSource = metroSettings,
             ) {
                 MetroDemoTheme {
                     NavHost(
@@ -85,27 +83,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(Apps.LAUNCHER) { Launcher(navController) }
                         composable(Apps.CALCULATOR) { CalculatorApp() }
-                        composable(Apps.METRO_SETTINGS) {
-                            MetroSettingsApp(
-                                isTallScreenRatio = metroSettingsState.isTallScreenRatio,
-                                frameRatio = metroSettingsState.frameRatio
-                            ) { itsr, fr ->
-                                scope.launch {
-                                    metroSettings.updateData {
-                                        it.toBuilder()
-                                            .setIsTallScreenRatio(itsr)
-                                            .apply {
-                                                if (fr == null) {
-                                                    clearFrameRatio()
-                                                } else {
-                                                    frameRatio = fr
-                                                }
-                                            }
-                                            .build()
-                                    }
-                                }
-                            }
-                        }
+                        composable(Apps.METRO_SETTINGS) { MetroSettingsApp(dataSource = metroSettings) }
                         composable(Apps.SETTINGS) { Settings() }
                         composable(Apps.BROWSER) { Browser() }
                         composable(Apps.CALENDAR) { Calendar() }
@@ -162,15 +140,16 @@ fun Launcher(
 @Composable
 fun DeviceFrame(
     navController: NavHostController,
-    isTallScreenRatio: Float,
-    frameRatio: Float,
+    metroSettingsDataSource: MetroSettingsDataSource,
     content: @Composable () -> Unit,
 ) {
     val isKeyboardOpen by keyboardAsState()
+    val configuration by metroSettingsDataSource.getConfiguration()
+        .collectAsState(initial = MetroSettingsConfiguration.INITIAL)
 
     val ratio =
         LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
-    val isTallScreen = ratio >= isTallScreenRatio
+    val isTallScreen = ratio >= configuration.isTallScreenRatio
 
     Column {
         // TODO maybe in future I can look into custom overscroll behaviour?
@@ -180,7 +159,7 @@ fun DeviceFrame(
                 .border(color = Color.White, width = 1.dp)
                 .run {
                     if (isTallScreen && isKeyboardOpen == Keyboard.Closed) // TODO allow this to be turn off
-                        this.aspectRatio(frameRatio)
+                        this.aspectRatio(configuration.frameRatio ?: error("Maybe I need to define a better type"))
                     else
                         this
                 }

@@ -1,4 +1,4 @@
-package com.louis993546.metroSettings
+package com.louis993546.metro.metroSettings
 
 import android.content.Context
 import android.content.Intent
@@ -16,9 +16,11 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -34,6 +36,7 @@ import com.louis993546.metro.MessageBox
 import com.louis993546.metro.Pages
 import com.louis993546.metro.Text
 import com.louis993546.metro.TitleBar
+import kotlinx.coroutines.launch
 
 /**
  * TODO refactor the whole thing so that MetroSettings is internal to this app itself
@@ -42,9 +45,7 @@ import com.louis993546.metro.TitleBar
 @Composable
 fun MetroSettingsApp(
     modifier: Modifier = Modifier,
-    isTallScreenRatio: Float,
-    frameRatio: Float?,
-    onDataModified: (Float, Float?) -> Unit,
+    dataSource: MetroSettingsDataSource,
 ) {
     Column(modifier = modifier) {
         TitleBar(title = "METRO SETTINGS")
@@ -55,12 +56,7 @@ fun MetroSettingsApp(
             pageTitles = listOf("settings", "about", "open-source licenses")
         ) { page ->
             when (page) {
-                0 -> SettingsPage(
-                    isTallScreenRatio = isTallScreenRatio,
-                    frameRatio = frameRatio,
-                    onDataModified = onDataModified,
-                )
-
+                0 -> SettingsPage(dataSource = dataSource)
                 1 -> AboutUs(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -107,24 +103,32 @@ fun MetroSettingsApp(
 @Composable
 fun SettingsPage(
     modifier: Modifier = Modifier,
-    isTallScreenRatio: Float,
-    frameRatio: Float?,
-    onDataModified: (Float, Float?) -> Unit,
+    dataSource: MetroSettingsDataSource,
 ) {
+    val scope = rememberCoroutineScope()
+    val configuration by dataSource.getConfiguration()
+        .collectAsState(initial = MetroSettingsConfiguration.INITIAL)
+
+
     Settings(
-        modifier = modifier.fillMaxWidth().padding(8.dp),
-        isTallScreenRatio = isTallScreenRatio,
-        frameRatio = frameRatio,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        isTallScreenRatio = configuration.isTallScreenRatio,
+        frameRatio = configuration.frameRatio,
     ) { field, textValue ->
         when (field) {
-            MetroSettingsField.IS_TALL_SCREEN_RATIO -> onDataModified(
-                textValue.toFloat(),
-                frameRatio,
-            )
-            MetroSettingsField.FRAME_RATIO -> onDataModified(
-                isTallScreenRatio,
-                textValue.toFloatOrNull(),
-            )
+            MetroSettingsField.IS_TALL_SCREEN_RATIO -> scope.launch {
+                dataSource.setTallScreenRatio(textValue.toFloat())
+            }
+            MetroSettingsField.FRAME_RATIO -> scope.launch {
+                val floatValue = textValue.toFloatOrNull()
+                if (floatValue == null) {
+                    dataSource.clearFrameRatio()
+                } else {
+                    dataSource.setFrameRatio(floatValue)
+                }
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.louis993546.metroSettings
+package com.louis993546.metro.metroSettings
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

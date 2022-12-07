@@ -1,11 +1,33 @@
 plugins {
     id 'metro-app-library-convention'
+    id "com.google.protobuf" version "0.9.1"
 }
 
 android {
-    namespace "com.louis993546.metroSettings"
+    namespace "com.louis993546.metro.metroSettings"
 }
 
-//dependencies {
-//    implementation "androidx.datastore:datastore:$datastore_version"
-//}
+dependencies {
+    api "androidx.datastore:datastore:$datastore_version"
+    implementation "com.google.protobuf:protobuf-javalite:3.21.10"
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.21.10"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
+
+}
