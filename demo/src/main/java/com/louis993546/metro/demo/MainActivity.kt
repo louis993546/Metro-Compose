@@ -70,6 +70,7 @@ class MainActivity : ComponentActivity() {
             val metroSettingsState by metroSettings.data.collectAsState(
                 initial = MetroSettingsSerializer.defaultValue,
             )
+            val scope = rememberCoroutineScope()
 
             DeviceFrame(
                 navController = navController,
@@ -86,8 +87,24 @@ class MainActivity : ComponentActivity() {
                         composable(Apps.CALCULATOR) { CalculatorApp() }
                         composable(Apps.METRO_SETTINGS) {
                             MetroSettingsApp(
-                                // TODO metro settings so that it can read and modify it
-                            )
+                                isTallScreenRatio = metroSettingsState.isTallScreenRatio,
+                                frameRatio = metroSettingsState.frameRatio
+                            ) { itsr, fr ->
+                                scope.launch {
+                                    metroSettings.updateData {
+                                        it.toBuilder()
+                                            .setIsTallScreenRatio(itsr)
+                                            .apply {
+                                                if (fr == null) {
+                                                    clearFrameRatio()
+                                                } else {
+                                                    frameRatio = fr
+                                                }
+                                            }
+                                            .build()
+                                    }
+                                }
+                            }
                         }
                         composable(Apps.SETTINGS) { Settings() }
                         composable(Apps.BROWSER) { Browser() }
