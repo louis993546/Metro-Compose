@@ -9,12 +9,12 @@ android {
 
 dependencies {
     api "androidx.datastore:datastore:$datastore_version"
-    implementation "com.google.protobuf:protobuf-javalite:3.21.10"
+    implementation "com.google.protobuf:protobuf-javalite:3.21.11"
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.21.10"
+        artifact = "com.google.protobuf:protoc:3.21.11"
     }
 
     // Generates the java Protobuf-lite code for the Protobufs in this project. See
