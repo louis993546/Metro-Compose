@@ -13,10 +13,11 @@ android {
     defaultConfig {
         applicationId "com.louis993546.metro.demo"
         minSdk min_sdk_version
+        compileSdk compile_sdk_version
         targetSdk compile_sdk_version
         def number = System.getenv("GITHUB_RUN_NUMBER") ?: 1
         versionCode number.toInteger()
-        versionName "${number}.0.0"
+        versionName "0.${number}.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

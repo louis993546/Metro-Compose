@@ -10,6 +10,10 @@ android {
         applicationId "com.louis993546.metro.launcher"
         minSdk min_sdk_version
         compileSdk compile_sdk_version
+        targetSdk compile_sdk_version
+        def number = System.getenv("GITHUB_RUN_NUMBER") ?: 1
+        versionCode number.toInteger()
+        versionName "0.${number}.0"
     }
     signingConfigs {
         debug {
