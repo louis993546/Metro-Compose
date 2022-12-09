@@ -36,12 +36,15 @@ fun DrawerPage(
     modifier: Modifier = Modifier,
     onAppClick: (Apps) -> Unit,
 ) {
-    val list = appsList.sorted().groupBy { it.first().lowercaseChar() }.map { (char, list) ->
-        val header = ListItem.Header(char.lowercaseChar())
-        val items = list.map { ListItem.App(it) }
+    val list = appsList
+        .sorted()
+        .groupBy { it.first().lowercaseChar() }
+        .map { (char, list) ->
+            val header = ListItem.Header(char.lowercaseChar())
+            val items = list.map { ListItem.App(it) }
 
-        listOf(header) + items
-    }.flatten()
+            listOf(header) + items
+        }.flatten()
 
     val topMargin = 8.dp
     Row(modifier = modifier) {
