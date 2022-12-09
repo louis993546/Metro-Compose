@@ -46,7 +46,7 @@ fun AppSearch(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(apps, { it.id }) {
-                AppRow(appName = it.name)
+                AppRow(appName = it.name, appIcon = null)
             }
         }
     }

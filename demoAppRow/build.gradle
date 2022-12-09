@@ -8,4 +8,5 @@ android {
 
 dependencies {
     implementation project(path: ":demoApps")
+    implementation "com.google.accompanist:accompanist-drawablepainter:$accompanist_version"
 }

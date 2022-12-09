@@ -68,7 +68,7 @@ fun DrawerPage(
                     }
                     is ListItem.App -> {
                         item(key = item.name) {
-                            AppRow(appName = item.name)
+                            AppRow(appName = item.name, appIcon = null)
                         }
                     }
                 }
@@ -123,7 +123,7 @@ fun Header(
     }
 }
 
-sealed interface ListItem {
+internal sealed interface ListItem {
     data class Header(val char: Char) : ListItem
     data class App(val name: String) : ListItem
 }
