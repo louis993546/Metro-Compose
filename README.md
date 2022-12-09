@@ -40,29 +40,29 @@ And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://dev
 
 ## Project Structure
 
-| Module                | Purpose                                                                      |
-|-----------------------|------------------------------------------------------------------------------|
-| `demo`                | Build a simplified Windows Phone 8.1 UI                                      |
-| `metro`               | The library that allows others to build Metro-ish apps using Jetpack Compose |
-| `apps`                | Just a Kotlin class that keeps list of apps. So kinda registry situation     |
-| `vertical_tiles_grid` | The thing that makes the 4-column grid thing possible                        |
+| Module              | Purpose                                                                      |
+|---------------------|------------------------------------------------------------------------------|
+| `demo`              | Build a simplified Windows Phone 8.1 UI                                      |
+| `metro`             | The library that allows others to build Metro-ish apps using Jetpack Compose |
+| `verticalTilesGrid` | The thing that makes the 4-column grid thing possible                        |
+| `demoAapps`         | Just a Kotlin class that keeps list of apps. So kinda registry situation     |
 
 And these are the list of build-in "apps"
 
-| Module           | App                                                  |
-|------------------|------------------------------------------------------|
-| `appDrawer`      | Display list of apps                                 |
-| `appRow`         | Display a row of app                                 |
-| `appSearch`      | Allow searching of apps                              |
-| `browser`        | Fake Internet Explorer                               |
-| `calculator`     | Calculator                                           |
-| `calendar`       | Calendar                                             |
-| `launcher`       | Controls what the home screen grid shows             |
-| `metroSettings`  | Settings and information for the demo app itself     |
-| `radio`          | Radio app                                            |
-| `settings`       | Settings app from WP8 itself                         |
-| `wordle`         | The game that was popular and then got bought by NYT |
-| `camera`         | 📷                                                   |
+| Module              | App                                                  |
+|---------------------|------------------------------------------------------|
+| `demoAppDrawer`     | Display list of apps                                 |
+| `demoAppRow`        | Display a row of app                                 |
+| `demoAppSearch`     | Allow searching of apps                              |
+| `demoBrowser`       | Fake Internet Explorer                               |
+| `demoCalculator`    | Calculator                                           |
+| `demoCalendar`      | Calendar                                             |
+| `demoLauncher`      | Controls what the home screen grid shows             |
+| `demoMetroSettings` | Settings and information for the demo app itself     |
+| `demoRadio`         | Radio app                                            |
+| `demoSettings`      | Settings app from WP8 itself                         |
+| `demoWordle`        | The game that was popular and then got bought by NYT |
+| `demoCamera`        | 📷                                                   |
 
 ## Contribution
 

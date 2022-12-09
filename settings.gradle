@@ -31,19 +31,20 @@ gradleEnterprise {
     }
 }
 rootProject.name = "Metro"
-include ":metro"
-include ":demo"
-include ":calculator"
-include ":metroSettings"
-include ":settings"
-include ":browser"
-include ":radio"
-include ":calendar"
-include ":vertical_tiles_grid"
-include ":appSearch"
-include ":appDrawer"
-include ":launcher"
-include ":apps"
-include ":appRow"
-include ":wordle"
-include ":camera"
+include ':metro'
+include ':verticalTilesGrid'
+include ':launcher'
+include ':demo'
+include ':demoAppDrawer'
+include ':demoAppRow'
+include ':demoApps'
+include ':demoAppSearch'
+include ':demoBrowser'
+include ':demoCalculator'
+include ':demoCalendar'
+include ':demoCamera'
+include ':demoLauncher'
+include ':demoMetroSettings'
+include ':demoRadio'
+include ':demoSettings'
+include ':demoWordle'
