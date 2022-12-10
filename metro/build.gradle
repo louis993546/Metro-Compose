@@ -43,6 +43,9 @@ dependencies {
     implementation composeBom
     androidTestImplementation composeBom
 
+    // TODO this should not be here in long run
+    implementation "com.jakewharton.timber:timber:5.0.1"
+
     api "androidx.compose.ui:ui"
     api "androidx.compose.foundation:foundation"
     api "androidx.compose.ui:ui-tooling"

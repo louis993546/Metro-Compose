@@ -42,7 +42,8 @@ apiValidation {
             "demoMetroSettings",
             "demoRadio",
             "demoSettings",
-            "demoWordle"
+            "demoWordle",
+            "launcher"
     ]
 }
 
