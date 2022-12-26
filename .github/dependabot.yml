@@ -10,8 +10,9 @@ updates:
     schedule:
       interval: "daily"
     ignore:
-      # KGP depends on compose version
-      - dependency-name: "kotlin-gradle-plugin"
+      # Major update depends on Android Studio/IntelliJ version, let's do this manually
+      - dependency-name: "com.android.tools.build:gradle"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/" # and this is the exception. this means this dot github directory
