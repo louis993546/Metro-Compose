@@ -1,18 +1,20 @@
 ## Build
 
-- Open this project with Android Studio
-    - see `com.android.tools.build:gradle` in the root `build.gradle` on which Android Studio
-      version to use
-- Run `git config core.hooksPath githooks`
+- Open this project with ~Android Studio~ IntelliJ 2022.3
+- Run `git config core.hooksPath githooks` to make sure the githook is run before push
 
-### Bugs
+### File Bugs
 
-(WIP)
+Please file a bug in "Issue" page above. 
 
-### Feature Requests
+### Fix Bugs
 
-(WIP)
+PRs are always welcome! And I am also slowly staring to start tagging good first-contribution issues.
 
-### Add New App
+### File Feature Requests
+
+Please file a bug in "Issue" page above. 
+
+### File New App
 
 (WIP, need to make the home screen useable first)
