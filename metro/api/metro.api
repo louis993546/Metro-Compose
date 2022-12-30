@@ -66,6 +66,18 @@ public final class com/louis993546/metro/PagesKt {
 	public static final fun TitleBar (Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 }
 
+public final class com/louis993546/metro/SwitchKt {
+	public static final fun Switch (Landroidx/compose/ui/Modifier;ZLcom/louis993546/metro/SwitchState;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/louis993546/metro/SwitchState : java/lang/Enum {
+	public static final field OFF Lcom/louis993546/metro/SwitchState;
+	public static final field ON Lcom/louis993546/metro/SwitchState;
+	public final fun flip ()Lcom/louis993546/metro/SwitchState;
+	public static fun valueOf (Ljava/lang/String;)Lcom/louis993546/metro/SwitchState;
+	public static fun values ()[Lcom/louis993546/metro/SwitchState;
+}
+
 public final class com/louis993546/metro/TextFieldKt {
 	public static final fun TextField (Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 }

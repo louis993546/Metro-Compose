@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.TextUnit
 
 /**
  * Note: If you want it to look more like Metro, you can import Segoe UI font and override it. But
- * please make sure you are following it's license. Visit Microsoft Fluent UI website for the
+ * please make sure you are following its license. Visit Microsoft Fluent UI website for the
  * latest info.
  */
 @Composable
@@ -34,4 +34,3 @@ fun Text(
         maxLines = maxLine,
     )
 }
-

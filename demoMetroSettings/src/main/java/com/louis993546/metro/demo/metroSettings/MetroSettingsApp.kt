@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -22,11 +20,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -34,6 +34,8 @@ import com.louis993546.metro.ApplicationBar
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.MessageBox
 import com.louis993546.metro.Pages
+import com.louis993546.metro.Switch
+import com.louis993546.metro.SwitchState
 import com.louis993546.metro.Text
 import com.louis993546.metro.TitleBar
 import kotlinx.coroutines.launch
@@ -101,6 +103,25 @@ fun MetroSettingsApp(
 }
 
 @Composable
+fun InterfacePage(
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier = modifier) {
+        TitleBar(title = "METRO SETTINGS") // TODO reuse this with other settings page
+
+        Title4(text = "Font")
+        // TODO a "font" drop down, which i am not sure if it sholus open a full page first
+
+        Title4(text = "Device Frame")
+        // TODO explain what the screen ratio thing does
+        // TODO give user a few major options, and list what they mimic
+        //    Lumia 920/520 (5*3)
+        //    Most WP (16:9)
+        //    full screen of your phone
+    }
+}
+
+@Composable
 fun SettingsPage(
     modifier: Modifier = Modifier,
     dataSource: MetroSettingsDataSource,
@@ -139,8 +160,9 @@ enum class MetroSettingsField {
 }
 
 /**
- * TODO Metro version of TextField
+ * TODO remove the suppress before merging the PR
  */
+@Suppress("UnusedPrivateMember")
 @Composable
 internal fun Settings(
     modifier: Modifier = Modifier,
@@ -149,26 +171,77 @@ internal fun Settings(
     onConfigChange: (MetroSettingsField, String) -> Unit,
 ) {
     Column(modifier = modifier.fillMaxHeight()) {
-        Text(text = "TODO Real browser, or in-app fake IE")
-        Text(text = "TODO typography")
-        Text(text = "isTallScreenRatio")
-        BasicTextField(
-            value = isTallScreenRatio.toString(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            onValueChange = {
-                onConfigChange(MetroSettingsField.IS_TALL_SCREEN_RATIO, it)
-            },
-        )
-        Text(text = "frameRatio")
-        BasicTextField(
-            value = frameRatio?.toString() ?: "",
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            onValueChange = {
-                onConfigChange(MetroSettingsField.FRAME_RATIO, it)
-            },
-        )
-        Text(text = "TODO override 4 or 6 columns")
+        var switchState by remember { mutableStateOf(SwitchState.OFF) }
+
+        Switch(
+            switchState = switchState,
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+        ) {
+            switchState = it
+        }
+
+        SettingEntry(
+            modifier = Modifier.padding(4.dp),
+            title = "interface",
+            subtitle = "font, screen ratio",
+        ) {
+            TODO("Need to navigate to next screen. Also somehow this needs to trigger all the other text " +
+                    "on screen to animate out correctly")
+        }
+        SettingEntry(
+            modifier = Modifier.padding(4.dp),
+            title = "interoperability",
+            subtitle = "browser",
+        ) {
+            TODO()
+        }
+//        Text(text = "TODO typography")
+//        Text(text = "isTallScreenRatio")
+//        BasicTextField(
+//            value = isTallScreenRatio.toString(),
+//            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+//            onValueChange = {
+//                onConfigChange(MetroSettingsField.IS_TALL_SCREEN_RATIO, it)
+//            },
+//        )
+//        Text(text = "frameRatio")
+//        BasicTextField(
+//            value = frameRatio?.toString() ?: "",
+//            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+//            onValueChange = {
+//                onConfigChange(MetroSettingsField.FRAME_RATIO, it)
+//            },
+//        )
+        SettingEntry(
+            modifier = Modifier.padding(4.dp),
+            title = "home screen",
+            subtitle = "column count, etc",
+        ) {
+            TODO()
+        }
+
     }
+}
+
+@Composable
+internal fun SettingEntry(
+    modifier: Modifier = Modifier,
+    title: String,
+    subtitle: String,
+    onClick: () -> Unit,
+) {
+    Column(modifier = modifier.clickable(onClick = onClick)) {
+        Text(text = title, size = 28.sp, weight = FontWeight.Light)
+        Title4(text = subtitle)
+    }
+}
+
+@Composable
+fun Title4(
+    modifier: Modifier = Modifier,
+    text: String,
+) {
+    Text(text = text, size = 16.sp, color = Color.Gray, modifier = modifier)
 }
 
 @Composable
