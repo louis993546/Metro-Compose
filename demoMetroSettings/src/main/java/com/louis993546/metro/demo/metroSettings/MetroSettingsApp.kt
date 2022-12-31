@@ -3,8 +3,11 @@ package com.louis993546.metro.demo.metroSettings
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +17,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -31,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.louis993546.metro.ApplicationBar
+import com.louis993546.metro.LocalOverscrollEffect
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.MessageBox
 import com.louis993546.metro.Pages
@@ -41,6 +44,7 @@ import kotlinx.coroutines.launch
 /**
  * TODO refactor the whole thing so that MetroSettings is internal to this app itself
  */
+@ExperimentalFoundationApi
 @ExperimentalPagerApi
 @Composable
 fun MetroSettingsApp(
@@ -62,6 +66,7 @@ fun MetroSettingsApp(
                         .fillMaxWidth()
                         .padding(8.dp)
                 )
+
                 2 -> OpenSourceLicenses(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -121,6 +126,7 @@ fun SettingsPage(
             MetroSettingsField.IS_TALL_SCREEN_RATIO -> scope.launch {
                 dataSource.setTallScreenRatio(textValue.toFloat())
             }
+
             MetroSettingsField.FRAME_RATIO -> scope.launch {
                 val floatValue = textValue.toFloatOrNull()
                 if (floatValue == null) {
@@ -180,6 +186,7 @@ internal fun AboutUs(
     }
 }
 
+@ExperimentalFoundationApi
 @Composable
 internal fun OpenSourceLicenses(
     modifier: Modifier = Modifier,
@@ -195,6 +202,7 @@ private fun Context.startBrowserActivity(uri: String) {
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
 }
 
+@ExperimentalFoundationApi
 @Composable
 internal fun OpenSourceLicenseRow(
     modifier: Modifier = Modifier,
@@ -215,7 +223,13 @@ internal fun OpenSourceLicenseRow(
 
     if (openDialog) {
         MessageBox(onDismissRequest = { openDialog = false }) {
-            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+            Column(
+                modifier = Modifier.scrollable(
+                    orientation = Orientation.Vertical,
+                    state = rememberScrollState(),
+                    overscrollEffect = LocalOverscrollEffect.current,
+                )
+            ) {
                 Text(
                     text = "I need a button component",
                     modifier = Modifier.run {

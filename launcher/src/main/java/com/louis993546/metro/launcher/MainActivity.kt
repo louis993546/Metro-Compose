@@ -27,12 +27,15 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.louis993546.metro.ExperimentalOverscrollType
 import com.louis993546.metro.LocalAccentColor
 import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.MetroTheme
+import com.louis993546.metro.OverscrollType
 import com.louis993546.metro.Text
 import com.louis993546.metro.demo.appRow.AppRow
 
+@ExperimentalOverscrollType
 @ExperimentalFoundationApi
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
@@ -138,6 +141,8 @@ sealed interface ListItem {
 }
 
 
+@ExperimentalFoundationApi
+@ExperimentalOverscrollType
 @Composable
 fun MetroLauncherTheme(
     content: @Composable () -> Unit,
@@ -145,6 +150,7 @@ fun MetroLauncherTheme(
     MetroTheme(
         accentColor = Color.Cyan,
         content = content,
+        overscrollType = OverscrollType.None,
     )
 }
 

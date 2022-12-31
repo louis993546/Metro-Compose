@@ -1,16 +1,19 @@
 package com.louis993546.metro.demo.launcher
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.overscroll
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.louis993546.metro.CircleButton
 import com.louis993546.metro.LocalAccentColor
+import com.louis993546.metro.LocalOverscrollEffect
 import com.louis993546.metro.LocalTextOnAccentColor
 import com.louis993546.metro.LocalTextOnBackgroundColor
 import com.louis993546.metro.Text
@@ -29,6 +33,7 @@ import com.louis993546.metro.demo.apps.Apps
 /**
  * Suppress LongMethod, as in long run, this whole thing should be configurable by the users
  */
+@ExperimentalFoundationApi
 @Suppress("LongMethod")
 @Composable
 fun HomePage(
@@ -43,7 +48,14 @@ fun HomePage(
 //            contentDescription = "background",
 //            contentScale = ContentScale.Crop,
 //        )
-    Column(modifier = modifier.verticalScroll(rememberScrollState())) {
+    Column(
+        modifier = modifier
+            .scrollable(
+                orientation = Orientation.Vertical,
+                state = rememberScrollState(),
+                overscrollEffect = LocalOverscrollEffect.current,
+            )
+    ) {
         val padding = 8.dp
         VerticalTilesGrid(
             modifier = Modifier.fillMaxSize(),

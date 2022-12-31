@@ -45,23 +45,26 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.louis993546.metro.ExperimentalOverscrollType
+import com.louis993546.metro.LocalBackgroundColor
+import com.louis993546.metro.OverscrollType
 import com.louis993546.metro.demo.appDrawer.DrawerPage
 import com.louis993546.metro.demo.appSearch.AppSearch
 import com.louis993546.metro.demo.apps.Apps
+import com.louis993546.metro.demo.browser.Browser
 import com.louis993546.metro.demo.calculator.CalculatorApp
 import com.louis993546.metro.demo.calendar.Calendar
 import com.louis993546.metro.demo.launcher.HomePage
-import com.louis993546.metro.LocalBackgroundColor
-import com.louis993546.metro.demo.browser.Browser
-import com.louis993546.metro.demo.theme.MetroDemoTheme
-import com.louis993546.metro.demo.settings.Settings
-import com.louis993546.metro.demo.wordle.WordleApp
 import com.louis993546.metro.demo.metroSettings.MetroSettingsApp
 import com.louis993546.metro.demo.metroSettings.MetroSettingsConfiguration
 import com.louis993546.metro.demo.metroSettings.MetroSettingsDataSource
 import com.louis993546.metro.demo.metroSettings.metroSettingsDataSource
+import com.louis993546.metro.demo.settings.Settings
+import com.louis993546.metro.demo.theme.MetroDemoTheme
+import com.louis993546.metro.demo.wordle.WordleApp
 import kotlinx.coroutines.launch
 
+@ExperimentalOverscrollType
 @ExperimentalFoundationApi
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
@@ -75,7 +78,9 @@ class MainActivity : ComponentActivity() {
                 navController = navController,
                 metroSettingsDataSource = metroSettings,
             ) {
-                MetroDemoTheme {
+                MetroDemoTheme(
+                    overscanType = OverscrollType.None, // TODO read this from settings
+                ) {
                     NavHost(
                         navController = navController,
                         startDestination = Apps.LAUNCHER.id,
@@ -152,8 +157,6 @@ fun DeviceFrame(
     val isTallScreen = ratio >= configuration.isTallScreenRatio
 
     Column {
-        // TODO maybe in future I can look into custom overscroll behaviour?
-        // CompositionLocalProvider( LocalOverScrollConfiguration provides null ) { }
         Box(
             modifier = Modifier
                 .border(color = Color.White, width = 1.dp)
