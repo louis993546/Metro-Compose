@@ -1,7 +1,9 @@
 package com.louis993546.metro.launcher
 
 import android.content.pm.LauncherApps
+import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Process
 import androidx.activity.ComponentActivity
@@ -32,13 +34,16 @@ import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.MetroTheme
 import com.louis993546.metro.Text
 import com.louis993546.metro.demo.appRow.AppRow
+import timber.log.Timber
 
 @ExperimentalFoundationApi
 @ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
+
+    private val iconPackManager = IconPackManager()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val installedApps = getInstalledApps()
+        val installedApps = testingIconPack(getInstalledApps())
 
         setContent {
             MetroLauncherTheme {
@@ -60,23 +65,59 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun testingIconPack(installedApps: List<App>): List<App> {
+        iconPackManager.setContext(this)
+
+        val iconPacks = iconPackManager.getAvailableIconPacks(false)
+        iconPacks.forEach { (t, _)->
+            Timber.tag("qqq").d(t)
+        }
+        iconPacks["com.whicons.iconpack"]?.run {
+            val appsWithBetterIcons = installedApps.map { app ->
+                app.copy(
+                    iconDrawable = getDrawableIconForPackage(app.packageName, app.iconDrawable),
+                )
+            }
+
+            return appsWithBetterIcons
+        }
+
+        return installedApps
+    }
+
     /**
      * TODO need a way to listen to (or at least pool) app changes
+     *
+     * @suppress the magic number check as "33" makes more sense then "tiramisu"
      */
+    @Suppress("MagicNumber")
     private fun getInstalledApps(): List<App> =
         getSystemService(LauncherApps::class.java)
             .getActivityList(null, Process.myUserHandle())
-            .map {
+            .map { activityInfo ->
+                val drawable = activityInfo.getIcon(resources.displayMetrics.densityDpi)
+                val icon = when {
+                    Build.VERSION.SDK_INT >= 33 && drawable is AdaptiveIconDrawable ->
+                        drawable.monochrome ?: drawable // TODO tint to white
+                    else -> drawable
+                }
                 App(
-                    label = it.label.toString(),
-                    iconDrawable = it.getIcon(resources.displayMetrics.densityDpi),
+                    label = activityInfo.label.toString(),
+                    iconDrawable = icon,
+                    packageName = activityInfo.applicationInfo.packageName,
                 )
             }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        iconPackManager.setContext(null)
+    }
 }
 
 data class App(
     val label: String,
     val iconDrawable: Drawable,
+    val packageName: String,
     // TODO things needed to launch the app
     // TODO shortcuts/notifications/etc
 )
@@ -143,7 +184,7 @@ fun MetroLauncherTheme(
     content: @Composable () -> Unit,
 ) {
     MetroTheme(
-        accentColor = Color.Cyan,
+        accentColor = Color.Black,
         content = content,
     )
 }

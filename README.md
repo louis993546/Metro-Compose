@@ -33,9 +33,10 @@ For the time being, the library is published to GitHub Packages
 And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://developer.android.com/jetpack/compose/setup#bom-version-mapping) instead.
 
 
-| `metro` version  | BoM version |
-|------------------|-------------|
-| 0.80.0 to latest | 22.11.00    |
+| `metro` version   | BoM version |
+|-------------------|-------------|
+| 0.80.0 to 0.101.0 | 22.11.00    |
+| 0.102.0 to latest | 23.01.00    |
 
 
 ## Project Structure
@@ -46,6 +47,7 @@ And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://dev
 | `metro`             | The library that allows others to build Metro-ish apps using Jetpack Compose |
 | `verticalTilesGrid` | The thing that makes the 4-column grid thing possible                        |
 | `demoAapps`         | Just a Kotlin class that keeps list of apps. So kinda registry situation     |
+| `launcher`          | A real Android launcher that uses the `metro` theme                          |
 
 And these are the list of build-in "apps"
 
