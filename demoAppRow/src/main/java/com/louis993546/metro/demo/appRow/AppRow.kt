@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -41,10 +42,16 @@ fun AppRow(
                         .fillMaxSize()
                         .background(color = LocalAccentColor.current)
                 )
-                else -> Image(
-                    painter = rememberDrawablePainter(drawable = appIcon),
-                    contentDescription = appName,
-                )
+                else -> Box(
+                    modifier = Modifier
+                        .background(color = LocalAccentColor.current)
+                        .padding(8.dp),
+                ) {
+                    Image(
+                        painter = rememberDrawablePainter(drawable = appIcon),
+                        contentDescription = appName,
+                    )
+                }
             }
 
         }
