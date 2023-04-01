@@ -5,9 +5,9 @@ plugins {
 }
 
 android {
-    namespace "com.louis993546.metro.launcher"
+    namespace "com.louis993546.seattle"
     defaultConfig {
-        applicationId "com.louis993546.metro.launcher"
+        applicationId "com.louis993546.seattle"
         minSdk min_sdk_version
         compileSdk compile_sdk_version
         targetSdk compile_sdk_version
@@ -48,7 +48,7 @@ dependencies {
     def composeBom = platform("androidx.compose:compose-bom:$compose_bom_version")
     implementation composeBom
     androidTestImplementation composeBom
-    implementation "androidx.activity:activity-compose:1.6.1"
+    implementation "androidx.activity:activity-compose:1.7.0"
     implementation "androidx.compose.ui:ui-tooling"
     implementation "com.google.android.material:material:1.8.0"
 

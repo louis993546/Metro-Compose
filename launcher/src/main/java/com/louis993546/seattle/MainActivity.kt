@@ -1,4 +1,4 @@
-package com.louis993546.metro.launcher
+package com.louis993546.seattle
 
 import android.content.pm.LauncherApps
 import android.graphics.drawable.AdaptiveIconDrawable
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
         val installedApps = testingIconPack(getInstalledApps())
 
         setContent {
-            MetroLauncherTheme {
+            SeattleTheme {
                 val pagerState = rememberPagerState()
                 HorizontalPager(
                     state = pagerState,
@@ -132,7 +132,7 @@ fun DrawerPage(
         .groupBy { it.label.first().lowercaseChar() }
         .map { (char, list) ->
             val header = ListItem.Header(char.lowercaseChar())
-            val items = list.map { ListItem.App(it) }
+            val items = list.map { ListItem.Row(it) }
 
             listOf(header) + items
         }
@@ -159,7 +159,7 @@ fun DrawerPage(
                         }
                     }
 
-                    is ListItem.App -> {
+                    is ListItem.Row -> {
                         item(key = item.app.label) { // TODO key should be activity id or something
                             AppRow(
                                 appName = item.app.label,
@@ -175,12 +175,12 @@ fun DrawerPage(
 
 sealed interface ListItem {
     data class Header(val char: Char) : ListItem
-    data class App(val app: com.louis993546.metro.launcher.App) : ListItem
+    data class Row(val app: App) : ListItem
 }
 
 
 @Composable
-fun MetroLauncherTheme(
+fun SeattleTheme(
     content: @Composable () -> Unit,
 ) {
     MetroTheme(

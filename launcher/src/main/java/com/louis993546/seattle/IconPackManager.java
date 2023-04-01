@@ -1,4 +1,4 @@
-package com.louis993546.metro.launcher;
+package com.louis993546.seattle;
 
 import android.content.Context;
 import android.content.Intent;
