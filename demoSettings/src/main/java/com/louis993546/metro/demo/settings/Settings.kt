@@ -1,14 +1,14 @@
 package com.louis993546.metro.demo.settings
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.louis993546.metro.Pages
 import com.louis993546.metro.Text
 import com.louis993546.metro.TitleBar
 
-@ExperimentalPagerApi
+@ExperimentalFoundationApi
 @Composable
 fun Settings(
     modifier: Modifier = Modifier,

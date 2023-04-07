@@ -1,5 +1,6 @@
 package com.louis993546.metro
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
@@ -20,16 +23,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 
 /**
  * TODO [pageTitles] should contain each page title
  * TODO it'd be great if [pageTitles] can be some enum
  */
-@ExperimentalPagerApi
+@ExperimentalFoundationApi
 @Composable
 fun Pages(
     modifier: Modifier = Modifier,
@@ -83,7 +83,7 @@ fun Pages(
         HorizontalPager(
             modifier = Modifier.weight(1f),
             state = pagerState,
-            count = pageTitles.size,
+            pageCount = pageTitles.size,
         ) { page ->
             Box(modifier = Modifier.fillMaxWidth()) {
                 this.page(page)

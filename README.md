@@ -47,7 +47,7 @@ And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://dev
 | `metro`             | The library that allows others to build Metro-ish apps using Jetpack Compose |
 | `verticalTilesGrid` | The thing that makes the 4-column grid thing possible                        |
 | `demoAapps`         | Just a Kotlin class that keeps list of apps. So kinda registry situation     |
-| `launcher`          | A real Android launcher that uses the `metro` theme                          |
+| `seattle`           | A real Android launcher that uses the `metro` theme                          |
 
 And these are the list of build-in "apps"
 
