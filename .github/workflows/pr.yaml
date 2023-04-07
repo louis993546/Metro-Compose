@@ -42,6 +42,7 @@ jobs:
         run: ./gradlew :demo:assembleRelease --no-daemon
       - name: "Sign Android release"
         uses: r0adkll/sign-android-release@v1
+        id: sign_app
         with:
           releaseDirectory: demo/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
