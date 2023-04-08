@@ -3,6 +3,7 @@ package com.louis993546.metro.demo.metroSettings
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -29,7 +30,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.louis993546.metro.ApplicationBar
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.MessageBox
@@ -41,7 +41,7 @@ import kotlinx.coroutines.launch
 /**
  * TODO refactor the whole thing so that MetroSettings is internal to this app itself
  */
-@ExperimentalPagerApi
+@ExperimentalFoundationApi
 @Composable
 fun MetroSettingsApp(
     modifier: Modifier = Modifier,

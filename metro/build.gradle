@@ -46,10 +46,9 @@ dependencies {
     api "androidx.compose.ui:ui"
     api "androidx.compose.foundation:foundation"
     api "androidx.compose.ui:ui-tooling"
-    api "com.google.accompanist:accompanist-pager:$accompanist_version"
     testImplementation "junit:junit:4.13.2"
-    androidTestImplementation "androidx.test.ext:junit:1.1.4"
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.0"
+    androidTestImplementation "androidx.test.ext:junit:1.1.5"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
     androidTestApi "androidx.compose.ui:ui-test-junit4"
 }
 

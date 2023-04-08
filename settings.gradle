@@ -33,7 +33,7 @@ gradleEnterprise {
 rootProject.name = "Metro"
 include ':metro'
 include ':verticalTilesGrid'
-include ':launcher'
+include ':seattle'
 include ':demo'
 include ':demoAppDrawer'
 include ':demoAppRow'

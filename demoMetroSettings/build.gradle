@@ -5,6 +5,10 @@ plugins {
 
 android {
     namespace "com.louis993546.metro.demo.metroSettings"
+
+    defaultConfig {
+        consumerProguardFiles 'proguard-rules.pro'
+    }
 }
 
 dependencies {

@@ -1,4 +1,4 @@
-package com.louis993546.metro.launcher
+package com.louis993546.seattle
 
 import android.content.pm.LauncherApps
 import android.graphics.drawable.AdaptiveIconDrawable
@@ -15,20 +15,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import com.louis993546.metro.LocalAccentColor
 import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.MetroTheme
@@ -37,7 +37,6 @@ import com.louis993546.metro.demo.appRow.AppRow
 import timber.log.Timber
 
 @ExperimentalFoundationApi
-@ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
 
     private val iconPackManager = IconPackManager()
@@ -46,14 +45,17 @@ class MainActivity : ComponentActivity() {
         val installedApps = testingIconPack(getInstalledApps())
 
         setContent {
-            MetroLauncherTheme {
+            SeattleTheme {
                 val pagerState = rememberPagerState()
                 HorizontalPager(
                     state = pagerState,
-                    count = 2,
+                    pageCount = 2,
                 ) { page ->
                     when (page) {
-                        0 -> Text(text = "Home page")
+                        0 -> Text(
+                            text = "Home page",
+                            modifier = Modifier.fillMaxHeight(),
+                        )
                         1 -> DrawerPage(
                             modifier = Modifier.fillMaxWidth(),
                             apps = installedApps,
@@ -132,7 +134,7 @@ fun DrawerPage(
         .groupBy { it.label.first().lowercaseChar() }
         .map { (char, list) ->
             val header = ListItem.Header(char.lowercaseChar())
-            val items = list.map { ListItem.App(it) }
+            val items = list.map { ListItem.Row(it) }
 
             listOf(header) + items
         }
@@ -159,8 +161,9 @@ fun DrawerPage(
                         }
                     }
 
-                    is ListItem.App -> {
-                        item(key = item.app.label) { // TODO key should be activity id or something
+                    is ListItem.Row -> {
+                        // TODO key should be activity id or something
+                        item(key = item.app.label) {
                             AppRow(
                                 appName = item.app.label,
                                 appIcon = item.app.iconDrawable,
@@ -175,12 +178,12 @@ fun DrawerPage(
 
 sealed interface ListItem {
     data class Header(val char: Char) : ListItem
-    data class App(val app: com.louis993546.metro.launcher.App) : ListItem
+    data class Row(val app: App) : ListItem
 }
 
 
 @Composable
-fun MetroLauncherTheme(
+fun SeattleTheme(
     content: @Composable () -> Unit,
 ) {
     MetroTheme(

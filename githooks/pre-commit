@@ -1,3 +1,2 @@
 #!/bin/sh
-./gradlew apiCheck
-./gradlew detekt
+./gradlew apiCheck detekt

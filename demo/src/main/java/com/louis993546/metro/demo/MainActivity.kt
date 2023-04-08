@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
@@ -42,9 +44,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import com.louis993546.metro.demo.appDrawer.DrawerPage
 import com.louis993546.metro.demo.appSearch.AppSearch
 import com.louis993546.metro.demo.apps.Apps
@@ -63,7 +62,6 @@ import com.louis993546.metro.demo.metroSettings.metroSettingsDataSource
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
-@ExperimentalPagerApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,7 +108,6 @@ fun NavController.navigate(route: Apps) {
 }
 
 @ExperimentalFoundationApi
-@ExperimentalPagerApi
 @Composable
 fun Launcher(
     navController: NavController,
@@ -119,7 +116,7 @@ fun Launcher(
     val pagerState = rememberPagerState()
     HorizontalPager(
         state = pagerState,
-        count = 2,
+        pageCount = 2,
     ) { page ->
         val navigate: (Apps) -> Unit = { app -> navController.navigate(app) }
         when (page) {
