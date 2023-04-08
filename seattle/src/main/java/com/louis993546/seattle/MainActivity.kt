@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -52,9 +53,9 @@ class MainActivity : ComponentActivity() {
                     pageCount = 2,
                 ) { page ->
                     when (page) {
-                        0 -> Text(
-                            text = "Home page",
-                            modifier = Modifier.fillMaxHeight(),
+                        0 -> HomePage(
+                            modifier = Modifier.fillMaxSize(),
+                            tempListOfApps = installedApps,
                         )
                         1 -> DrawerPage(
                             modifier = Modifier.fillMaxWidth(),
@@ -71,9 +72,7 @@ class MainActivity : ComponentActivity() {
         iconPackManager.setContext(this)
 
         val iconPacks = iconPackManager.getAvailableIconPacks(false)
-        iconPacks.forEach { (t, _)->
-            Timber.tag("qqq").d(t)
-        }
+        // TODO user configurable
         iconPacks["com.whicons.iconpack"]?.run {
             val appsWithBetterIcons = installedApps.map { app ->
                 app.copy(
@@ -124,93 +123,7 @@ data class App(
     // TODO shortcuts/notifications/etc
 )
 
-@ExperimentalFoundationApi
-@Composable
-fun DrawerPage(
-    modifier: Modifier = Modifier,
-    apps: List<App>,
-) {
-    val list = apps.sortedBy { it.label }
-        .groupBy { it.label.first().lowercaseChar() }
-        .map { (char, list) ->
-            val header = ListItem.Header(char.lowercaseChar())
-            val items = list.map { ListItem.Row(it) }
-
-            listOf(header) + items
-        }
-        .flatten()
-
-    val topMargin = 8.dp
-    Row(modifier = modifier) {
-//        SearchButton(modifier = Modifier.padding(all = topMargin)) { onAppClick(Apps.APP_SEARCH) }
-
-        val listState = rememberLazyListState()
-        LazyColumn(
-            state = listState,
-            contentPadding = PaddingValues(vertical = topMargin),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            list.forEach { item ->
-                when (item) {
-                    is ListItem.Header -> {
-                        stickyHeader(key = item.char) {
-                            Header(
-                                modifier = Modifier.fillMaxWidth(),
-                                letter = item.char,
-                            )
-                        }
-                    }
-
-                    is ListItem.Row -> {
-                        // TODO key should be activity id or something
-                        item(key = item.app.label) {
-                            AppRow(
-                                appName = item.app.label,
-                                appIcon = item.app.iconDrawable,
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
 sealed interface ListItem {
     data class Header(val char: Char) : ListItem
     data class Row(val app: App) : ListItem
-}
-
-
-@Composable
-fun SeattleTheme(
-    content: @Composable () -> Unit,
-) {
-    MetroTheme(
-        accentColor = Color.Black,
-        content = content,
-    )
-}
-
-@Composable
-fun Header(
-    modifier: Modifier = Modifier,
-    letter: Char,
-) {
-    Box(modifier = modifier) {
-        Box(
-            modifier = Modifier
-                .background(color = LocalBackgroundColor.current)
-                .size(48.dp)
-                .border(width = 2.dp, color = LocalAccentColor.current)
-        ) {
-            Text(
-                modifier = Modifier
-                    .padding(start = 8.dp)
-                    .align(Alignment.BottomStart),
-                text = letter.toString(),
-                size = 24.sp,
-            )
-        }
-    }
 }
