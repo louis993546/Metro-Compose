@@ -72,7 +72,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Debug APK
-          path: demo/build/outputs/apk/debug/seattle-debug.apk
+          path: seattle/build/outputs/apk/debug/seattle-debug.apk
   lint:
     runs-on: ubuntu-latest
     steps:
