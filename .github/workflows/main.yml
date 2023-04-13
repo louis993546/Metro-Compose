@@ -18,6 +18,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Assemble Debug"
@@ -27,7 +28,7 @@ jobs:
         with:
           name: Debug APK
           path: demo/build/outputs/apk/debug/demo-debug.apk
-  launcher-debug:
+  seattle-debug:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Repo"
@@ -37,6 +38,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Assemble Debug"
@@ -56,6 +58,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Lint"
@@ -70,11 +73,12 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Test"
         run: ./gradlew test --no-daemon
-  release-demo-app:
+  demo-release-sign-publish:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Repo"
@@ -111,7 +115,7 @@ jobs:
           releaseFiles: demo/build/outputs/bundle/release/demo-release.aab
           track: beta
           status: completed
-  release-seattle-app:
+  seattle-release:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Repo"
@@ -121,10 +125,11 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
-#      - name: "Generate Release AAB"
-#        run: ./gradlew :seattle:bundleRelease --no-daemon
+      - name: "Generate Release AAB"
+        run: ./gradlew :seattle:bundleRelease --no-daemon
 #      - name: "Sign Android release"
 #        uses: r0adkll/sign-android-release@v1
 #        with:
@@ -146,6 +151,8 @@ jobs:
 #          releaseFiles: seattle/build/outputs/bundle/release/seattle-release.aab
 #          track: beta
 #          status: completed
+#        env:
+#          BUILD_TOOLS_VERSION: "33.0.2"
   lib-api-check:
     runs-on: ubuntu-latest
     steps:
@@ -156,6 +163,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Check API"
@@ -173,6 +181,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Publish package"
