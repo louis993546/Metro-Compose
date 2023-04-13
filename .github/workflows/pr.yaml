@@ -26,7 +26,7 @@ jobs:
         with:
           name: Debug APK
           path: demo/build/outputs/apk/debug/demo-debug.apk
-  release-demo-app:
+  demo-release-and-sign:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Repo"
@@ -49,6 +49,8 @@ jobs:
           alias: ${{ secrets.ALIAS }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "33.0.2"
       - name: "Upload Release APK to GitHub"
         uses: actions/upload-artifact@v3
         with:
