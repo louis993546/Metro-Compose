@@ -17,6 +17,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Assemble Debug"
@@ -36,6 +37,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Generate Release APK"
@@ -64,6 +66,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Assemble Debug"
@@ -83,6 +86,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Lint"
@@ -97,6 +101,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Dekekt"
@@ -111,6 +116,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Test"
@@ -125,6 +131,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v1
       - name: "Check API"
