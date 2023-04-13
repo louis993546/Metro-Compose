@@ -26,7 +26,7 @@ jobs:
         with:
           name: Debug APK
           path: demo/build/outputs/apk/debug/demo-debug.apk
-  release-demo-app:
+  demo-release-and-sign:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Repo"
