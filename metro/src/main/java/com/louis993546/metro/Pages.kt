@@ -2,15 +2,8 @@ package com.louis993546.metro
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -37,15 +30,18 @@ fun Pages(
     page: @Composable BoxScope.(pageNumber: Int) -> Unit,
 ) {
     Column(modifier = modifier) {
+        val pageCount = pageTitles.size
+
         val scope = rememberCoroutineScope()
         val scope2 = rememberCoroutineScope()
 
-        val listState = rememberLazyListState()
-        val pagerState = rememberPagerState()
+        val listState = rememberLazyListState(Int.MAX_VALUE / 2)
+        val pagerState = rememberPagerState(Int.MAX_VALUE / 2)
         // TODO connect scrollState and pagerState together somehow
 
         LaunchedEffect(pagerState) {
             snapshotFlow { pagerState.currentPage }.collect {
+                // TODO: Titles parallax scrolling (eg pivot control)
                 listState.animateScrollToItem(it)
             }
         }
@@ -53,40 +49,46 @@ fun Pages(
         LazyRow(
             state = listState,
             contentPadding = PaddingValues(horizontal = 8.dp),
+            userScrollEnabled = false,
             horizontalArrangement = Arrangement.spacedBy(
                 space = 16.dp,
                 alignment = Alignment.Start,
             ),
         ) {
-            itemsIndexed(
-                items = pageTitles,
-                key = { _, item -> item }
-            ) { index, title ->
-                Text(
-                    text = title,
-                    size = 48.sp,
-                    weight = FontWeight.Light,
-                    color = if (pagerState.currentPage == index) LocalTextOnBackgroundColor.current
-                    else LocalTextOnBackgroundColor.current.copy(alpha = 0.4f),
-                    modifier = Modifier.clickable {
-                        // 2 scopes to make sure the animations won't wait for one another
-                        scope.launch {
-                            listState.animateScrollToItem(index)
+            items(
+                // See HorizontalPager pageCount comment for more info
+                count = Int.MAX_VALUE,
+                itemContent = {
+                    val index = it % pageCount
+
+                    Text(
+                        text = pageTitles[index],
+                        size = 48.sp,
+                        weight = FontWeight.Light,
+                        color = if (pagerState.currentPage % pageCount == index) LocalTextOnBackgroundColor.current
+                        else LocalTextOnBackgroundColor.current.copy(alpha = 0.4f),
+                        modifier = Modifier.clickable {
+                            // 2 scopes to make sure the animations won't wait for one another
+                            scope.launch {
+                                listState.animateScrollToItem(it)
+                            }
+                            scope2.launch {
+                                pagerState.animateScrollToPage(it)
+                            }
                         }
-                        scope2.launch {
-                            pagerState.animateScrollToPage(index)
-                        }
-                    }
-                )
-            }
+                    )
+                }
+            )
         }
         HorizontalPager(
             modifier = Modifier.weight(1f),
             state = pagerState,
-            pageCount = pageTitles.size,
-        ) { page ->
-            Box(modifier = Modifier.fillMaxWidth()) {
-                this.page(page)
+            // Ugly hack to support infinite/looping scrolling,
+            // officially recommended by @google/accompanist.
+            pageCount = Int.MAX_VALUE,
+        ) { index ->
+            Box(modifier = Modifier.fillMaxWidth().fillMaxHeight()) {
+                this.page(index % pageCount)
             }
         }
     }
