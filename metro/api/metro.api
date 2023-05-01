@@ -14,6 +14,47 @@ public final class com/louis993546/metro/FontFamilyKt {
 	public static final fun getFontFamily ()Landroidx/compose/ui/text/font/FontFamily;
 }
 
+public abstract interface class com/louis993546/metro/ListViewItem {
+}
+
+public final class com/louis993546/metro/ListViewItem$Content : com/louis993546/metro/ListViewItem {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function2;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Lkotlin/jvm/functions/Function2;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Lkotlin/jvm/functions/Function2;Ljava/lang/String;Ljava/lang/String;)Lcom/louis993546/metro/ListViewItem$Content;
+	public static synthetic fun copy$default (Lcom/louis993546/metro/ListViewItem$Content;Lkotlin/jvm/functions/Function2;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/louis993546/metro/ListViewItem$Content;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContents ()Lkotlin/jvm/functions/Function2;
+	public final fun getKey ()Ljava/lang/String;
+	public final fun getLabel ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/louis993546/metro/ListViewItem$Header : com/louis993546/metro/ListViewItem {
+	public static final field $stable I
+	public fun <init> (Lkotlin/jvm/functions/Function2;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Lkotlin/jvm/functions/Function2;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Lkotlin/jvm/functions/Function2;Ljava/lang/String;Ljava/lang/String;)Lcom/louis993546/metro/ListViewItem$Header;
+	public static synthetic fun copy$default (Lcom/louis993546/metro/ListViewItem$Header;Lkotlin/jvm/functions/Function2;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/louis993546/metro/ListViewItem$Header;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContents ()Lkotlin/jvm/functions/Function2;
+	public final fun getKey ()Ljava/lang/String;
+	public final fun getLabel ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/louis993546/metro/ListViewKt {
+	public static final fun AcronymIcon (Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun ListView (Landroidx/compose/ui/Modifier;Ljava/util/List;Landroidx/compose/runtime/Composer;II)V
+	public static final fun ListViewHeaderAcronymStyle (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)V
+}
+
 public final class com/louis993546/metro/MessageBoxKt {
 	public static final fun MessageBox (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
