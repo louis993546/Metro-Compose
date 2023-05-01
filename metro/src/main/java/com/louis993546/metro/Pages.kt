@@ -139,13 +139,15 @@ fun Pages(
         HorizontalPager(
             modifier = Modifier.weight(1f),
             state = pagerState,
-            contentPadding = PaddingValues(top = 20.dp),
+            contentPadding = PaddingValues(top = 10.dp),
             // Ugly hack to support infinite/looping scrolling,
             // officially recommended by @google/accompanist.
             pageCount = Int.MAX_VALUE,
         ) { index ->
             Box(
-                modifier = Modifier.fillMaxWidth().fillMaxHeight()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 10.dp)
             ) {
                 content(index % pageCount)
             }

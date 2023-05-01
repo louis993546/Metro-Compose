@@ -34,6 +34,7 @@ import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.MetroTheme
 import com.louis993546.metro.Text
 import com.louis993546.metro.demo.appRow.AppRow
+import com.louis993546.metro.forceTapAnimation
 import timber.log.Timber
 
 @ExperimentalFoundationApi
@@ -197,7 +198,10 @@ fun Header(
     modifier: Modifier = Modifier,
     letter: Char,
 ) {
-    Box(modifier = modifier) {
+    Box(
+        modifier = modifier
+            .forceTapAnimation()
+    ) {
         Box(
             modifier = Modifier
                 .background(color = LocalBackgroundColor.current)

@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,11 +32,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.louis993546.metro.ApplicationBar
+import com.louis993546.metro.Button
+import com.louis993546.metro.Disclaimer
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.MessageBox
 import com.louis993546.metro.Pages
-import com.louis993546.metro.Text
 import com.louis993546.metro.TitleBar
+import com.louis993546.metro.Text
 import kotlinx.coroutines.launch
 
 /**
@@ -48,7 +51,7 @@ fun MetroSettingsApp(
     dataSource: MetroSettingsDataSource,
 ) {
     Column(modifier = modifier) {
-        TitleBar(title = "METRO SETTINGS")
+        TitleBar(title = "Metro Settings")
 
         Pages(
             modifier = Modifier
@@ -148,9 +151,20 @@ internal fun Settings(
     frameRatio: Float?,
     onConfigChange: (MetroSettingsField, String) -> Unit,
 ) {
-    Column(modifier = modifier.fillMaxHeight()) {
+    Column(
+        modifier = modifier.fillMaxHeight(),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+
         Text(text = "TODO Real browser, or in-app fake IE")
         Text(text = "TODO typography")
+        Disclaimer(
+            text = "This is an example of the `Disclaimer` text component. " +
+                    "It works similarly to the normal `Text` component but" +
+                    "is intended to always wrap around to the next line instead" +
+                    "of overflowing outside the viewport."
+        )
+
         Text(text = "isTallScreenRatio")
         BasicTextField(
             value = isTallScreenRatio.toString(),
@@ -168,6 +182,9 @@ internal fun Settings(
             },
         )
         Text(text = "TODO override 4 or 6 columns")
+        Button(
+            text = "cool test button"
+        )
     }
 }
 
