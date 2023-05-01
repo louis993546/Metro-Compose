@@ -1,5 +1,6 @@
 package com.louis993546.seattle
 
+import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherApps
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
@@ -9,32 +10,22 @@ import android.os.Process
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.louis993546.metro.LocalAccentColor
-import com.louis993546.metro.LocalBackgroundColor
+import com.louis993546.metro.ListView
+import com.louis993546.metro.ListViewHeaderAcronymStyle
+import com.louis993546.metro.ListViewItem
+import com.louis993546.metro.MetroColor
 import com.louis993546.metro.MetroTheme
 import com.louis993546.metro.Text
 import com.louis993546.metro.demo.appRow.AppRow
-import com.louis993546.metro.forceTapAnimation
 import timber.log.Timber
 
 @ExperimentalFoundationApi
@@ -78,7 +69,7 @@ class MainActivity : ComponentActivity() {
         iconPacks["com.whicons.iconpack"]?.run {
             val appsWithBetterIcons = installedApps.map { app ->
                 app.copy(
-                    iconDrawable = getDrawableIconForPackage(app.packageName, app.iconDrawable),
+                    iconDrawable = getDrawableIconForPackage(app.info.packageName, app.iconDrawable),
                 )
             }
 
@@ -93,21 +84,33 @@ class MainActivity : ComponentActivity() {
      *
      * @suppress the magic number check as "33" makes more sense then "tiramisu"
      */
-    @Suppress("MagicNumber")
+    @Suppress("MagicNumber", "TooGenericExceptionCaught", "SwallowedException")
     private fun getInstalledApps(): List<App> =
         getSystemService(LauncherApps::class.java)
             .getActivityList(null, Process.myUserHandle())
             .map { activityInfo ->
-                val drawable = activityInfo.getIcon(resources.displayMetrics.densityDpi)
-                val icon = when {
-                    Build.VERSION.SDK_INT >= 33 && drawable is AdaptiveIconDrawable ->
-                        drawable.monochrome ?: drawable // TODO tint to white
-                    else -> drawable
+                val icon = try {
+                    val drawable = packageManager.getApplicationIcon(activityInfo.applicationInfo.packageName)
+                    when {
+                        Build.VERSION.SDK_INT >= 26 && drawable is AdaptiveIconDrawable ->
+                            drawable.foreground
+                        else -> drawable
+                    }
+                } catch (e: Exception) {
+                    val drawable = activityInfo.getIcon(resources.displayMetrics.densityDpi)
+                    when {
+                        Build.VERSION.SDK_INT >= 33 && drawable is AdaptiveIconDrawable ->
+                            drawable.monochrome ?: drawable
+                        else -> drawable
+                    }
+
                 }
+
                 App(
+                    uuid = activityInfo.name,
                     label = activityInfo.label.toString(),
-                    iconDrawable = icon,
-                    packageName = activityInfo.applicationInfo.packageName,
+                    iconDrawable = icon, // TODO tint to white
+                    info = activityInfo.applicationInfo,
                 )
             }
 
@@ -118,9 +121,10 @@ class MainActivity : ComponentActivity() {
 }
 
 data class App(
+    val uuid: String,
     val label: String,
     val iconDrawable: Drawable,
-    val packageName: String,
+    val info: ApplicationInfo,
     // TODO things needed to launch the app
     // TODO shortcuts/notifications/etc
 )
@@ -134,87 +138,42 @@ fun DrawerPage(
     val list = apps.sortedBy { it.label }
         .groupBy { it.label.first().lowercaseChar() }
         .map { (char, list) ->
-            val header = ListItem.Header(char.lowercaseChar())
-            val items = list.map { ListItem.Row(it) }
+            val letter = char.lowercase()
 
+            val header = ListViewItem.Header(
+                contents = { ListViewHeaderAcronymStyle(letter) },
+                label = letter,
+                key = letter
+            )
+
+            val items = list.map {
+                ListViewItem.Content(
+                    contents = { AppRow(name = it.label, icon = it.iconDrawable) },
+                    label = it.label,
+                    key = it.uuid
+                )
+            }
             listOf(header) + items
         }
         .flatten()
 
-    val topMargin = 8.dp
     Row(modifier = modifier) {
 //        SearchButton(modifier = Modifier.padding(all = topMargin)) { onAppClick(Apps.APP_SEARCH) }
 
-        val listState = rememberLazyListState()
-        LazyColumn(
-            state = listState,
-            contentPadding = PaddingValues(vertical = topMargin),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            list.forEach { item ->
-                when (item) {
-                    is ListItem.Header -> {
-                        stickyHeader(key = item.char) {
-                            Header(
-                                modifier = Modifier.fillMaxWidth(),
-                                letter = item.char,
-                            )
-                        }
-                    }
-
-                    is ListItem.Row -> {
-                        // TODO key should be activity id or something
-                        item(key = item.app.label) {
-                            AppRow(
-                                name = item.app.label,
-                                icon = item.app.iconDrawable,
-                            )
-                        }
-                    }
-                }
-            }
-        }
+        ListView(
+            modifier = Modifier
+                .fillMaxSize(),
+            items = list,
+        )
     }
 }
-
-sealed interface ListItem {
-    data class Header(val char: Char) : ListItem
-    data class Row(val app: App) : ListItem
-}
-
 
 @Composable
 fun SeattleTheme(
     content: @Composable () -> Unit,
 ) {
     MetroTheme(
-        accentColor = Color.Black,
+        accentColor = MetroColor.cyan,
         content = content,
     )
-}
-
-@Composable
-fun Header(
-    modifier: Modifier = Modifier,
-    letter: Char,
-) {
-    Box(
-        modifier = modifier
-            .forceTapAnimation()
-    ) {
-        Box(
-            modifier = Modifier
-                .background(color = LocalBackgroundColor.current)
-                .size(48.dp)
-                .border(width = 2.dp, color = LocalAccentColor.current)
-        ) {
-            Text(
-                modifier = Modifier
-                    .padding(start = 8.dp)
-                    .align(Alignment.BottomStart),
-                text = letter.toString(),
-                size = 24.sp,
-            )
-        }
-    }
 }
