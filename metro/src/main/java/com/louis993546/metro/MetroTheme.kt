@@ -24,7 +24,7 @@ fun MetroTheme(
     val backgroundColor = if (darkTheme) Color.Black else Color.White
     val textOnBackgroundColor = if (darkTheme) Color.White else Color.Black
     val textOnAccentColor = accentColor.textColor()
-    val buttonColor = if (darkTheme) Color.DarkGray else Color.LightGray
+    val buttonColor = if (darkTheme) Color(0xFF1F1F1F) else Color(0xFFDDDDDD)
 
     CompositionLocalProvider(
         LocalAccentColor provides accentColor,

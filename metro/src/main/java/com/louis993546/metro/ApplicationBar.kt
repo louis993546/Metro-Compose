@@ -26,7 +26,7 @@ fun ApplicationBar(
         (0 until count).forEach { index ->
             CircleButton(
                 modifier = Modifier
-                    .size(36.dp)
+                    .size(42.dp)
                     .clickable { onButtonClicked(index) }
             ) {
                 icon(index)
@@ -48,7 +48,7 @@ fun ApplicationBar(
         modifier = modifier
             .height(IntrinsicSize.Min)
             .background(LocalButtonColor.current)
-            .padding(vertical = 8.dp, horizontal = 16.dp),
+            .padding(vertical = 10.dp, horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(
             16.dp,
             alignment = Alignment.CenterHorizontally
