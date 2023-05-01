@@ -165,8 +165,8 @@ fun DrawerPage(
                         // TODO key should be activity id or something
                         item(key = item.app.label) {
                             AppRow(
-                                appName = item.app.label,
-                                appIcon = item.app.iconDrawable,
+                                name = item.app.label,
+                                icon = item.app.iconDrawable,
                             )
                         }
                     }

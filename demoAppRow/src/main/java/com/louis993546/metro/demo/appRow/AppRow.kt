@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
@@ -25,41 +28,47 @@ fun AppIcon(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    Box(modifier = modifier.size(48.dp), content = content)
+    Box(
+        modifier = modifier
+            .size(56.dp),
+        content = content
+    )
 }
 
 @Composable
 fun AppRow(
     modifier: Modifier = Modifier,
-    appName: String,
-    appIcon: Drawable?,
+    name: String,
+    icon: Drawable? = null,
+    background: Color = LocalAccentColor.current,
 ) {
-    Row(modifier = modifier) {
+    Row(modifier = modifier.fillMaxSize()) {
         AppIcon {
-            when (appIcon) {
+            when (icon) {
                 null -> Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color = LocalAccentColor.current)
-                )
-                else -> Box(
+                        .background(color = background)
+                ) else -> Box(
                     modifier = Modifier
-                        .background(color = LocalAccentColor.current)
-                        .padding(8.dp),
+                        .background(color = background)
+                        .padding(2.dp),
                 ) {
                     Image(
-                        painter = rememberDrawablePainter(drawable = appIcon),
-                        contentDescription = appName,
+                        painter = rememberDrawablePainter(drawable = icon),
+                        contentDescription = name,
+                        colorFilter = ColorFilter.tint(color = Color.White)
                     )
                 }
             }
 
         }
-        Spacer(modifier = Modifier.width(8.dp))
+        Spacer(modifier = Modifier.width(14.dp))
         Text(
-            modifier = Modifier.align(Alignment.CenterVertically),
-            text = appName,
+            modifier = Modifier.align(Alignment.CenterVertically).padding(bottom = 4.dp),
+            text = name,
             size = 28.sp,
+            weight = FontWeight.Light
         )
     }
 }

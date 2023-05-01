@@ -5,21 +5,29 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.louis993546.metro.CircleButton
@@ -46,29 +54,40 @@ fun DrawerPage(
             listOf(header) + items
         }.flatten()
 
-    val topMargin = 8.dp
-    Row(modifier = modifier) {
-        SearchButton(modifier = Modifier.padding(all = topMargin)) { onAppClick(Apps.APP_SEARCH) }
+    Row(
+        modifier = modifier
+            .padding(horizontal = 6.dp)
+    ) {
+        SearchButton(
+            modifier = Modifier
+                .padding(horizontal = 12.dp, vertical = 16.dp),
+        ) { onAppClick(Apps.APP_SEARCH) }
 
         val listState = rememberLazyListState()
         LazyColumn(
             state = listState,
-            contentPadding = PaddingValues(vertical = topMargin),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            contentPadding = PaddingValues(vertical = 20.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            list.forEach { item ->
+            list.forEachIndexed { index, item ->
                 when (item) {
                     is ListItem.Header -> {
                         stickyHeader(key = item.char) {
                             Header(
-                                modifier = Modifier.fillMaxWidth(),
+                                modifier = Modifier
+                                    .fillMaxWidth(),
                                 letter = item.char,
                             )
                         }
                     }
                     is ListItem.App -> {
                         item(key = item.name) {
-                            AppRow(appName = item.name, appIcon = null)
+                            AppRow(name = item.name, icon = null)
+                            Spacer(modifier = Modifier.height(6.dp))
+
+                            // Space between groups like in 8.1 Update 2
+                            if (list.elementAtOrNull(index + 1) is ListItem.Header)
+                                Spacer(modifier = Modifier.height(16.dp))
                         }
                     }
                 }
@@ -83,19 +102,32 @@ fun SearchButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val pressed by interactionSource.collectIsPressedAsState()
     CircleButton(
+        pressed = pressed,
         modifier = modifier
             .size(48.dp)
             .padding(4.dp)
-            .clickable(onClick = onClick)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null, // TODO Metro indication
+                onClick = onClick
+            )
     ) {
         Image(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp),
+                .padding(8.dp)
+                .scale(scaleX = -1f, scaleY = 1f),
             painter = painterResource(id = R.drawable.ic_baseline_search_24),
             contentDescription = "Search",
-            colorFilter = ColorFilter.tint(color = LocalTextOnBackgroundColor.current)
+            colorFilter = ColorFilter.tint(
+                if(pressed)
+                    LocalBackgroundColor.current
+                else
+                    LocalTextOnBackgroundColor.current
+            ),
         )
     }
 }
@@ -105,19 +137,26 @@ fun Header(
     modifier: Modifier = Modifier,
     letter: Char,
 ) {
-    Box(modifier = modifier) {
+    Box(
+        modifier = modifier
+            .background(color = LocalBackgroundColor.current)
+            .height(62.dp)
+    ) {
         Box(
             modifier = Modifier
                 .background(color = LocalBackgroundColor.current)
-                .size(48.dp)
-                .border(width = 2.dp, color = LocalAccentColor.current)
+                .size(56.dp)
+                .border(width = 3.dp, color = LocalAccentColor.current),
         ) {
             Text(
                 modifier = Modifier
                     .padding(start = 8.dp)
+                    .padding(bottom = 4.dp)
                     .align(Alignment.BottomStart),
                 text = letter.toString(),
-                size = 24.sp,
+                weight = FontWeight.Medium,
+                color = LocalAccentColor.current,
+                size = 36.sp,
             )
         }
     }
