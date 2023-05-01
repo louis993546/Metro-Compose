@@ -4,7 +4,10 @@ public final class com/louis993546/metro/ApplicationBarKt {
 }
 
 public final class com/louis993546/metro/ButtonsKt {
-	public static final fun CircleButton (Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun Button (Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun CircleButton (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun forceTapAnimation (Landroidx/compose/ui/Modifier;F)Landroidx/compose/ui/Modifier;
+	public static synthetic fun forceTapAnimation$default (Landroidx/compose/ui/Modifier;FILjava/lang/Object;)Landroidx/compose/ui/Modifier;
 }
 
 public final class com/louis993546/metro/FontFamilyKt {
@@ -64,7 +67,8 @@ public final class com/louis993546/metro/TextFieldKt {
 }
 
 public final class com/louis993546/metro/TextKt {
-	public static final fun Text-19tTp10 (Landroidx/compose/ui/Modifier;Ljava/lang/String;JJLandroidx/compose/ui/text/font/FontWeight;ILandroidx/compose/runtime/Composer;II)V
+	public static final fun Disclaimer-Cscg79A (Landroidx/compose/ui/Modifier;Ljava/lang/String;JJJLandroidx/compose/ui/text/font/FontWeight;Landroidx/compose/runtime/Composer;II)V
+	public static final fun Text-7et1jq0 (Landroidx/compose/ui/Modifier;Ljava/lang/String;JJJLandroidx/compose/ui/text/font/FontWeight;ILandroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/louis993546/metro/TileKt {

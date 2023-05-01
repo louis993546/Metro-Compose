@@ -153,7 +153,6 @@ fun DeviceFrame(
         // CompositionLocalProvider( LocalOverScrollConfiguration provides null ) { }
         Box(
             modifier = Modifier
-                .border(color = Color.White, width = 1.dp)
                 .run {
                     if (isTallScreen && isKeyboardOpen == Keyboard.Closed) // TODO allow this to be turn off
                         this.aspectRatio(configuration.frameRatio ?: error("Maybe I need to define a better type"))

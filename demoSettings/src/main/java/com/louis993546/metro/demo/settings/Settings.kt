@@ -14,7 +14,7 @@ fun Settings(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
-        TitleBar(title = "SETTINGS")
+        TitleBar(title = "Settings")
         Pages(pageTitles = listOf("system", "applications")) { pageNumber ->
             when (pageNumber) {
                 0 -> SystemPage()
