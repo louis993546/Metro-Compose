@@ -30,7 +30,7 @@ import kotlin.math.roundToInt
 fun Pages(
     modifier: Modifier = Modifier,
     pageTitles: List<String>,
-    page: @Composable BoxScope.(pageNumber: Int) -> Unit,
+    content: @Composable BoxScope.(pageNumber: Int) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -89,7 +89,7 @@ fun Pages(
                 offset = FastOutSlowInEasing.transform(offset)
 
                 // Finally scroll the label into view with the offset we created
-                val res = (offset * item!!.size).roundToInt()
+                val res = (offset * item.size).roundToInt()
                 listState.scrollToItem(if (res != 0 || pagerState.currentPage == page) page else target, res)
             }
         }
@@ -147,7 +147,7 @@ fun Pages(
             Box(
                 modifier = Modifier.fillMaxWidth().fillMaxHeight()
             ) {
-                page(index % pageCount)
+                content(index % pageCount)
             }
         }
     }
