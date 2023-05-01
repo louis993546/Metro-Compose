@@ -1,2 +1,2 @@
 #!/bin/sh
-./gradlew apiCheck detekt
+./gradlew apiCheck detekt lint

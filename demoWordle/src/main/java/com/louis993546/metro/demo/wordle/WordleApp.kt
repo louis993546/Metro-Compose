@@ -1,3 +1,4 @@
+
 package com.louis993546.metro.demo.wordle
 
 import androidx.compose.foundation.background
@@ -129,110 +130,6 @@ sealed class GuessCellState {
     data class Correct(val char: Char) : GuessCellState()
 }
 
-sealed class KeyPress {
-    data class Action(val action: KeyAction) : KeyPress()
-    data class Character(val char: Char) : KeyPress()
-}
-
-enum class KeyAction {
-    Enter,
-    Backspace
-}
-
-@Composable
-fun Keyboard(
-    modifier: Modifier = Modifier,
-//    state: Map<Char, GuessKeyState>,
-    onKeyPressed: (KeyPress) -> Unit,
-) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(
-            space = 8.dp,
-            alignment = Alignment.CenterVertically
-        ),
-    ) {
-        KeyboardRow {
-            "qwertyuiop"
-                .map { it.uppercase() } // TODO read state
-                .forEach {
-                    Key(
-                        modifier = Modifier
-                            .clickable { onKeyPressed(KeyPress.Character(it.first())) }
-                    ) { Text(text = it) }
-                }
-        }
-
-        KeyboardRow {
-            "asdfghjkl"
-                .map { it.uppercase() } // TODO read state
-                .forEach {
-                    Key(
-                        modifier = Modifier
-                            .clickable { onKeyPressed(KeyPress.Character(it.first())) }
-                    ) { Text(text = it) }
-                }
-        }
-
-        KeyboardRow {
-            Key(
-                modifier = Modifier.clickable { onKeyPressed(KeyPress.Action(KeyAction.Enter)) },
-                width = KeyWidth.L,
-            ) { Text(text = "Enter") }
-            "zxcvbnm"
-                .map { it.uppercase() } // TODO read state
-                .forEach {
-                    Key(
-                        modifier = Modifier
-                            .clickable { onKeyPressed(KeyPress.Character(it.first())) }
-                    ) { Text(text = it) }
-                }
-            Key(
-                modifier = Modifier.clickable { onKeyPressed(KeyPress.Action(KeyAction.Backspace)) },
-                width = KeyWidth.L
-            ) { Text(text = "←") }
-        }
-    }
-}
-
-@Composable
-fun KeyboardRow(
-    content: @Composable RowScope.() -> Unit
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(
-            space = 8.dp, // TODO for smaller screens, replace this with smaller number
-            alignment = Alignment.CenterHorizontally,
-        ),
-        content = content,
-    )
-}
-
-@Composable
-fun Key(
-    modifier: Modifier = Modifier,
-    width: KeyWidth = KeyWidth.M,
-    content: @Composable BoxScope.() -> Unit,
-) {
-    @Suppress("MagicNumber")
-    val widthBase = (LocalConfiguration.current.screenWidthDp - 16) / 14
-
-    Box(
-        modifier = modifier
-            .height((widthBase * 2).dp)
-            .width((width.factor * widthBase).dp)
-            .background(color = Color.Gray),
-        content = content,
-        contentAlignment = Alignment.Center,
-    )
-}
-
-enum class KeyWidth(val factor: Int) {
-    M(1), L(2)
-}
-
 data class WordleGuessState(
     val guesses: List<GuessRowState>,
 ) {
@@ -247,11 +144,4 @@ data class GuessRowState(
     companion object {
         val EMPTY = GuessRowState(MutableList(5) { GuessCellState.Empty })
     }
-}
-
-enum class GuessKeyState {
-    //    Unknown, // this is the default
-    Wrong,
-    WrongPosition,
-    Correct
 }

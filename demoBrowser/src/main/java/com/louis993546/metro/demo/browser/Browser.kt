@@ -1,5 +1,6 @@
 package com.louis993546.metro.demo.browser
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -22,6 +23,7 @@ import com.louis993546.metro.ApplicationBar
 import com.louis993546.metro.CircleButton
 import com.louis993546.metro.Text
 
+@SuppressLint("SetJavaScriptEnabled")
 @Composable
 fun Browser(
     modifier: Modifier = Modifier,
@@ -43,7 +45,7 @@ fun Browser(
             modifier = Modifier.fillMaxWidth(),
         ) {
             RefreshButton()
-            AddressBar(url = webViewState.content.getCurrentUrl() ?: "wtf")
+            AddressBar(url = webViewState.lastLoadedUrl ?: "wtf")
             ThreeDotsButton()
         }
     }
