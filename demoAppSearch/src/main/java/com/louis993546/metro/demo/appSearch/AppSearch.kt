@@ -29,12 +29,15 @@ fun AppSearch(
     val focusRequester = remember { FocusRequester() }
 
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp),
     ) {
         TextField(
             modifier = Modifier
                 .focusRequester(focusRequester)
                 .padding(8.dp)
+                .padding(bottom = 32.dp)
                 .fillMaxWidth(),
             value = searchQuery,
             onValueChange = { searchQuery = it },
@@ -43,10 +46,10 @@ fun AppSearch(
             modifier = Modifier
                 .weight(1f)
                 .padding(horizontal = 8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             items(apps, { it.id }) {
-                AppRow(appName = it.name, appIcon = null)
+                AppRow(name = it.name, icon = null)
             }
         }
     }

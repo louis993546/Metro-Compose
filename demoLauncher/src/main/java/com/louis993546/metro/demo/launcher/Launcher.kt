@@ -8,18 +8,24 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.louis993546.metro.CircleButton
 import com.louis993546.metro.LocalAccentColor
+import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.LocalTextOnAccentColor
 import com.louis993546.metro.LocalTextOnBackgroundColor
 import com.louis993546.metro.Text
@@ -44,10 +50,12 @@ fun HomePage(
 //            contentScale = ContentScale.Crop,
 //        )
     Column(modifier = modifier.verticalScroll(rememberScrollState())) {
-        val padding = 8.dp
         VerticalTilesGrid(
-            modifier = Modifier.fillMaxSize(),
-            gap = padding,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(vertical = 8.dp)
+                .padding(horizontal = 12.dp),
+            gap = 12.dp,
         ) {
             s {
                 HomeTile(
@@ -135,18 +143,31 @@ fun HomePage(
                 )
             }
         }
+
+        val interactionSource = remember { MutableInteractionSource() }
+        val pressed by interactionSource.collectIsPressedAsState()
         CircleButton(
+            pressed = pressed,
             modifier = Modifier
                 .align(Alignment.End)
-                .padding(padding),
+                .padding(8.dp)
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null, // TODO Metro indication
+                    onClick = onArrowClick
+                )
         ) {
             Image(
                 modifier = Modifier
-                    .padding(4.dp)
-                    .clickable(onClick = onArrowClick),
+                    .padding(6.dp),
                 painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_24),
                 contentDescription = "Apps list",
-                colorFilter = ColorFilter.tint(LocalTextOnBackgroundColor.current),
+                colorFilter = ColorFilter.tint(
+                    if(pressed)
+                        LocalBackgroundColor.current
+                    else
+                        LocalTextOnBackgroundColor.current
+                ),
             )
         }
     }
@@ -155,6 +176,8 @@ fun HomePage(
 
 /**
  * Unlike normal Tile, HomeTile can be rectangle, not just square
+ * FIXME We need to know the size of the tile to set the correct
+ *  icon size and whether to show the label or not
  */
 @Composable
 fun HomeTile(
@@ -181,8 +204,9 @@ fun HomeTile(
         Text(
             modifier = Modifier
                 .align(Alignment.BottomStart)
-                .padding(start = 6.dp, bottom = 2.dp),
+                .padding(start = 10.dp, bottom = 6.dp),
             text = title,
+            size = 18.sp,
             color = textColor,
         )
     }
