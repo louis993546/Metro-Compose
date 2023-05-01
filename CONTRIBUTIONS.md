@@ -1,7 +1,7 @@
 ## Build
 
-- Open this project with ~Android Studio~ IntelliJ 2022.3
-- Run `git config core.hooksPath githooks` to make sure the githook is run before push
+- Open this project with the latest Android Studio Canary build
+- Run `git config core.hooksPath githooks` to make sure the githook is run before push.
 
 ### File Bugs
 
