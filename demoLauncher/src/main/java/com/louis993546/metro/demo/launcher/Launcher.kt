@@ -3,7 +3,7 @@ package com.louis993546.metro.demo.launcher
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,8 +26,6 @@ import com.louis993546.metro.LocalTextOnBackgroundColor
 import com.louis993546.metro.Text
 import com.louis993546.metro.demo.VerticalTilesGrid
 import com.louis993546.metro.demo.apps.Apps
-import com.louis993546.metro.forceTapAnimation
-import kotlin.coroutines.cancellation.CancellationException
 
 /**
  * Suppress LongMethod, as in long run, this whole thing should be configurable by the users
@@ -144,17 +141,13 @@ fun HomePage(
             modifier = Modifier
                 .align(Alignment.End)
                 .padding(8.dp)
+                .clickable {
+                    onArrowClick()
+                }
         ) {
             Image(
                 modifier = Modifier
-                    .padding(6.dp)
-                    .pointerInput(Unit) {
-                        detectTapGestures(
-                            onPress = {
-                                onArrowClick()
-                            }
-                        )
-                    },
+                    .padding(6.dp),
                 painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_24),
                 contentDescription = "Apps list",
                 colorFilter = ColorFilter.tint(
@@ -181,43 +174,35 @@ fun HomeTile(
 ) {
     Box(
         modifier = Modifier
-            .forceTapAnimation()
-            .background(color = backgroundColor)
-            .pointerInput(Unit) {
-                detectTapGestures(
-                    onPress = {
-                        @Suppress("SwallowedException")
-                        val released = try {
-                            tryAwaitRelease()
-                        } catch (c: CancellationException) {
-                            false
-                        }
-
-                        if (released && activate != null)
-                            activate()
-                    }
-                )
+            .clickable {
+                activate?.invoke()
             }
     ) {
-        iconRes?.let { res ->
-            Image(
+        Box(
+            modifier = Modifier
+                .background(color = backgroundColor)
+                .fillMaxSize()
+        ) {
+            iconRes?.let { res ->
+                Image(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .align(Alignment.Center),
+                    painter = painterResource(id = res),
+                    contentDescription = "", // TODO fix me
+                    colorFilter = ColorFilter.tint(textColor),
+                )
+            }
+
+            Text(
                 modifier = Modifier
-                    .size(36.dp)
-                    .align(Alignment.Center),
-                painter = painterResource(id = res),
-                contentDescription = "", // TODO fix me
-                colorFilter = ColorFilter.tint(textColor),
+                    .align(Alignment.BottomStart)
+                    .padding(start = 10.dp, bottom = 6.dp),
+                text = title,
+                size = 18.sp,
+                color = textColor,
+                maxLine = 1
             )
         }
-
-        Text(
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(start = 10.dp, bottom = 6.dp),
-            text = title,
-            size = 18.sp,
-            color = textColor,
-            maxLine = 1
-        )
     }
 }

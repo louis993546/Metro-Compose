@@ -3,6 +3,7 @@ package com.louis993546.metro.demo.appDrawer
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.louis993546.metro.CircleButton
@@ -76,19 +76,15 @@ fun SearchButton(
         modifier = modifier
             .size(48.dp)
             .padding(4.dp)
+            .clickable {
+                onClick()
+            }
     ) {
         Image(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp)
-                .scale(scaleX = -1f, scaleY = 1f)
-                .pointerInput(Unit) {
-                    detectTapGestures(
-                        onPress = {
-                            onClick()
-                        }
-                    )
-                },
+                .scale(scaleX = -1f, scaleY = 1f),
             painter = painterResource(id = R.drawable.ic_baseline_search_24),
             contentDescription = "Search",
             colorFilter = ColorFilter.tint(

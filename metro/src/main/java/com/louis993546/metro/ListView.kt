@@ -72,7 +72,6 @@ fun AcronymIcon(
 ) {
     Box(
         modifier = modifier
-            .forceTapAnimation()
             .background(color = LocalBackgroundColor.current)
             .height(62.dp)
     ) {
