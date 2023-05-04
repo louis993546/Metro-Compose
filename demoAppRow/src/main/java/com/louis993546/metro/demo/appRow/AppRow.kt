@@ -3,6 +3,7 @@ package com.louis993546.metro.demo.appRow
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
@@ -22,7 +23,6 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.louis993546.metro.LocalAccentColor
 import com.louis993546.metro.Text
-import com.louis993546.metro.forceTapAnimation
 
 @Composable
 fun AppIcon(
@@ -45,7 +45,7 @@ fun AppRow(
 ) {
     Row(
         modifier = modifier
-            .forceTapAnimation()
+            .clickable { }
             .fillMaxSize()
     ) {
         AppIcon {

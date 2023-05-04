@@ -1,5 +1,6 @@
 package com.louis993546.metro
 
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -33,6 +34,7 @@ fun MetroTheme(
         LocalTextOnBackgroundColor provides textOnBackgroundColor,
         LocalButtonColor provides buttonColor,
         LocalTextOnButtonColor provides textOnBackgroundColor, // this is close enough for now
+        LocalIndication provides TiltIndication()
     ) {
         content()
     }

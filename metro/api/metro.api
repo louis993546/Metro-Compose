@@ -6,8 +6,6 @@ public final class com/louis993546/metro/ApplicationBarKt {
 public final class com/louis993546/metro/ButtonsKt {
 	public static final fun Button (Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 	public static final fun CircleButton (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
-	public static final fun forceTapAnimation (Landroidx/compose/ui/Modifier;F)Landroidx/compose/ui/Modifier;
-	public static synthetic fun forceTapAnimation$default (Landroidx/compose/ui/Modifier;FILjava/lang/Object;)Landroidx/compose/ui/Modifier;
 }
 
 public final class com/louis993546/metro/FontFamilyKt {
@@ -114,5 +112,9 @@ public final class com/louis993546/metro/TextKt {
 
 public final class com/louis993546/metro/TileKt {
 	public static final fun Tile (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/louis993546/metro/TiltIndicationKt {
+	public static final fun rememberTiltIndication (FFFLandroidx/compose/runtime/Composer;II)Landroidx/compose/foundation/Indication;
 }
 
