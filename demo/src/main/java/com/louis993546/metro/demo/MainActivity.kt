@@ -6,19 +6,28 @@ import android.os.Bundle
 import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.DecayAnimationSpec
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.snapping.SnapFlingBehavior
+import androidx.compose.foundation.gestures.snapping.SnapLayoutInfoProvider
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -34,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -44,21 +54,21 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.demo.appDrawer.DrawerPage
 import com.louis993546.metro.demo.appSearch.AppSearch
 import com.louis993546.metro.demo.apps.Apps
+import com.louis993546.metro.demo.browser.Browser
 import com.louis993546.metro.demo.calculator.CalculatorApp
 import com.louis993546.metro.demo.calendar.Calendar
 import com.louis993546.metro.demo.launcher.HomePage
-import com.louis993546.metro.LocalBackgroundColor
-import com.louis993546.metro.demo.browser.Browser
-import com.louis993546.metro.demo.theme.MetroDemoTheme
-import com.louis993546.metro.demo.settings.Settings
-import com.louis993546.metro.demo.wordle.WordleApp
 import com.louis993546.metro.demo.metroSettings.MetroSettingsApp
 import com.louis993546.metro.demo.metroSettings.MetroSettingsConfiguration
 import com.louis993546.metro.demo.metroSettings.MetroSettingsDataSource
 import com.louis993546.metro.demo.metroSettings.metroSettingsDataSource
+import com.louis993546.metro.demo.settings.Settings
+import com.louis993546.metro.demo.theme.MetroDemoTheme
+import com.louis993546.metro.demo.wordle.WordleApp
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
@@ -114,9 +124,8 @@ fun Launcher(
 ) {
     val scope2 = rememberCoroutineScope()
     val pagerState = rememberPagerState()
-    HorizontalPager(
-        state = pagerState,
-        pageCount = 2,
+    StartScreen(
+        pageCount = 2
     ) { page ->
         val navigate: (Apps) -> Unit = { app -> navController.navigate(app) }
         when (page) {
@@ -130,6 +139,51 @@ fun Launcher(
                 onAppClick = navigate,
             )
             else -> error("WTF")
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun StartScreen(
+    pageCount: Int,
+    pageContent: @Composable (page: Int) -> Unit
+) {
+    val listState = rememberLazyListState(0)
+    val snappingLayout = remember(listState) {
+        SnapLayoutInfoProvider(listState)
+    }
+    val density = LocalDensity.current
+    val highVelocityApproachSpec: DecayAnimationSpec<Float> = rememberSplineBasedDecay()
+    val flingBehavior = remember(
+        snappingLayout,
+        highVelocityApproachSpec,
+        density
+    ) {
+        SnapFlingBehavior(
+            snapLayoutInfoProvider = snappingLayout,
+            lowVelocityAnimationSpec = tween(easing = LinearEasing),
+            highVelocityAnimationSpec = highVelocityApproachSpec,
+            snapAnimationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+            density = density,
+            shortSnapVelocityThreshold = 15.dp
+        )
+    }
+
+    LazyRow(
+        modifier = Modifier
+            .fillMaxSize(),
+        state = listState,
+        flingBehavior = flingBehavior
+    ) {
+        items(pageCount) {
+            Box(
+                modifier = Modifier
+                    .fillParentMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                pageContent(it)
+            }
         }
     }
 }
