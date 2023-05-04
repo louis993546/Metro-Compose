@@ -1,3 +1,82 @@
+public abstract class com/louis993546/metro/AdaptiveContent {
+	public static final field $stable I
+	public fun <init> ()V
+}
+
+public final class com/louis993546/metro/AdaptiveImage : com/louis993546/metro/AdaptiveContent {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Lcom/louis993546/metro/AdaptiveImageAlign;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/louis993546/metro/AdaptiveImageAlign;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAlign ()Lcom/louis993546/metro/AdaptiveImageAlign;
+	public final fun getSource ()Ljava/lang/String;
+}
+
+public final class com/louis993546/metro/AdaptiveImageAlign : java/lang/Enum {
+	public static final field Center Lcom/louis993546/metro/AdaptiveImageAlign;
+	public static final field Default Lcom/louis993546/metro/AdaptiveImageAlign;
+	public static final field Left Lcom/louis993546/metro/AdaptiveImageAlign;
+	public static final field Right Lcom/louis993546/metro/AdaptiveImageAlign;
+	public static final field Stretch Lcom/louis993546/metro/AdaptiveImageAlign;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/louis993546/metro/AdaptiveImageAlign;
+	public static fun values ()[Lcom/louis993546/metro/AdaptiveImageAlign;
+}
+
+public final class com/louis993546/metro/AdaptiveText : com/louis993546/metro/AdaptiveContent {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;ZLcom/louis993546/metro/AdaptiveTextStyle;Lcom/louis993546/metro/AdaptiveTextAlign;)V
+	public synthetic fun <init> (Ljava/lang/String;ZLcom/louis993546/metro/AdaptiveTextStyle;Lcom/louis993546/metro/AdaptiveTextAlign;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAlign ()Lcom/louis993546/metro/AdaptiveTextAlign;
+	public final fun getStyle ()Lcom/louis993546/metro/AdaptiveTextStyle;
+	public final fun getText ()Ljava/lang/String;
+	public final fun getWrap ()Z
+}
+
+public final class com/louis993546/metro/AdaptiveTextAlign : java/lang/Enum {
+	public static final field Auto Lcom/louis993546/metro/AdaptiveTextAlign;
+	public static final field Center Lcom/louis993546/metro/AdaptiveTextAlign;
+	public static final field Default Lcom/louis993546/metro/AdaptiveTextAlign;
+	public static final field Left Lcom/louis993546/metro/AdaptiveTextAlign;
+	public static final field Right Lcom/louis993546/metro/AdaptiveTextAlign;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/louis993546/metro/AdaptiveTextAlign;
+	public static fun values ()[Lcom/louis993546/metro/AdaptiveTextAlign;
+}
+
+public final class com/louis993546/metro/AdaptiveTextStacking : java/lang/Enum {
+	public static final field Bottom Lcom/louis993546/metro/AdaptiveTextStacking;
+	public static final field Center Lcom/louis993546/metro/AdaptiveTextStacking;
+	public static final field Default Lcom/louis993546/metro/AdaptiveTextStacking;
+	public static final field Top Lcom/louis993546/metro/AdaptiveTextStacking;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/louis993546/metro/AdaptiveTextStacking;
+	public static fun values ()[Lcom/louis993546/metro/AdaptiveTextStacking;
+}
+
+public final class com/louis993546/metro/AdaptiveTextStyle : java/lang/Enum {
+	public static final field Base Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field BaseSubtle Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field Body Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field BodySubtle Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field Caption Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field CaptionSubtle Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field Default Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field Header Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field HeaderNumeral Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field HeaderSubtle Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field Subheader Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field SubheaderNumeral Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field SubheaderSubtle Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field Subtitle Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field SubtitleSubtle Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field Title Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field TitleNumeral Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static final field TitleSubtle Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/louis993546/metro/AdaptiveTextStyle;
+	public static fun values ()[Lcom/louis993546/metro/AdaptiveTextStyle;
+}
+
 public final class com/louis993546/metro/ApplicationBarKt {
 	public static final fun ApplicationBar (Landroidx/compose/ui/Modifier;ILkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 	public static final fun ApplicationBar (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
@@ -51,6 +130,125 @@ public final class com/louis993546/metro/ListViewKt {
 	public static final fun AcronymIcon (Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 	public static final fun ListView (Landroidx/compose/ui/Modifier;Ljava/util/List;Landroidx/compose/runtime/Composer;II)V
 	public static final fun ListViewHeaderAcronymStyle (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)V
+}
+
+public final class com/louis993546/metro/LiveTile {
+	public static final field $stable I
+	public fun <init> (Lcom/louis993546/metro/LiveTileVisual;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Landroidx/compose/ui/Modifier;)V
+	public synthetic fun <init> (Lcom/louis993546/metro/LiveTileVisual;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Landroidx/compose/ui/Modifier;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBadge ()Ljava/lang/String;
+	public final fun getIcon ()Landroidx/compose/ui/graphics/painter/Painter;
+	public final fun getModifier ()Landroidx/compose/ui/Modifier;
+	public final fun getVisual ()Lcom/louis993546/metro/LiveTileVisual;
+}
+
+public final class com/louis993546/metro/LiveTileBackgroundImage {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;I)V
+	public synthetic fun <init> (Ljava/lang/String;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getOverlay ()I
+	public final fun getSource ()Ljava/lang/String;
+}
+
+public final class com/louis993546/metro/LiveTileBinding {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Lcom/louis993546/metro/LiveTileBranding;Lcom/louis993546/metro/LiveTileContent;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/louis993546/metro/LiveTileBranding;Lcom/louis993546/metro/LiveTileContent;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBranding ()Lcom/louis993546/metro/LiveTileBranding;
+	public final fun getContent ()Lcom/louis993546/metro/LiveTileContent;
+	public final fun getDisplayName ()Ljava/lang/String;
+}
+
+public final class com/louis993546/metro/LiveTileBranding : java/lang/Enum {
+	public static final field Logo Lcom/louis993546/metro/LiveTileBranding;
+	public static final field Name Lcom/louis993546/metro/LiveTileBranding;
+	public static final field NameAndLogo Lcom/louis993546/metro/LiveTileBranding;
+	public static final field None Lcom/louis993546/metro/LiveTileBranding;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/louis993546/metro/LiveTileBranding;
+	public static fun values ()[Lcom/louis993546/metro/LiveTileBranding;
+}
+
+public abstract class com/louis993546/metro/LiveTileContent {
+	public static final field $stable I
+	public fun <init> ()V
+}
+
+public final class com/louis993546/metro/LiveTileContentAdaptive : com/louis993546/metro/LiveTileContent {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Lcom/louis993546/metro/LiveTilePeekImage;Lcom/louis993546/metro/LiveTileBackgroundImage;Lcom/louis993546/metro/AdaptiveTextStacking;Ljava/util/List;)V
+	public synthetic fun <init> (Lcom/louis993546/metro/LiveTilePeekImage;Lcom/louis993546/metro/LiveTileBackgroundImage;Lcom/louis993546/metro/AdaptiveTextStacking;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBackgroundImage ()Lcom/louis993546/metro/LiveTileBackgroundImage;
+	public final fun getChildren ()Ljava/util/List;
+	public final fun getPeekImage ()Lcom/louis993546/metro/LiveTilePeekImage;
+	public final fun getTextStacking ()Lcom/louis993546/metro/AdaptiveTextStacking;
+}
+
+public final class com/louis993546/metro/LiveTileContentIconWithBadge : com/louis993546/metro/LiveTileContent {
+	public static final field $stable I
+	public fun <init> ()V
+}
+
+public final class com/louis993546/metro/LiveTileContentTileSquareBlock : com/louis993546/metro/LiveTileContent {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBesideBlockText ()Ljava/lang/String;
+	public final fun getBlockText ()Ljava/lang/String;
+	public final fun getText ()Ljava/lang/String;
+}
+
+public final class com/louis993546/metro/LiveTilePeekImage {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;I)V
+	public synthetic fun <init> (Ljava/lang/String;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getOverlay ()I
+	public final fun getSource ()Ljava/lang/String;
+}
+
+public final class com/louis993546/metro/LiveTileSize : java/lang/Enum {
+	public static final field Large Lcom/louis993546/metro/LiveTileSize;
+	public static final field Medium Lcom/louis993546/metro/LiveTileSize;
+	public static final field Small Lcom/louis993546/metro/LiveTileSize;
+	public static final field Wide Lcom/louis993546/metro/LiveTileSize;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/louis993546/metro/LiveTileSize;
+	public static fun values ()[Lcom/louis993546/metro/LiveTileSize;
+}
+
+public final class com/louis993546/metro/LiveTileVisual {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Lcom/louis993546/metro/LiveTileBranding;Lcom/louis993546/metro/LiveTileBinding;Lcom/louis993546/metro/LiveTileBinding;Lcom/louis993546/metro/LiveTileBinding;Lcom/louis993546/metro/LiveTileBinding;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/louis993546/metro/LiveTileBranding;Lcom/louis993546/metro/LiveTileBinding;Lcom/louis993546/metro/LiveTileBinding;Lcom/louis993546/metro/LiveTileBinding;Lcom/louis993546/metro/LiveTileBinding;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBranding ()Lcom/louis993546/metro/LiveTileBranding;
+	public final fun getDisplayName ()Ljava/lang/String;
+	public final fun getTileLarge ()Lcom/louis993546/metro/LiveTileBinding;
+	public final fun getTileMedium ()Lcom/louis993546/metro/LiveTileBinding;
+	public final fun getTileSmall ()Lcom/louis993546/metro/LiveTileBinding;
+	public final fun getTileWide ()Lcom/louis993546/metro/LiveTileBinding;
+}
+
+public final class com/louis993546/metro/LiveTile_TextKt {
+	public static final fun FromAdaptiveTextAlign (Lcom/louis993546/metro/AdaptiveTextAlign;Landroidx/compose/runtime/Composer;I)I
+	public static final fun FromAdaptiveTextStyle (Lcom/louis993546/metro/AdaptiveTextStyle;Lcom/louis993546/metro/AdaptiveTextAlign;Landroidx/compose/runtime/Composer;II)Landroidx/compose/ui/text/TextStyle;
+}
+
+public final class com/louis993546/metro/LiveTile_VisualizerKt {
+	public static final fun VisualizeLiveTile (Landroidx/compose/ui/Modifier;Lcom/louis993546/metro/LiveTile;Lcom/louis993546/metro/LiveTileSize;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VisualizeLiveTileBranding (Landroidx/compose/ui/Modifier;Lcom/louis993546/metro/LiveTileVisual;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VisualizeLiveTileBrandingLogo (Landroidx/compose/ui/Modifier;Lcom/louis993546/metro/LiveTileVisual;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VisualizeLiveTileBrandingName (Landroidx/compose/ui/Modifier;Lcom/louis993546/metro/LiveTileVisual;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VisualizeLiveTileContent (Landroidx/compose/ui/Modifier;Lcom/louis993546/metro/LiveTile;Lcom/louis993546/metro/LiveTileContent;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VisualizeLiveTileContentAdaptive (Landroidx/compose/ui/Modifier;Lcom/louis993546/metro/LiveTileContentAdaptive;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VisualizeLiveTileContentAdaptiveText (Landroidx/compose/ui/Modifier;Lcom/louis993546/metro/AdaptiveText;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VisualizeLiveTileContentIconWithBadge (Landroidx/compose/ui/Modifier;Lcom/louis993546/metro/LiveTile;Lcom/louis993546/metro/LiveTileContentIconWithBadge;Landroidx/compose/runtime/Composer;II)V
+	public static final fun VisualizeLiveTileContentTileSquareBlock (Landroidx/compose/ui/Modifier;Lcom/louis993546/metro/LiveTileContentTileSquareBlock;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class com/louis993546/metro/MenuFlyoutKt {
+	public static final fun MenuFlyout (Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun MenuFlyoutItem (Landroidx/compose/ui/Modifier;Ljava/lang/String;ZLkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/louis993546/metro/MessageBoxKt {

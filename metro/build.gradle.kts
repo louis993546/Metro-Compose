@@ -48,6 +48,7 @@ dependencies {
     val composeBom = platform(libs.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13")
 
     api("androidx.compose.ui:ui")
     api("androidx.compose.foundation:foundation")

@@ -72,7 +72,9 @@ fun AppRow(
             modifier = Modifier.align(Alignment.CenterVertically).padding(bottom = 4.dp),
             text = name,
             size = 28.sp,
-            weight = FontWeight.Light
+            lineHeight = 28.sp,
+            weight = FontWeight.Light,
+            maxLine = 1,
         )
     }
 }
