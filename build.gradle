@@ -6,7 +6,7 @@ buildscript {
         kotlin_version = "1.8.10"
         kotlin_compiler_version = "1.4.3"
         datastore_version = "1.0.0"
-        protofbuf_version = "3.23.2"
+        protofbuf_version = "3.23.4"
 
         compile_sdk_version = 33
         build_tool_version = "33.0.0"
