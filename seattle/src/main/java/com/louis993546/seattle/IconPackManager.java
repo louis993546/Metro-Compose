@@ -20,7 +20,6 @@ import java.util.*;
 
 /**
  * Copy from <a href="https://stackoverflow.com/a/33711983">StackOverflow</a>
- *
  * TODO make this nicer and publish it as a maven lib just because I can
  */
 public class IconPackManager

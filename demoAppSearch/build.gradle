@@ -4,6 +4,11 @@ plugins {
 
 android {
     namespace "com.louis993546.metro.demo.appSearch"
+
+    // K2 lint crash
+    lint {
+        disable "MutableCollectionMutableState", "AutoboxingStateCreation"
+    }
 }
 
 dependencies {

@@ -36,7 +36,8 @@ And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://dev
 |--------------------|-------------|
 | 0.80.0 to 0.101.0  | 22.11.00    |
 | 0.102.0 to 0.104.0 | 23.01.00    |
-| 0.105.0 to latest  | 23.03.00    |
+| 0.105.0 to 0.134.0 | 23.03.00    |
+| 0.135.0 to latest  | 23.08.00    |
 
 
 ## Project Structure

@@ -18,7 +18,6 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.louis993546.metro.ListView
 import com.louis993546.metro.ListViewHeaderAcronymStyle
 import com.louis993546.metro.ListViewItem
@@ -38,11 +37,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             SeattleTheme {
-                val pagerState = rememberPagerState()
-                HorizontalPager(
-                    state = pagerState,
-                    pageCount = 2,
-                ) { page ->
+                val pagerState = rememberPagerState(
+                    initialPage = 0,
+                    initialPageOffsetFraction = 0f,
+                    pageCount = { 2 },
+                )
+                HorizontalPager(state = pagerState) { page ->
                     when (page) {
                         0 -> Text(
                             text = "Home page",
@@ -63,13 +63,16 @@ class MainActivity : ComponentActivity() {
         iconPackManager.setContext(this)
 
         val iconPacks = iconPackManager.getAvailableIconPacks(false)
-        iconPacks.forEach { (t, _)->
+        iconPacks.forEach { (t, _) ->
             Timber.tag("qqq").d(t)
         }
         iconPacks["com.whicons.iconpack"]?.run {
             val appsWithBetterIcons = installedApps.map { app ->
                 app.copy(
-                    iconDrawable = getDrawableIconForPackage(app.info.packageName, app.iconDrawable),
+                    iconDrawable = getDrawableIconForPackage(
+                        app.info.packageName,
+                        app.iconDrawable
+                    ),
                 )
             }
 
@@ -90,7 +93,8 @@ class MainActivity : ComponentActivity() {
             .getActivityList(null, Process.myUserHandle())
             .map { activityInfo ->
                 val icon = try {
-                    val drawable = packageManager.getApplicationIcon(activityInfo.applicationInfo.packageName)
+                    val drawable =
+                        packageManager.getApplicationIcon(activityInfo.applicationInfo.packageName)
                     when {
                         Build.VERSION.SDK_INT >= 26 && drawable is AdaptiveIconDrawable ->
                             drawable.foreground

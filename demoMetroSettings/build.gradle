@@ -9,6 +9,11 @@ android {
     defaultConfig {
         consumerProguardFiles 'proguard-rules.pro'
     }
+
+    // K2 lint crash
+    lint {
+        disable "MutableCollectionMutableState", "AutoboxingStateCreation"
+    }
 }
 
 dependencies {
