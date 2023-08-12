@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,7 +36,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -44,21 +43,21 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.louis993546.metro.LocalBackgroundColor
 import com.louis993546.metro.demo.appDrawer.DrawerPage
 import com.louis993546.metro.demo.appSearch.AppSearch
 import com.louis993546.metro.demo.apps.Apps
+import com.louis993546.metro.demo.browser.Browser
 import com.louis993546.metro.demo.calculator.CalculatorApp
 import com.louis993546.metro.demo.calendar.Calendar
 import com.louis993546.metro.demo.launcher.HomePage
-import com.louis993546.metro.LocalBackgroundColor
-import com.louis993546.metro.demo.browser.Browser
-import com.louis993546.metro.demo.theme.MetroDemoTheme
-import com.louis993546.metro.demo.settings.Settings
-import com.louis993546.metro.demo.wordle.WordleApp
 import com.louis993546.metro.demo.metroSettings.MetroSettingsApp
 import com.louis993546.metro.demo.metroSettings.MetroSettingsConfiguration
 import com.louis993546.metro.demo.metroSettings.MetroSettingsDataSource
 import com.louis993546.metro.demo.metroSettings.metroSettingsDataSource
+import com.louis993546.metro.demo.settings.Settings
+import com.louis993546.metro.demo.theme.MetroDemoTheme
+import com.louis993546.metro.demo.wordle.WordleApp
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
@@ -98,7 +97,7 @@ class MainActivity : ComponentActivity() {
 
 private fun NavGraphBuilder.composable(
     apps: Apps,
-    content: @Composable (NavBackStackEntry) -> Unit
+    content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
 ) {
     composable(route = apps.id, content = content)
 }
@@ -113,11 +112,12 @@ fun Launcher(
     navController: NavController,
 ) {
     val scope2 = rememberCoroutineScope()
-    val pagerState = rememberPagerState()
-    HorizontalPager(
-        state = pagerState,
-        pageCount = 2,
-    ) { page ->
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        initialPageOffsetFraction = 0f,
+        pageCount = { 2 },
+    )
+    HorizontalPager(state = pagerState) { page ->
         val navigate: (Apps) -> Unit = { app -> navController.navigate(app) }
         when (page) {
             0 -> HomePage(
@@ -155,7 +155,10 @@ fun DeviceFrame(
             modifier = Modifier
                 .run {
                     if (isTallScreen && isKeyboardOpen == Keyboard.Closed) // TODO allow this to be turn off
-                        this.aspectRatio(configuration.frameRatio ?: error("Maybe I need to define a better type"))
+                        this.aspectRatio(
+                            configuration.frameRatio
+                                ?: error("Maybe I need to define a better type")
+                        )
                     else
                         this
                 }

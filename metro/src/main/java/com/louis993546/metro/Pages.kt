@@ -42,7 +42,11 @@ fun Pages(
         val scope2 = rememberCoroutineScope()
 
         val listState = rememberLazyListState(Int.MAX_VALUE / 2)
-        val pagerState = rememberPagerState(Int.MAX_VALUE / 2)
+        val pagerState = rememberPagerState(
+            initialPage = Int.MAX_VALUE / 2,
+            initialPageOffsetFraction = 0f,
+            pageCount = Int.Companion::MAX_VALUE,
+        )
         // TODO connect scrollState and pagerState together somehow
 
         LaunchedEffect(pagerState) {
@@ -142,7 +146,6 @@ fun Pages(
             contentPadding = PaddingValues(top = 10.dp),
             // Ugly hack to support infinite/looping scrolling,
             // officially recommended by @google/accompanist.
-            pageCount = Int.MAX_VALUE,
         ) { index ->
             Box(
                 modifier = Modifier

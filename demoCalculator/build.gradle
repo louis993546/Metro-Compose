@@ -5,4 +5,8 @@ plugins {
 
 android {
     namespace "com.louis993546.metro.demo.calculator"
+    // K2 lint crash
+    lint {
+        disable "MutableCollectionMutableState", "AutoboxingStateCreation"
+    }
 }
