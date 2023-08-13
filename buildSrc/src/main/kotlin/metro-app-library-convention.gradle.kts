@@ -1,32 +1,37 @@
 plugins {
-    id "com.android.library"
-    id "kotlin-android"
-    id "io.gitlab.arturbosch.detekt"
+    kotlin("android")
+    id("io.gitlab.arturbosch.detekt")
+    id("com.android.library")
+}
+
+repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
 }
 
 android {
-    compileSdk compile_sdk_version
-    buildToolsVersion "$build_tool_version"
+    compileSdk = 34 //compile_sdk_version
 
     defaultConfig {
-        minSdk min_sdk_version
-        targetSdk compile_sdk_version
+        minSdk = 23 //min_sdk_version
+        targetSdk = 34 //compile_sdk_version
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = "11"
     }
     buildFeatures {
-        compose true
+        compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion kotlin_compiler_version
+        kotlinCompilerExtensionVersion = kotlin_compiler_version
     }
 }
 

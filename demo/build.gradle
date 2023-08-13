@@ -8,8 +8,6 @@ android {
     namespace "com.louis993546.metro.demo"
     compileSdk compile_sdk_version
 
-    buildToolsVersion "$build_tool_version"
-
     defaultConfig {
         applicationId "com.louis993546.metro.demo"
         minSdk min_sdk_version
