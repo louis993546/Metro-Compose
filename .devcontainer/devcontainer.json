@@ -1,0 +1,71 @@
+{
+    "name": "Metro-Compose",
+    "image": "mcr.microsoft.com/devcontainers/base:jammy",
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "20",
+            "jdkDistro": "open",
+            "installGradle": true,
+            "gradleVersion": "8.2"
+        },
+        "ghcr.io/NordcomInc/devcontainer-features/android-sdk:1": {
+            "platform": "34"
+        },
+        "ghcr.io/devcontainers-contrib/features/kotlin-sdkman:2": {
+            "jdkVersion": "20",
+            "jdkDistro": "open"
+        },
+        "ghcr.io/mikaello/devcontainer-features/kotlinc:1": {}
+    },
+    "overrideFeatureInstallOrder": [
+        "ghcr.io/devcontainers/features/java:1",
+        "ghcr.io/NordcomInc/devcontainer-features/android-sdk:1",
+        "ghcr.io/devcontainers-contrib/features/kotlin-sdkman:2",
+        "ghcr.io/mikaello/devcontainer-features/kotlinc:1"
+    ],
+    "forwardPorts": [
+        5037,
+        5555
+    ],
+    "portsAttributes": {
+        "5037": {
+            "forwardPort": 5037,
+            "displayName": "ADB",
+            "requireLocalPort": true,
+            "elevateIfNeeded": true
+        },
+        "5555": {
+            "forwardPort": 5555,
+            "displayName": "ADB over WIFI",
+            "requireLocalPort": true,
+            "elevateIfNeeded": true
+        }
+    },
+    // Required for ADB USB debugging.
+    "privileged": true,
+    "mounts": [
+        "source=/dev/bus/usb,target=/dev/bus/usb,type=bind"
+    ],
+    // Automatically start ADB.
+    "postCreateCommand": {
+        "adb-server": "adb start-server"
+    },
+    // Language-support.
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "mathiasfrohlich.Kotlin",
+                "vscjava.vscode-gradle"
+            ],
+            "settings": {
+                "editor.tabSize": 4,
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "zsh": {
+                        "path": "zsh"
+                    }
+                }
+            }
+        }
+    }
+}
