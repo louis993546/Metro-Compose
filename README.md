@@ -18,6 +18,9 @@ It's currently on open testing on Play Store
 For the time being, the library is published to GitHub Packages
 [over here](https://github.com/louis993546/Metro-Compose/packages/896987)
 
+<details>
+<summary>0.80.0 or older</summary>
+
 | `metro` version  | Compose version |
 |------------------|-----------------|
 | 0.10.0 to 0.12.0 | 1.0.0-rc01      |
@@ -30,6 +33,8 @@ For the time being, the library is published to GitHub Packages
 | 0.70.0 to 0.73.0 | 1.3.0-beta03    |
 | 0.74.0 to 0.79.0 | 1.3.0-rc01      |
 
+</details>
+
 And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://developer.android.com/jetpack/compose/setup#bom-version-mapping) instead.
 
 | `metro` version    | BoM version |
@@ -37,7 +42,8 @@ And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://dev
 | 0.80.0 to 0.101.0  | 22.11.00    |
 | 0.102.0 to 0.104.0 | 23.01.00    |
 | 0.105.0 to 0.134.0 | 23.03.00    |
-| 0.135.0 to latest  | 23.08.00    |
+| 0.135.0 to 0.141.0 | 23.08.00    |
+| 0.142.0 to latest  | 23.09.01    |
 
 
 ## Project Structure
