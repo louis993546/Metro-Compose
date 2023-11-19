@@ -11,8 +11,9 @@ android {
         minSdk = rootProject.extra.get("min_sdk_version") as? Int ?: 0
         compileSdk = rootProject.extra.get("compile_sdk_version") as? Int
         targetSdk = rootProject.extra.get("compile_sdk_version") as? Int
-        val number = System.getenv("GITHUB_RUN_NUMBER") ?: 1
-        versionCode = 1 //number.toInt()
+
+        val number = System.getenv("GITHUB_RUN_NUMBER")?.toInt() ?: 1
+        versionCode = number
         versionName = "0.${number}.0"
     }
     signingConfigs {
@@ -48,7 +49,7 @@ dependencies {
     val composeBom = platform("androidx.compose:compose-bom:${rootProject.extra.get("compose_bom_version")}")
     implementation(composeBom)
     androidTestImplementation(composeBom)
-    implementation("androidx.activity:activity-compose:1.8.0")
+    implementation("androidx.activity:activity-compose:1.8.1")
     implementation("androidx.compose.ui:ui-tooling")
     implementation("com.google.android.material:material:1.10.0")
 
