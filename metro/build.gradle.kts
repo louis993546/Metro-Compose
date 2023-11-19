@@ -13,7 +13,6 @@ android {
 
     defaultConfig {
         minSdk = rootProject.extra.get("min_sdk_version") as? Int
-        targetSdk = rootProject.extra.get("compile_sdk_version") as? Int
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
