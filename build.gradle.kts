@@ -1,35 +1,36 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext {
-        compose_bom_version = "2023.10.01"
-        accompanist_version = "0.32.0"
-        kotlin_version = "1.9.0"
-        kotlin_compiler_version = "1.5.1"
-        datastore_version = "1.0.0"
-        protofbuf_version = "3.25.0"
+    extra.apply {
+        set("compose_bom_version", "2023.10.01")
+        set("accompanist_version", "0.32.0")
+        set("kotlin_version", "1.9.0")
+        set("kotlin_compiler_version", "1.5.1")
+        set("datastore_version", "1.0.0")
+        set("protofbuf_version", "3.25.1")
 
-        compile_sdk_version = 34
-        build_tool_version = "34.0.0"
-        min_sdk_version = 23
+        set("compile_sdk_version", 34)
+        set("build_tool_version", "34.0.0")
+        set("min_sdk_version", 23)
     }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.3.0-alpha13'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("com.android.tools.build:gradle:8.3.0-alpha13")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.extra.get("kotlin_version")}")
     }
 }
 
 plugins {
-    id "org.jetbrains.kotlinx.binary-compatibility-validator" version "0.13.2"
-    id "com.osacky.doctor" version "0.9.0"
-    id "io.gitlab.arturbosch.detekt" version "1.23.3"
+    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.13.2"
+    id("com.osacky.doctor") version "0.9.0"
+    id("io.gitlab.arturbosch.detekt") version "1.23.3"
 }
 
 apiValidation {
-    ignoredProjects += [
+    ignoredProjects.addAll(
+        listOf(
             "demo",
             "demoApps",
             "demoAppDrawer",
@@ -45,7 +46,8 @@ apiValidation {
             "demoSettings",
             "demoWordle",
             "seattle"
-    ]
+        )
+    )
 }
 
 doctor {
@@ -65,7 +67,6 @@ doctor {
     }
 }
 
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register("clean", Delete::class.java) {
+    delete(rootProject.layout.buildDirectory)
 }
