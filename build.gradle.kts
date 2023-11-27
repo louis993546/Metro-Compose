@@ -24,7 +24,7 @@ buildscript {
 
 plugins {
     id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.13.2"
-    id("com.osacky.doctor") version "0.9.0"
+    id("com.osacky.doctor") version "0.9.1"
     id("io.gitlab.arturbosch.detekt") version "1.23.3"
 }
 
