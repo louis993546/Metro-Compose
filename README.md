@@ -81,3 +81,49 @@ See [CONTRIBUTIONS](CONTRIBUTIONS.md)
 ## LICENSE
 
 See [LICENSE](LICENSE)
+
+## Dependency Diagram
+
+```mermaid
+%%{
+  init: {
+    'theme': 'neutral'
+  }
+}%%
+
+graph LR
+
+  demoCalendar --> metro
+  demoLauncher --> metro
+  demoLauncher --> demoApps
+  demoLauncher --> verticalTilesGrid
+  demoBrowser --> metro
+  demoRadio --> metro
+  demoAppRow --> metro
+  demoAppRow --> demoApps
+  demoAppDrawer --> metro
+  demoAppDrawer --> demoApps
+  demoAppDrawer --> demoAppRow
+  demoCamera --> metro
+  demoCalculator --> metro
+  demoAppSearch --> metro
+  demoAppSearch --> demoApps
+  demoAppSearch --> demoAppRow
+  demoMetroSettings --> metro
+  seattle --> metro
+  seattle --> demoAppRow
+  demoWordle --> metro
+  demo --> metro
+  demo --> demoApps
+  demo --> demoAppDrawer
+  demo --> demoAppSearch
+  demo --> demoBrowser
+  demo --> demoCalculator
+  demo --> demoCalendar
+  demo --> demoLauncher
+  demo --> demoMetroSettings
+  demo --> demoRadio
+  demo --> demoSettings
+  demo --> demoWordle
+  demoSettings --> metro
+```
