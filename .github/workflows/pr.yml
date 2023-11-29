@@ -143,11 +143,6 @@ jobs:
           path: "maestro-report.xml"
           reporter: "java-junit"
           fail-on-error: true
-#      - name: "Testing"
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: HomeScreen.png
-#          path: HomeScreen.png
   lib-api-check:
     runs-on: ubuntu-latest
     steps:
