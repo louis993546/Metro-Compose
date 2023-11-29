@@ -97,7 +97,7 @@ jobs:
           api-level: 34
           target: google_apis
           arch: x86_64
-          script: meaestro test --format=junit --output=report.xml --no-ansi maestro.yml
+          script: maestro test --format=junit --output=report.xml --no-ansi maestro.yml
   demo-release-sign-publish:
     runs-on: ubuntu-latest
     steps:
