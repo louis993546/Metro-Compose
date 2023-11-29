@@ -1,11 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     extra.apply {
-        set("compose_bom_version", "2023.10.01")
-        set("accompanist_version", "0.32.0")
-        set("kotlin_version", "1.9.0")
-        set("kotlin_compiler_version", "1.5.1")
-        set("datastore_version", "1.0.0")
+        set("kotlin_version", "2.0.0-Beta1")
+        set("kotlin_compiler_version", "1.5.5-dev-k2.0.0-Beta1-06b8ae672a4")
         set("protofbuf_version", "3.25.1")
 
         set("compile_sdk_version", 34)
@@ -17,7 +14,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.3.0-alpha13")
+        classpath("com.android.tools.build:gradle:8.3.0-alpha15")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.extra.get("kotlin_version")}")
     }
 }
