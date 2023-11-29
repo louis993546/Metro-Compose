@@ -26,7 +26,7 @@ jobs:
       - name: "Upload Debug APK to GitHub"
         uses: actions/upload-artifact@v3
         with:
-          name: Debug APK
+          name: demo-debug.apk
           path: demo/build/outputs/apk/debug/demo-debug.apk
   seattle-debug:
     runs-on: ubuntu-latest
@@ -46,7 +46,7 @@ jobs:
       - name: "Upload Debug APK to GitHub"
         uses: actions/upload-artifact@v3
         with:
-          name: Debug APK
+          name: seattle-debug.apk
           path: demo/build/outputs/apk/debug/seattle-debug.apk
   lint:
     runs-on: ubuntu-latest
@@ -97,7 +97,7 @@ jobs:
           api-level: 34
           target: google_apis
           arch: x86_64
-          script: maestro test --format=junit --output=report.xml --no-ansi maestro.yml
+          script: scripts/maestro-test.sh
   demo-release-sign-publish:
     runs-on: ubuntu-latest
     steps:
@@ -126,7 +126,7 @@ jobs:
       - name: "Upload Release AAB to GitHub"
         uses: actions/upload-artifact@v3
         with:
-          name: Release AAB
+          name: demo-release.aab
           path: demo/build/outputs/bundle/release/demo-release.aab
       - name: "Upload Release AAB to Play Store"
         uses: r0adkll/upload-google-play@v1
