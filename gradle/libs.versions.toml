@@ -1,0 +1,49 @@
+[versions]
+accompanist = "0.32.0"
+activityCompose = "1.8.1"
+appcompat = "1.6.1"
+binaryCompatabilityValidator = "0.13.2"
+cameraX = "1.3.0"
+composeBom = "2023.10.01"
+coreKtx = "1.12.0"
+datastore = "1.0.0"
+detekt = "1.23.4"
+espressoCore = "3.5.1"
+androidGradlePlugin = "8.3.0-alpha15"
+gradleDoctor = "0.9.1"
+junit = "4.13.2"
+junitAndroid = "1.1.5"
+lifecycleRuntimeKtx = "2.6.2"
+material = "1.10.0"
+navigationCompose = "2.7.5"
+timber = "5.0.1"
+
+[libraries]
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitAndroid" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
+junit = { module = "junit:junit", version.ref = "junit" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-material = { module = "androidx.compose.material:material" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraX" }
+camera-two = { module = "androidx.camera:camera-camera2", version.ref = "cameraX" }
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
+accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-drawablepainter", version.ref = "accompanist" }
+accompanist-webview = { module = "com.google.accompanist:accompanist-webview", version.ref = "accompanist" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
+
+[plugins]
+binary-compatability-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatabilityValidator" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+doctor = { id = "com.osacky.doctor", version.ref = "gradleDoctor" }

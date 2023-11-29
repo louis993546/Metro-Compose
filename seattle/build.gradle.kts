@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("io.gitlab.arturbosch.detekt")
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -46,17 +46,17 @@ android {
 }
 
 dependencies {
-    val composeBom = platform("androidx.compose:compose-bom:${rootProject.extra.get("compose_bom_version")}")
+    val composeBom = platform(libs.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
-    implementation("androidx.activity:activity-compose:1.8.1")
+    implementation(libs.androidx.activity.compose)
     implementation("androidx.compose.ui:ui-tooling")
-    implementation("com.google.android.material:material:1.10.0")
+    implementation(libs.material)
 
     implementation(project(":metro"))
     implementation(project(":demoAppRow")) // TODO move it into metro maybe?
 
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(libs.timber)
 
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 }

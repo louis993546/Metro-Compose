@@ -16,6 +16,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            setUrl("https://androidx.dev/storage/compose-compiler/repository/")
+        }
     }
 }
 gradleEnterprise {
@@ -31,20 +34,22 @@ gradleEnterprise {
     }
 }
 rootProject.name = "Metro"
-include(":metro")
-include(":verticalTilesGrid")
-include(":seattle")
-include(":demo")
-include(":demoAppDrawer")
-include(":demoAppRow")
-include(":demoApps")
-include(":demoAppSearch")
-include(":demoBrowser")
-include(":demoCalculator")
-include(":demoCalendar")
-include(":demoCamera")
-include(":demoLauncher")
-include(":demoMetroSettings")
-include(":demoRadio")
-include(":demoSettings")
-include(":demoWordle")
+include(
+    ":metro",
+    ":verticalTilesGrid",
+    ":seattle",
+    ":demo",
+    ":demoAppDrawer",
+    ":demoAppRow",
+    ":demoApps",
+    ":demoAppSearch",
+    ":demoBrowser",
+    ":demoCalculator",
+    ":demoCalendar",
+    ":demoCamera",
+    ":demoLauncher",
+    ":demoMetroSettings",
+    ":demoRadio",
+    ":demoSettings",
+    ":demoWordle",
+)

@@ -18,7 +18,7 @@ android {
 }
 
 dependencies {
-    api("androidx.datastore:datastore:${rootProject.extra.get("datastore_version")}")
+    api(libs.androidx.datastore)
     implementation("com.google.protobuf:protobuf-javalite:${rootProject.extra.get("protofbuf_version")}")
 }
 

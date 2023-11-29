@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("io.gitlab.arturbosch.detekt")
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -57,22 +57,22 @@ android {
 }
 
 dependencies {
-    val composeBom = platform("androidx.compose:compose-bom:${rootProject.extra.get("compose_bom_version")}")
+    val composeBom = platform(libs.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.10.0")
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material:material")
-    implementation("androidx.compose.ui:ui-tooling")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.8.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.timber)
+    implementation(libs.accompanist.pager)
+    implementation(libs.androidx.navigation.compose)
     implementation(project(":metro"))
-    implementation("com.jakewharton.timber:timber:5.0.1")
-    implementation("com.google.accompanist:accompanist-pager:${rootProject.extra.get("accompanist_version")}")
-    implementation("androidx.navigation:navigation-compose:2.7.5")
     implementation(project(":demoApps"))
 
     //region Apps
@@ -88,9 +88,9 @@ dependencies {
     implementation(project(":demoWordle"))
     //endregion
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
 }
 

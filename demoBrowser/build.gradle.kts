@@ -7,5 +7,5 @@ android {
 }
 
 dependencies {
-    implementation("com.google.accompanist:accompanist-webview:${rootProject.extra.get("accompanist_version")}")
+    implementation(libs.accompanist.webview)
 }
