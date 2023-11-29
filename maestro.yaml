@@ -1,0 +1,12 @@
+appId: com.louis993546.metro.demo.debug
+---
+- launchApp
+- tapOn: "Calculator"
+- back
+- tapOn: "Browser"
+- back
+- tapOn: "Wordle"
+- back
+- swipe:
+    direction: LEFT
+- assertVisible: "Al Jazeera"
