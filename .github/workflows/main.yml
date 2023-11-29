@@ -94,7 +94,7 @@ jobs:
       - name: Run Maestro test
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 34
+          api-level: 33
           target: google_apis
           script: meaestro test --format=junit --output=report.xml --no-ansi maestro.yml
   demo-release-sign-publish:
