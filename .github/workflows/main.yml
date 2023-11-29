@@ -98,7 +98,7 @@ jobs:
           api-level: 34
           target: google_apis
           arch: x86_64
-          profile: pixel_6
+          profile: pixel_3a
           script: scripts/maestro-test.sh
       - name: "Upload report"
         uses: dorny/test-reporter@v1
