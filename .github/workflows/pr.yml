@@ -132,6 +132,14 @@ jobs:
           target: google_apis
           arch: x86_64
           script: scripts/maestro-test.sh
+      - name: "Upload report"
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: "Maestro Test Report"
+          path: "maestro-report.xml"
+          reporter: "java-junit"
+          fail-on-error: true
   lib-api-check:
     runs-on: ubuntu-latest
     steps:
