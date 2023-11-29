@@ -1,6 +1,11 @@
 appId: com.louis993546.metro.demo.debug
 ---
 - launchApp
+#- takeScreenshot: HomeScreen
+- extendedWaitUntil:
+    visible: "Calculator"
+    timeout: 10000
+#- takeScreenshot: HomeScreen2
 - tapOn: "Calculator"
 - back
 - tapOn: "Browser"
