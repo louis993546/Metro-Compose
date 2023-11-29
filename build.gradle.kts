@@ -14,15 +14,15 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.3.0-alpha15")
+        classpath(libs.android.gradle.plugin)
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.extra.get("kotlin_version")}")
     }
 }
 
 plugins {
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.13.2"
-    id("com.osacky.doctor") version "0.9.1"
-    id("io.gitlab.arturbosch.detekt") version "1.23.4"
+    alias(libs.plugins.binary.compatability.validator)
+    alias(libs.plugins.doctor)
+    alias(libs.plugins.detekt)
 }
 
 apiValidation {
