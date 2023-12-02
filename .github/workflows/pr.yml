@@ -25,7 +25,7 @@ jobs:
       - name: "Upload Debug APK to GitHub"
         uses: actions/upload-artifact@v3
         with:
-          name: Debug APK
+          name: demo-debug.apk
           path: demo/build/outputs/apk/debug/demo-debug.apk
   demo-release: # To ensure nothing wrong with release build
     runs-on: ubuntu-latest
@@ -60,7 +60,7 @@ jobs:
       - name: "Upload Debug APK to GitHub"
         uses: actions/upload-artifact@v3
         with:
-          name: Debug APK
+          name: seattle-debug.apk
           path: seattle/build/outputs/apk/debug/seattle-debug.apk
   lint:
     runs-on: ubuntu-latest

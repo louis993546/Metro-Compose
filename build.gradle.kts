@@ -23,6 +23,7 @@ plugins {
     alias(libs.plugins.binary.compatability.validator)
     alias(libs.plugins.doctor)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.module.graph)
 }
 
 apiValidation {
@@ -62,6 +63,11 @@ doctor {
         ensureJavaHomeIsSet = true
         failOnError.set(true)
     }
+}
+
+moduleGraphConfig {
+    readmePath.set("./README.md")
+    heading.set("## Dependency Diagram")
 }
 
 tasks.register("clean", Delete::class.java) {
