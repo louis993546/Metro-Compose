@@ -15,7 +15,7 @@ junit = "4.13.2"
 junitAndroid = "1.1.5"
 lifecycleRuntimeKtx = "2.7.0"
 material = "1.11.0"
-navigationCompose = "2.7.6"
+navigationCompose = "2.7.7"
 timber = "5.0.1"
 
 [libraries]
