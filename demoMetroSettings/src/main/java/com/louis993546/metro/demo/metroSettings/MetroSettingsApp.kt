@@ -175,7 +175,7 @@ internal fun Settings(
         )
         Text(text = "frameRatio")
         BasicTextField(
-            value = frameRatio?.toString() ?: "",
+            value = frameRatio?.toString().orEmpty(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             onValueChange = {
                 onConfigChange(MetroSettingsField.FRAME_RATIO, it)
@@ -241,7 +241,7 @@ internal fun OpenSourceLicenseRow(
                     },
                 )
                 Text(
-                    text = library.license ?: "", // TODO maybe this should not be nullable?
+                    text = library.license.orEmpty(), // TODO maybe this should not be nullable?
                     modifier = Modifier.padding(top = 8.dp)
                 )
             }
