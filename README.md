@@ -45,7 +45,8 @@ And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://dev
 | 0.135.0 to 0.141.0 | 23.08.00    |
 | 0.142.0 to 0.144.0 | 23.09.01    |
 | 0.146.0 to 0.156.0 | 23.10.01    |
-| 0.157.0 to latest  | 24.01.00    |
+| 0.157.0 to 0.160   | 24.01.00    |
+| 0.161 to latest    | 24.02.00    |
 
 
 ## Project Structure
@@ -84,6 +85,16 @@ See [CONTRIBUTIONS](CONTRIBUTIONS.md)
 See [LICENSE](LICENSE)
 
 ## Dependency Diagram
+
+### How to update
+
+Run the following
+
+```shell
+./gradlew createModuleGraph
+```
+
+### Graph
 
 ```mermaid
 %%{

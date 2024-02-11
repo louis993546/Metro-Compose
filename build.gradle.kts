@@ -67,7 +67,7 @@ doctor {
 
 moduleGraphConfig {
     readmePath.set("./README.md")
-    heading.set("## Dependency Diagram")
+    heading.set("### Graph")
 }
 
 tasks.register("clean", Delete::class.java) {
