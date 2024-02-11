@@ -77,7 +77,7 @@ jobs:
       - name: "Validate Gradle wrapper"
         uses: gradle/wrapper-validation-action@v2
       - name: "Dekekt"
-        run: ./gradlew detektMain detektTest --no-daemon
+        run: ./gradlew detekt detektMain detektTest --no-daemon
   test:
     runs-on: ubuntu-latest
     steps:
