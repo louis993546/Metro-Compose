@@ -15,5 +15,7 @@
 local.properties
 /metro/src/close/
 /.idea/deploymentTargetDropDown.xml
+/.idea/deploymentTargetSelector.xml
 /.idea/misc.xml
+/.idea/render.experimental.xml
 /gradle-user-home/

@@ -45,7 +45,6 @@ fun AppRow(
 ) {
     Row(
         modifier = modifier
-            .clickable { }
             .fillMaxSize()
     ) {
         AppIcon {

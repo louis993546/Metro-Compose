@@ -1,6 +1,7 @@
 package com.louis993546.seattle
 
 import android.content.pm.ApplicationInfo
+import android.content.Intent
 import android.content.pm.LauncherApps
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
@@ -9,15 +10,23 @@ import android.os.Bundle
 import android.os.Process
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.unit.dp
 import com.louis993546.metro.ListView
 import com.louis993546.metro.ListViewHeaderAcronymStyle
 import com.louis993546.metro.ListViewItem
@@ -29,8 +38,8 @@ import timber.log.Timber
 
 @ExperimentalFoundationApi
 class MainActivity : ComponentActivity() {
-
     private val iconPackManager = IconPackManager()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val installedApps = testingIconPack(getInstalledApps())
@@ -107,11 +116,11 @@ class MainActivity : ComponentActivity() {
                             drawable.monochrome ?: drawable
                         else -> drawable
                     }
-
                 }
 
                 App(
                     uuid = activityInfo.name,
+                    intent = packageManager.getLaunchIntentForPackage(activityInfo.applicationInfo.packageName),
                     label = activityInfo.label.toString(),
                     iconDrawable = icon, // TODO tint to white
                     info = activityInfo.applicationInfo,
@@ -126,6 +135,7 @@ class MainActivity : ComponentActivity() {
 
 data class App(
     val uuid: String,
+    val intent: Intent?,
     val label: String,
     val iconDrawable: Drawable,
     val info: ApplicationInfo,
@@ -150,9 +160,25 @@ fun DrawerPage(
                 key = letter
             )
 
+            val context = LocalContext.current
+            val haptics = LocalHapticFeedback.current
+
             val items = list.map {
                 ListViewItem.Content(
-                    contents = { AppRow(name = it.label, icon = it.iconDrawable) },
+                    contents = {
+                        AppRow(
+                            name = it.label,
+                            icon = it.iconDrawable,
+                            modifier = Modifier.combinedClickable(
+                                onClick = {
+                                    context.startActivity(it.intent)
+                                },
+                                onLongClick = {
+                                    haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+                                },
+                            )
+                        )
+                    },
                     label = it.label,
                     key = it.uuid
                 )
@@ -161,12 +187,13 @@ fun DrawerPage(
         }
         .flatten()
 
-    Row(modifier = modifier) {
+    Row(modifier = modifier.padding(horizontal = 8.dp)) {
 //        SearchButton(modifier = Modifier.padding(all = topMargin)) { onAppClick(Apps.APP_SEARCH) }
 
         ListView(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .padding(vertical = 8.dp),
             items = list,
         )
     }
