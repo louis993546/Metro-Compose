@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-const val FAKE_PAGE_COUNT = 256
+private const val FAKE_PAGE_COUNT = 256
 
 @ExperimentalFoundationApi
 @Composable
