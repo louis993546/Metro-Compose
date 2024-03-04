@@ -84,7 +84,7 @@ class MainActivity : ComponentActivity() {
                         composable(Apps.SETTINGS) { Settings() }
                         composable(Apps.BROWSER) { Browser() }
                         composable(Apps.CALENDAR) { Calendar() }
-                        composable(Apps.APP_SEARCH) { AppSearch(apps = Apps.values().asList()) }
+                        composable(Apps.APP_SEARCH) { AppSearch(apps = Apps.entries) }
                         composable(Apps.WORDLE) { WordleApp() }
                         composable(Apps.CAMERA) { Camera() }
                         // Add new apps here (step 2)
