@@ -36,7 +36,8 @@ import com.louis993546.metro.Button
 import com.louis993546.metro.Disclaimer
 import com.louis993546.metro.LocalTextOnButtonColor
 import com.louis993546.metro.MessageBox
-import com.louis993546.metro.Pages
+import com.louis993546.metro.Pivot
+import com.louis993546.metro.PivotItem
 import com.louis993546.metro.TitleBar
 import com.louis993546.metro.Text
 import kotlinx.coroutines.launch
@@ -52,26 +53,21 @@ fun MetroSettingsApp(
 ) {
     Column(modifier = modifier) {
         TitleBar(title = "Metro Settings")
-
-        Pages(
+        Pivot(
             modifier = Modifier
                 .weight(1f),
-            pageTitles = listOf("settings", "about", "open-source licenses")
-        ) { page ->
-            when (page) {
-                0 -> SettingsPage(dataSource = dataSource)
-                1 -> AboutUs(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                )
-                2 -> OpenSourceLicenses(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                )
-            }
-        }
+            items = listOf(
+                PivotItem("Settings") {
+                    SettingsPage(dataSource)
+                },
+                PivotItem("About") {
+                    AboutUs()
+                },
+                PivotItem("Open-Source Licenses") {
+                    OpenSourceLicenses()
+                }
+            ),
+        )
 
         val context = LocalContext.current
         ApplicationBar(
@@ -105,7 +101,6 @@ fun MetroSettingsApp(
 
 @Composable
 fun SettingsPage(
-    modifier: Modifier = Modifier,
     dataSource: MetroSettingsDataSource,
 ) {
     val scope = rememberCoroutineScope()
@@ -114,7 +109,7 @@ fun SettingsPage(
 
 
     Settings(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
         isTallScreenRatio = configuration.isTallScreenRatio,
@@ -189,19 +184,15 @@ internal fun Settings(
 }
 
 @Composable
-internal fun AboutUs(
-    modifier: Modifier = Modifier,
-) {
-    Column(modifier = modifier.fillMaxHeight()) {
+internal fun AboutUs() {
+    Column(modifier = Modifier.fillMaxHeight()) {
         Text(text = "Under Construction")
     }
 }
 
 @Composable
-internal fun OpenSourceLicenses(
-    modifier: Modifier = Modifier,
-) {
-    LazyColumn(modifier = modifier) {
+internal fun OpenSourceLicenses() {
+    LazyColumn {
         items(items = libraries, key = { it.name }) { lib ->
             OpenSourceLicenseRow(library = lib)
         }
