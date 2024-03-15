@@ -7,6 +7,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.timber)
+
     implementation(project(":demoApps"))
     implementation(project(":verticalTilesGrid"))
 }

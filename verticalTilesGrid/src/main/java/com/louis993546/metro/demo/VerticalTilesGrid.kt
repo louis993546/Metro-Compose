@@ -1,5 +1,7 @@
 package com.louis993546.metro.demo
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Layout
@@ -15,36 +17,45 @@ fun something(width: Int, height: Int) {
 
 interface VerticalTilesGridScope {
     @Composable
-    fun s(content: @Composable () -> Unit)
+    fun Small(content: @Composable () -> Unit)
 
     @Composable
-    fun m(content: @Composable () -> Unit)
+    fun Medium(content: @Composable () -> Unit)
 
     @Composable
-    fun l(content: @Composable () -> Unit)
+    fun Wide(content: @Composable () -> Unit)
+
+    @Composable
+    fun Large(content: @Composable () -> Unit)
 }
 
 class VerticalTilesGridScopeImpl : VerticalTilesGridScope {
     @Composable
-    override fun s(content: @Composable () -> Unit) {
+    override fun Small(content: @Composable () -> Unit) {
         content()
         something(1, 1)
     }
 
     @Composable
-    override fun m(content: @Composable () -> Unit) {
+    override fun Medium(content: @Composable () -> Unit) {
         content()
         something(2, 2)
     }
 
     @Composable
-    override fun l(content: @Composable () -> Unit) {
+    override fun Wide(content: @Composable () -> Unit) {
         content()
         something(4, 2)
     }
 
+    @Composable
+    override fun Large(content: @Composable () -> Unit) {
+        content()
+        something(4, 4)
+    }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun VerticalTilesGrid(
     modifier: Modifier = Modifier,
@@ -56,7 +67,7 @@ fun VerticalTilesGrid(
         modifier = modifier,
         content = { VerticalTilesGridScopeImpl().content() },
     ) { measurables, constraints ->
-        val totalGapWidth = gap.roundToPx() * (columns + 1)
+        val totalGapWidth = gap.roundToPx() * (columns - 1)
         val cellSize = (constraints.maxWidth - totalGapWidth) / columns
 
         val maxPossibleRowCount = List(measurables.size) { index ->
@@ -136,7 +147,7 @@ fun VerticalTilesGrid(
         val tallestLastRowRowCount = placeablesWithCoordinates.filter { it.row == totalRowCount }
             .maxByOrNull { it.heightRowCount }?.heightRowCount ?: 1
         val totalHeight =
-            ((totalRowCount + 1) * cellSize) + ((totalRowCount + 2) * gap.roundToPx()) + ((tallestLastRowRowCount - 1) * cellSize)
+            ((totalRowCount + 1) * cellSize) + ((totalRowCount + 1) * gap.roundToPx()) + ((tallestLastRowRowCount - 1) * cellSize)
 
         layout(
             width = constraints.maxWidth,
@@ -144,8 +155,8 @@ fun VerticalTilesGrid(
         ) {
             placeablesWithCoordinates.forEach { (placeable, row, column) ->
                 Timber.tag("qqqq").d("row = $row, column = $column")
-                val x = ((column + 1) * gap.roundToPx()) + (column * cellSize)
-                val y = ((row + 1) * gap.roundToPx()) + (row * cellSize)
+                val x = ((column + 0) * gap.roundToPx()) + (column * cellSize)
+                val y = ((row + 0) * gap.roundToPx()) + (row * cellSize)
 
                 Timber.tag("qqqq").d("x = $x, y = $y")
 

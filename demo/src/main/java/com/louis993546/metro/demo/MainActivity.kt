@@ -17,7 +17,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
@@ -36,6 +38,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -140,37 +143,20 @@ fun DeviceFrame(
     metroSettingsDataSource: MetroSettingsDataSource,
     content: @Composable () -> Unit,
 ) {
-    val isKeyboardOpen by keyboardAsState()
-    val configuration by metroSettingsDataSource.getConfiguration()
-        .collectAsState(initial = MetroSettingsConfiguration.INITIAL)
-
-    val ratio =
-        LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
-    val isTallScreen = ratio >= configuration.isTallScreenRatio
-
     Column {
-        // TODO maybe in future I can look into custom overscroll behaviour?
-        // CompositionLocalProvider( LocalOverScrollConfiguration provides null ) { }
         Box(
             modifier = Modifier
-                .run {
-                    if (isTallScreen && isKeyboardOpen == Keyboard.Closed) // TODO allow this to be turn off
-                        this.aspectRatio(
-                            configuration.frameRatio
-                                ?: error("Maybe I need to define a better type")
-                        )
-                    else
-                        this
-                }
+                .fillMaxSize()
+                .weight(2f)
         ) {
             content()
         }
         Row(
             modifier = Modifier
-                .fillMaxHeight()
-                .background(color = Color.Black), // like capacitive buttons,
+                .background(color = Color.Black)
+                .padding(top = 24.dp, bottom = 14.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.Bottom
         ) {
             Image(
                 modifier = Modifier

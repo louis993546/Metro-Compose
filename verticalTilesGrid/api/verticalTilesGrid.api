@@ -36,16 +36,18 @@ public final class com/louis993546/metro/demo/VerticalTilesGridKt {
 }
 
 public abstract interface class com/louis993546/metro/demo/VerticalTilesGridScope {
-	public abstract fun l (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
-	public abstract fun m (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
-	public abstract fun s (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Large (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Medium (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Small (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public abstract fun Wide (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 }
 
 public final class com/louis993546/metro/demo/VerticalTilesGridScopeImpl : com/louis993546/metro/demo/VerticalTilesGridScope {
 	public static final field $stable I
 	public fun <init> ()V
-	public fun l (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
-	public fun m (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
-	public fun s (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Large (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Medium (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Small (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public fun Wide (Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
 }
 

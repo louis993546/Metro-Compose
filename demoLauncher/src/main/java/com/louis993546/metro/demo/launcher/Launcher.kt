@@ -1,35 +1,47 @@
 package com.louis993546.metro.demo.launcher
 
-import androidx.annotation.DrawableRes
+import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.louis993546.metro.AdaptiveText
+import com.louis993546.metro.AdaptiveTextStyle
 import com.louis993546.metro.CircleButton
-import com.louis993546.metro.LocalAccentColor
-import com.louis993546.metro.LocalTextOnAccentColor
+import com.louis993546.metro.LiveTile
+import com.louis993546.metro.LiveTileBinding
+import com.louis993546.metro.LiveTileBranding
+import com.louis993546.metro.LiveTileContentAdaptive
+import com.louis993546.metro.LiveTileContentIconWithBadge
+import com.louis993546.metro.LiveTileContentTileSquareBlock
+import com.louis993546.metro.LiveTileSize
+import com.louis993546.metro.LiveTileVisual
 import com.louis993546.metro.LocalTextOnBackgroundColor
-import com.louis993546.metro.Text
+import com.louis993546.metro.VisualizeLiveTile
 import com.louis993546.metro.demo.VerticalTilesGrid
 import com.louis993546.metro.demo.apps.Apps
+
+import timber.log.Timber
 
 /**
  * Suppress LongMethod, as in long run, this whole thing should be configurable by the users
  */
+@OptIn(ExperimentalFoundationApi::class)
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Suppress("LongMethod")
 @Composable
 fun HomePage(
@@ -37,172 +49,269 @@ fun HomePage(
     onAppClick: (Apps) -> Unit,
     onArrowClick: () -> Unit,
 ) {
-    // TODO https://stackoverflow.com/questions/68334723/how-to-do-the-wp8-background-effect-in-jetpack-compose
-//        Image(
-//            modifier = Modifier.fillMaxWidth(),
-//            painter = painterResource(id = R.drawable.image),
-//            contentDescription = "background",
-//            contentScale = ContentScale.Crop,
-//        )
-    Column(modifier = modifier.verticalScroll(rememberScrollState())) {
-        VerticalTilesGrid(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(vertical = 8.dp)
-                .padding(horizontal = 12.dp),
-            gap = 12.dp,
-        ) {
-            s {
-                HomeTile(
-                    title = "Calculator",
-                    iconRes = R.drawable.ic_baseline_calculate_24,
-                    activate = { onAppClick(Apps.CALCULATOR) }
-                )
-            }
-            s {
-                HomeTile(
-                    title = "FM Radio",
-                    iconRes = R.drawable.ic_baseline_radio_24,
-                )
-            }
-            m {
-                HomeTile(
-                    title = "Browser",
-                    iconRes = R.drawable.outline_public_24,
-                    activate = { onAppClick(Apps.BROWSER) }
-                )
-            }
-            s {
-                HomeTile(
-                    title = "Camera",
-                    iconRes = R.drawable.ic_baseline_photo_camera_24,
-                    activate = { onAppClick(Apps.CAMERA) }
-                )
-            }
-            s {
-                HomeTile(
-                    title = "Calendar",
-                    iconRes = R.drawable.ic_baseline_calculate_24,
-                    activate = { onAppClick(Apps.CALENDAR) }
-                )
-            }
-            l { HomeTile(title = "Photos") }
-            m {
-                HomeTile(
-                    title = "7:00",
-                    iconRes = R.drawable.outline_public_24,
-                )
-            }
-            s {
-                HomeTile(
-                    title = "Videos"
-                )
-            }
-            s {
-                HomeTile(
-                    title = "Wordle",
-                    iconRes = R.drawable.wordle_icon,
-                    activate = { onAppClick(Apps.WORDLE) }
-                )
-            }
-            m {
-                HomeTile(
-                    title = "Maps",
-                    iconRes = R.drawable.ic_baseline_map_24,
-                )
-            }
-            s {
-                HomeTile(
-                    title = "Docs"
-                )
-            }
-            s {
-                HomeTile(
-                    title = "", // Metro Settings
-                    iconRes = R.drawable.ic_baseline_settings_24,
-                    activate = { onAppClick(Apps.SETTINGS) }
-                )
-            }
-            l {
-                HomeTile(
-                    title = "People"
-                )
-            }
-            s {
-                HomeTile(
-                    title = "", // Settings
-                    iconRes = R.drawable.ic_baseline_settings_24,
-                    activate = { onAppClick(Apps.METRO_SETTINGS) }
-                )
-            }
-        }
 
-        CircleButton(
-            modifier = Modifier
-                .align(Alignment.End)
-                .padding(8.dp)
-                .clickable {
-                    onArrowClick()
-                }
-        ) {
-            Image(
-                modifier = Modifier
-                    .padding(6.dp),
-                painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_24),
-                contentDescription = "Apps list",
-                colorFilter = ColorFilter.tint(
-                    LocalTextOnBackgroundColor.current
-                ),
+    val mail = LiveTile(
+        badge = "10",
+        visual = LiveTileVisual(
+            displayName = "Mail",
+            branding = LiveTileBranding.NameAndLogo,
+            tileWide = LiveTileBinding(
+                content = LiveTileContentAdaptive(
+                    children = listOf(
+                        AdaptiveText(
+                            text = "Basically a title",
+                            style = AdaptiveTextStyle.Base,
+                        ),
+                        AdaptiveText(
+                            text = "The actual content here which might very well get cut off",
+                            style = AdaptiveTextStyle.CaptionSubtle,
+                        ),
+                    )
+                )
             )
-        }
+        )
+    )
+
+    val calendar = LiveTile(
+        visual = LiveTileVisual(
+            displayName = "Calendar",
+            branding = LiveTileBranding.None,
+            tileMedium = LiveTileBinding(
+                content = LiveTileContentTileSquareBlock(
+                    besideBlockText = "Sat",
+                    blockText = "12",
+                    text = "This is a place for current calendar events",
+                )
+            )
+        )
+    )
+
+    val settings = LiveTile(
+        icon = painterResource(id = R.drawable.ic_baseline_settings_24),
+        visual = LiveTileVisual(
+            displayName = "Settings",
+            branding = LiveTileBranding.Name,
+            tileMedium = LiveTileBinding(
+                content = LiveTileContentIconWithBadge()
+            )
+        )
+    )
+
+    val badge = LiveTile(
+        badge = "1",
+        icon = painterResource(id = R.drawable.ic_baseline_photo_camera_24),
+        visual = LiveTileVisual(
+            displayName = "Test",
+            branding = LiveTileBranding.Name,
+            tileSmall = LiveTileBinding(
+                content = LiveTileContentIconWithBadge()
+            ),
+            tileMedium = LiveTileBinding(
+                content = LiveTileContentAdaptive(
+                    children = listOf(
+                        AdaptiveText(
+                            text = "medium"
+                        ),
+                    )
+                )
+            ),
+            tileWide = LiveTileBinding(
+                content = LiveTileContentAdaptive(
+                    children = listOf(
+                        AdaptiveText(
+                            text = "wide"
+                        ),
+                    )
+                )
+            ),
+            tileLarge = LiveTileBinding(
+                content = LiveTileContentAdaptive(
+                    children = listOf(
+                        AdaptiveText(
+                            text = "About those large live tiles",
+                            wrap = true,
+                            style = AdaptiveTextStyle.Base,
+                        ),
+                        AdaptiveText(
+                            text = "This size never actually managed to come over to the Phone, " +
+                                    "though based on early cshell leaks it appears to have been in " +
+                                    "the works for Windows 10 Mobile.",
+                            wrap = true,
+                        ),
+                        AdaptiveText(
+                            text = "Since the tile library supports it we might as well let the user " +
+                                    "have access to large live tiles too, even if they didn't exist " +
+                                    "in Windows Phone 8.1.",
+                            wrap = true,
+                        ),
+                    )
+                )
+            )
+        )
+    )
+
+    val haptics = LocalHapticFeedback.current;
+    val createInteractionModifier: (action: (() -> Unit)?) -> Modifier = { action ->
+        Modifier.combinedClickable(
+            onClick = {
+                if (action != null) {
+                    action()
+                }
+            },
+            onLongClick = {
+                haptics.performHapticFeedback(HapticFeedbackType.LongPress)
+            },
+        )
     }
-}
 
-
-/**
- * Unlike normal Tile, HomeTile can be rectangle, not just square
- * FIXME We need to know the size of the tile to set the correct
- *  icon size and whether to show the label or not
- */
-@Composable
-fun HomeTile(
-    @DrawableRes iconRes: Int? = null,
-    title: String = "",
-    backgroundColor: Color = LocalAccentColor.current,
-    textColor: Color = LocalTextOnAccentColor.current,
-    activate: (() -> Unit)? = null,
-) {
-    Box(
+    BoxWithConstraints(
         modifier = Modifier
-            .clickable {
-                activate?.invoke()
-            }
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
-        Box(
-            modifier = Modifier
-                .background(color = backgroundColor)
+        Column(
+            modifier = modifier
                 .fillMaxSize()
         ) {
-            iconRes?.let { res ->
+            VerticalTilesGrid(
+                columns = 6,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 18.dp, bottom = 6.dp, start = 14.dp, end = 12.dp),
+                gap = 12.dp,
+            ) {
+                Wide {
+                    VisualizeLiveTile(
+                        tile = mail,
+                        tileSize = LiveTileSize.Wide,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Medium {
+                    VisualizeLiveTile(
+                        tile = calendar,
+                        tileSize = LiveTileSize.Medium,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Medium {
+                    VisualizeLiveTile(
+                        tile = settings,
+                        tileSize = LiveTileSize.Medium,
+                        modifier = createInteractionModifier { onAppClick(Apps.METRO_SETTINGS) },
+                    )
+                }
+                Wide {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Wide,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Wide {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Wide,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Small {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Small,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Small {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Small,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Small {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Small,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Small {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Small,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Large {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Large,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Medium {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Medium,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Medium {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Medium,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Medium {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Medium,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Medium {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Medium,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Medium {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Medium,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+                Medium {
+                    VisualizeLiveTile(
+                        tile = badge,
+                        tileSize = LiveTileSize.Medium,
+                        modifier = createInteractionModifier {},
+                    )
+                }
+            }
+
+            CircleButton(
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .padding(vertical = 8.dp, horizontal = 12.dp)
+                    .clickable {
+                        onArrowClick()
+                    },
+            ) {
                 Image(
                     modifier = Modifier
-                        .size(36.dp)
-                        .align(Alignment.Center),
-                    painter = painterResource(id = res),
-                    contentDescription = "", // TODO fix me
-                    colorFilter = ColorFilter.tint(textColor),
+                        .padding(6.dp),
+                    painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_24),
+                    contentDescription = "Apps list",
+                    colorFilter = ColorFilter.tint(
+                        LocalTextOnBackgroundColor.current
+                    ),
                 )
             }
-
-            Text(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(start = 10.dp, bottom = 6.dp),
-                text = title,
-                size = 18.sp,
-                color = textColor,
-                maxLine = 1
-            )
         }
     }
 }
