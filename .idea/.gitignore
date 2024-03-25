@@ -5,3 +5,5 @@
 /gradle.xml
 /kotlinc.xml
 /inspectionProfiles/Project_Default.xml
+# GitHub Copilot persisted chat sessions
+/copilot/chatSessions
