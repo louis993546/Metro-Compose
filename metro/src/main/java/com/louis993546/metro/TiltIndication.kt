@@ -43,7 +43,7 @@ import kotlinx.coroutines.launch
 fun rememberTiltIndication(
     activeScale: Float = 0.98f,
     inactiveScale: Float = 1f,
-    intensity: Float = 7.5f
+    intensity: Float = 4f
 ): Indication {
     return remember(activeScale, inactiveScale, intensity) {
         TiltIndication(
@@ -57,7 +57,7 @@ fun rememberTiltIndication(
 internal class TiltIndication(
     private val scaleMin: Float = 0.98f,
     private val scaleMax: Float = 1f,
-    private val intensity: Float = 7.5f
+    private val intensity: Float = 4f
 ) : Indication {
     @Composable
     override fun rememberUpdatedInstance(

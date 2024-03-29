@@ -141,9 +141,6 @@ enum class MetroSettingsField {
     FRAME_RATIO
 }
 
-/**
- * TODO Metro version of TextField
- */
 @Composable
 internal fun Settings(
     modifier: Modifier = Modifier,

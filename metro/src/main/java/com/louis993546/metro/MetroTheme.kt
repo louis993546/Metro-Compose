@@ -7,6 +7,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
 
 val LocalAccentColor = compositionLocalOf<Color> { error("No accent color found!") }
 val LocalBackgroundColor = compositionLocalOf<Color> { error("No background color found") }
@@ -34,7 +36,11 @@ fun MetroTheme(
         LocalTextOnBackgroundColor provides textOnBackgroundColor,
         LocalButtonColor provides buttonColor,
         LocalTextOnButtonColor provides textOnBackgroundColor, // this is close enough for now
-        LocalIndication provides TiltIndication()
+        LocalIndication provides TiltIndication(),
+        LocalDensity provides Density(
+            LocalDensity.current.density,
+            fontScale = 1f,
+        )
     ) {
         content()
     }

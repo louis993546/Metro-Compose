@@ -3,7 +3,15 @@ package com.louis993546.metro
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -30,7 +38,7 @@ fun ListView(
         state = listState,
         contentPadding = PaddingValues(vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
     ) {
         items.forEachIndexed { index, item ->
             when (item) {
@@ -74,6 +82,7 @@ fun AcronymIcon(
         modifier = modifier
             .background(color = LocalBackgroundColor.current)
             .height(62.dp)
+            .clickable {  }
     ) {
         Box(
             modifier = Modifier
@@ -90,6 +99,7 @@ fun AcronymIcon(
                 weight = FontWeight.Medium,
                 color = LocalAccentColor.current,
                 size = 36.sp,
+                maxLine = 1
             )
         }
     }

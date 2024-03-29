@@ -4,4 +4,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="Theme.MetroDemo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.MetroDemo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -12,6 +12,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Row
@@ -19,17 +21,30 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.louis993546.metro.CircleButton
 import com.louis993546.metro.ListView
 import com.louis993546.metro.ListViewHeaderAcronymStyle
 import com.louis993546.metro.ListViewItem
+import com.louis993546.metro.LocalBackgroundColor
+import com.louis993546.metro.LocalTextOnBackgroundColor
+import com.louis993546.metro.MenuFlyout
+import com.louis993546.metro.MenuFlyoutItem
 import com.louis993546.metro.MetroColor
 import com.louis993546.metro.MetroTheme
 import com.louis993546.metro.Text
@@ -51,7 +66,12 @@ class MainActivity : ComponentActivity() {
                     initialPageOffsetFraction = 0f,
                     pageCount = { 2 },
                 )
-                HorizontalPager(state = pagerState) { page ->
+                HorizontalPager(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(LocalBackgroundColor.current),
+                    state = pagerState
+                ) { page ->
                     when (page) {
                         0 -> Text(
                             text = "Home page",
@@ -149,6 +169,8 @@ fun DrawerPage(
     modifier: Modifier = Modifier,
     apps: List<App>,
 ) {
+    var actionMenuOpen by remember { mutableStateOf(false) }
+
     val list = apps.sortedBy { it.label }
         .groupBy { it.label.first().lowercaseChar() }
         .map { (char, list) ->
@@ -174,6 +196,7 @@ fun DrawerPage(
                                     context.startActivity(it.intent)
                                 },
                                 onLongClick = {
+                                    actionMenuOpen = true
                                     haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                                 },
                             )
@@ -187,14 +210,53 @@ fun DrawerPage(
         }
         .flatten()
 
-    Row(modifier = modifier.padding(horizontal = 8.dp)) {
-//        SearchButton(modifier = Modifier.padding(all = topMargin)) { onAppClick(Apps.APP_SEARCH) }
+    Row(
+        modifier = modifier
+            .padding(horizontal = 6.dp)
+    ) {
+        SearchButton(
+            modifier = Modifier
+                .padding(horizontal = 12.dp, vertical = 16.dp),
+        ) { }
 
         ListView(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(vertical = 8.dp),
+                .fillMaxSize(),
             items = list,
+        )
+
+        MenuFlyout(
+            enabled = actionMenuOpen,
+            onDismissRequest = { actionMenuOpen = false }
+        ) {
+            MenuFlyoutItem(text = "Pin to Start")
+        }
+    }
+}
+
+@Composable
+fun SearchButton(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit,
+) {
+    CircleButton(
+        modifier = modifier
+            .size(48.dp)
+            .padding(4.dp)
+            .clickable {
+                onClick()
+            }
+    ) {
+        Image(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+                .scale(scaleX = -1f, scaleY = 1f),
+            painter = painterResource(id = R.drawable.ic_baseline_search_24),
+            contentDescription = "Search",
+            colorFilter = ColorFilter.tint(
+                LocalTextOnBackgroundColor.current
+            ),
         )
     }
 }
