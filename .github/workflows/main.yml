@@ -20,7 +20,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: "Assemble Debug"
         run: ./gradlew :demo:assembleDebug --no-daemon
       - name: "Upload Debug APK to GitHub"
@@ -40,7 +40,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: "Assemble Debug"
         run: ./gradlew :seattle:assembleDebug --no-daemon
       - name: "Upload Debug APK to GitHub"
@@ -60,7 +60,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: "Lint"
         run: ./gradlew lint --no-daemon
   detekt:
@@ -75,7 +75,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: "Dekekt"
         run: ./gradlew detekt detektMain detektTest --no-daemon
   test:
@@ -90,7 +90,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: "Test"
         run: ./gradlew test --no-daemon
   demo-release-sign-publish:
@@ -105,7 +105,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: "Generate Release AAB"
         run: ./gradlew :demo:bundleRelease --no-daemon
       - name: "Sign Android release"
@@ -143,7 +143,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: "Generate Release AAB"
         run: ./gradlew :seattle:bundleRelease --no-daemon
 #      - name: "Sign Android release"
@@ -181,7 +181,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: "Check API"
         run: ./gradlew :metro:apiCheck --no-daemon
   publish-lib:
@@ -199,7 +199,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v2
+        uses: gradle/wrapper-validation-action@v3
       - name: "Publish package"
         run: ./gradlew publish --no-daemon
         env:
