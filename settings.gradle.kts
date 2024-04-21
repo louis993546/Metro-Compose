@@ -5,11 +5,11 @@ pluginManagement {
         mavenCentral()
     }
     plugins {
-        id("com.gradle.enterprise") version "3.16.2"
+        id("com.gradle.develocity") version "3.17.2"
     }
 }
 plugins {
-    id("com.gradle.enterprise")
+    id("com.gradle.develocity")
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -21,11 +21,10 @@ dependencyResolutionManagement {
         }
     }
 }
-gradleEnterprise {
+develocity {
     buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
-        publishAlways()
+        termsOfUseUrl = "https://gradle.com/terms-of-service"
+        termsOfUseAgree = "yes"
         if (System.getenv("CI").toBoolean()) {
             tag("CI")
         } else {
@@ -33,6 +32,7 @@ gradleEnterprise {
         }
     }
 }
+
 rootProject.name = "Metro"
 include(
     ":metro",

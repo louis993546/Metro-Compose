@@ -19,12 +19,12 @@ android {
 
 dependencies {
     api(libs.androidx.datastore)
-    implementation("com.google.protobuf:protobuf-javalite:${rootProject.extra.get("protofbuf_version")}")
+    implementation(libs.protobuf.javalite)
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:${rootProject.extra.get("protofbuf_version")}"
+        artifact = "com.google.protobuf:protoc:${libs.versions.protobufJavalite.get()}"
     }
 
     // Generates the java Protobuf-lite code for the Protobufs in this project. See
