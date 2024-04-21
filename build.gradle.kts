@@ -2,9 +2,8 @@
 buildscript {
     extra.apply {
         // https://androidx.dev/storage/compose-compiler/repository
-        set("kotlin_version", "2.0.0-Beta3")
-        set("kotlin_compiler_version", "1.5.9-dev-k2.0.0-Beta3-7c5ec6895a0")
-        set("protofbuf_version", "3.25.1")
+        set("kotlin_version", "2.0.0-RC1")
+        set("kotlin_compiler_version", "1.5.13-dev-k2.0.0-RC1-50f08dfa4b4")
 
         set("compile_sdk_version", 34)
         set("build_tool_version", "34.0.0")
