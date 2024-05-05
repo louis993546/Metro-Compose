@@ -36,12 +36,6 @@ android {
             withSourcesJar()
         }
     }
-
-    // K2 lint crash
-    lint {
-        disable.add("MutableCollectionMutableState")
-        disable.add("AutoboxingStateCreation")
-    }
 }
 
 dependencies {

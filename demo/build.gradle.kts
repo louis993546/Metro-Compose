@@ -50,10 +50,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = rootProject.extra.get("kotlin_compiler_version") as? String
     }
-    // K2 lint crash
-    lint {
-        disable.addAll(listOf("MutableCollectionMutableState", "AutoboxingStateCreation"))
-    }
 }
 
 dependencies {
