@@ -49,7 +49,8 @@ And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://dev
 | 0.161.0 to 0.163.0 | 2024.02.00  |
 | 0.164.0 to 0.170.0 | 2024.02.01  |
 | 0.171.0 to 0.172.0 | 2024.03.00  |
-| 0.173.0 to latest  | 2024.04.01  |
+| 0.173.0 to 0.174.0 | 2024.04.01  |
+| 0.175.0 to latest  | 2024.05.00  |
 
 
 ## Project Structure
