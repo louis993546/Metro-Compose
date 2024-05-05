@@ -14,10 +14,17 @@ plugins {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
+        google {
+//            content {
+//                includeGroupAndSubgroups("androidx")
+//                includeGroupAndSubgroups("com.android")
+//                includeGroupAndSubgroups("com.google")
+//            }
+        }
         mavenCentral()
-        maven {
-            setUrl("https://androidx.dev/storage/compose-compiler/repository/")
+        maven("https://androidx.dev/storage/compose-compiler/repository/") {
+            name = "Compose Compiler Snapshots"
+            content { includeGroup("androidx.compose.compiler") }
         }
     }
 }
