@@ -18,7 +18,7 @@ material = "1.12.0"
 navigationCompose = "2.7.7"
 protobufJavalite = "4.26.1"
 timber = "5.0.1"
-modulegraph = "0.8.1"
+modulegraph = "0.9.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
