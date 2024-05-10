@@ -6,7 +6,7 @@ buildscript {
         set("kotlin_compiler_version", "1.5.13-dev-k2.0.0-RC1-50f08dfa4b4")
 
         set("compile_sdk_version", 34)
-        set("build_tool_version", "34.0.0")
+        set("compile_sdk_version_preview", "VanillaIceCream")
         set("min_sdk_version", 23)
     }
     repositories {
