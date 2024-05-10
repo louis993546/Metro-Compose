@@ -4,9 +4,12 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -52,15 +55,15 @@ fun DrawerPage(
     Row(
         modifier = modifier
             .padding(horizontal = 6.dp)
+            .windowInsetsPadding(WindowInsets.statusBars)
     ) {
         SearchButton(
-            modifier = Modifier
-                .padding(horizontal = 12.dp, vertical = 16.dp),
+            modifier = Modifier.padding(horizontal = 12.dp),
         ) { onAppClick(Apps.APP_SEARCH) }
 
         ListView(
             modifier = Modifier
-                    .fillMaxSize(),
+                .fillMaxSize(),
             items = list,
         )
     }
