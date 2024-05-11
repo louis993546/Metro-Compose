@@ -6,11 +6,11 @@ plugins {
 
 android {
     compileSdk compile_sdk_version
-    compileSdkPreview compile_sdk_version_preview
+    buildToolsVersion "$build_tool_version"
+
     defaultConfig {
         minSdk min_sdk_version
         targetSdk compile_sdk_version
-        targetSdkPreview compile_sdk_version_preview
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -28,11 +28,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion kotlin_compiler_version
     }
-}
-
-detekt {
-    config.setFrom(file("$project.rootDir/config/detekt/detekt.yml"))
-    buildUponDefaultConfig = true
 }
 
 dependencies {

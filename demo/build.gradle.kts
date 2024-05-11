@@ -7,13 +7,12 @@ plugins {
 android {
     namespace = "com.louis993546.metro.demo"
     compileSdk = rootProject.extra.get("compile_sdk_version") as? Int
-    compileSdkPreview = rootProject.extra.get("compile_sdk_version_preview") as? String
 
     defaultConfig {
         applicationId = "com.louis993546.metro.demo"
         minSdk = rootProject.extra.get("min_sdk_version") as? Int
+        compileSdk = rootProject.extra.get("compile_sdk_version") as? Int
         targetSdk = rootProject.extra.get("compile_sdk_version") as? Int
-        targetSdkPreview = rootProject.extra.get("compile_sdk_version_preview") as? String
 
         val number = System.getenv("GITHUB_RUN_NUMBER")?.toInt() ?: 1
         versionCode = number
