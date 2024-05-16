@@ -1,6 +1,6 @@
 plugins {
     id("metro-app-library-convention")
-    id("kotlin-parcelize")
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {

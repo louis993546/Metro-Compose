@@ -117,8 +117,8 @@ graph LR
   :demoWordle --> :metro
   :seattle --> :metro
   :seattle --> :demoAppRow
-  :demoCamera --> :metro
   :demoSettings --> :metro
+  :demoCamera --> :metro
   :demoAppRow --> :metro
   :demoAppRow --> :demoApps
   :demoMetroSettings --> :metro
