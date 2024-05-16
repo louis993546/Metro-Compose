@@ -1,10 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     extra.apply {
-        // https://androidx.dev/storage/compose-compiler/repository
-        set("kotlin_version", "2.0.0-RC1")
-        set("kotlin_compiler_version", "1.5.13-dev-k2.0.0-RC1-50f08dfa4b4")
-
         set("compile_sdk_version", 34)
         set("build_tool_version", "34.0.0")
         set("min_sdk_version", 23)
@@ -15,7 +11,7 @@ buildscript {
     }
     dependencies {
         classpath(libs.android.gradle.plugin)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${rootProject.extra.get("kotlin_version")}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.get()}")
     }
 }
 
@@ -24,6 +20,11 @@ plugins {
     alias(libs.plugins.doctor)
     alias(libs.plugins.detekt)
     alias(libs.plugins.module.graph)
+
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.compose) apply false
 }
 
 apiValidation {
@@ -46,6 +47,11 @@ apiValidation {
             "seattle"
         )
     )
+}
+
+detekt {
+    config.setFrom(file("$project.rootDir/config/detekt/detekt.yml"))
+    buildUponDefaultConfig = true
 }
 
 doctor {

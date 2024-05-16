@@ -1,7 +1,8 @@
 // TODO I need another convention to share anything compose i guess (app/lib/util)
 plugins {
     id("com.android.library")
-    id("kotlin-android")
+    alias(libs.plugins.kotlin.android)
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -24,9 +25,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = rootProject.extra.get("kotlin_compiler_version") as? String
     }
 }
 
