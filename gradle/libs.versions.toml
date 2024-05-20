@@ -18,7 +18,7 @@ material = "1.12.0"
 navigationCompose = "2.7.7"
 protobufJavalite = "4.26.1"
 timber = "5.0.1"
-modulegraph = "0.9.0"
+modulegraph = "0.10.0"
 kotlin = "2.0.0-RC3"
 
 [libraries]
