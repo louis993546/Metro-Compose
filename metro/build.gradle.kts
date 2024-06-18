@@ -34,6 +34,10 @@ android {
             withSourcesJar()
         }
     }
+
+    lint {
+        disable.add("OpaqueUnitKey") // bug in androidGradlePlugin 8.6.0-alpha06
+    }
 }
 
 dependencies {
