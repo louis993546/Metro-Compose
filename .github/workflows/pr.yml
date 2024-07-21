@@ -19,7 +19,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v3
+        uses: gradle/actions/wrapper-validation@v3
       - name: "Assemble Debug"
         run: ./gradlew :demo:assembleDebug --no-daemon
       - name: "Upload Debug APK to GitHub"
@@ -39,7 +39,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v3
+        uses: gradle/actions/wrapper-validation@v3
       - name: "Generate Release APK"
         run: ./gradlew :demo:assembleRelease --no-daemon
   seattle-debug:
@@ -54,7 +54,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v3
+        uses: gradle/actions/wrapper-validation@v3
       - name: "Assemble Debug"
         run: ./gradlew :seattle:assembleDebug --no-daemon
       - name: "Upload Debug APK to GitHub"
@@ -74,7 +74,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v3
+        uses: gradle/actions/wrapper-validation@v3
       - name: "Lint"
         run: ./gradlew lint --no-daemon
   detekt:
@@ -89,7 +89,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v3
+        uses: gradle/actions/wrapper-validation@v3
       - name: "Dekekt"
         run: ./gradlew detekt detektMain detektTest --no-daemon
   test:
@@ -104,7 +104,7 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v3
+        uses: gradle/actions/wrapper-validation@v3
       - name: "Test"
         run: ./gradlew test --no-daemon
   lib-api-check:
@@ -119,6 +119,6 @@ jobs:
           java-version: 17
           cache: 'gradle'
       - name: "Validate Gradle wrapper"
-        uses: gradle/wrapper-validation-action@v3
+        uses: gradle/actions/wrapper-validation@v3
       - name: "Check API"
         run: ./gradlew :metro:apiCheck --no-daemon
