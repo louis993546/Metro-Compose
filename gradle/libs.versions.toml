@@ -1,5 +1,5 @@
 [versions]
-accompanist = "0.34.0"
+accompanist = "0.36.0"
 activityCompose = "1.9.2"
 appcompat = "1.7.0"
 binaryCompatabilityValidator = "0.16.3"
