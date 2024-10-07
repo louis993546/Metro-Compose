@@ -114,7 +114,3 @@ public final class com/louis993546/metro/TileKt {
 	public static final fun Tile (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
-public final class com/louis993546/metro/TiltIndicationKt {
-	public static final fun rememberTiltIndication (FFFLandroidx/compose/runtime/Composer;II)Landroidx/compose/foundation/Indication;
-}
-

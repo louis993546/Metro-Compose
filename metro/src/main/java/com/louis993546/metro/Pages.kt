@@ -137,7 +137,7 @@ fun Pages(
             modifier = Modifier.weight(1f),
             state = pagerState,
             contentPadding = PaddingValues(top = 10.dp),
-            beyondBoundsPageCount = 3,
+            beyondViewportPageCount = 3,
             // Ugly hack to support infinite/looping scrolling,
             // officially recommended by @google/accompanist.
         ) { index ->
