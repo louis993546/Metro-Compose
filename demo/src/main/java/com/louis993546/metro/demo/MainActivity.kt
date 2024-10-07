@@ -102,7 +102,10 @@ private fun NavGraphBuilder.composable(
     composable(route = apps.id, content = content)
 }
 
-fun NavController.navigate(route: Apps) {
+/**
+ * TODO this has `2` cause the signature collide with a new compose navigation version
+ */
+fun NavController.navigate2(route: Apps) {
     this.navigate(route.id)
 }
 
@@ -118,7 +121,7 @@ fun Launcher(
         pageCount = { 2 },
     )
     HorizontalPager(state = pagerState) { page ->
-        val navigate: (Apps) -> Unit = { app -> navController.navigate(app) }
+        val navigate: (Apps) -> Unit = { app -> navController.navigate2(app) }
         when (page) {
             0 -> HomePage(
                 modifier = Modifier.fillMaxWidth(),
