@@ -139,6 +139,7 @@ fun Launcher(
 
 @Composable
 fun DeviceFrame(
+    modifier: Modifier = Modifier,
     navController: NavHostController,
     metroSettingsDataSource: MetroSettingsDataSource,
     content: @Composable () -> Unit,
@@ -151,7 +152,9 @@ fun DeviceFrame(
         LocalConfiguration.current.screenHeightDp.toFloat() / LocalConfiguration.current.screenWidthDp.toFloat()
     val isTallScreen = ratio >= configuration.isTallScreenRatio
 
-    Column {
+    Column(
+        modifier = modifier,
+    ) {
         // TODO maybe in future I can look into custom overscroll behaviour?
         // CompositionLocalProvider( LocalOverScrollConfiguration provides null ) { }
         Box(

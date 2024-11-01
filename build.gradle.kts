@@ -1,8 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     extra.apply {
-        set("compile_sdk_version", 34)
-        set("build_tool_version", "34.0.0")
+        set("compile_sdk_version", 35)
+        set("build_tool_version", "35.0.0")
         set("min_sdk_version", 23)
     }
     repositories {
