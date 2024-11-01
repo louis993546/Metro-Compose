@@ -28,14 +28,17 @@ fun ListView(
     val listState = rememberLazyListState()
     LazyColumn(
         state = listState,
-        contentPadding = PaddingValues(vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         modifier = modifier,
     ) {
+        item {
+            Spacer(modifier = modifier.windowInsetsPadding(WindowInsets.statusBars))
+        }
         items.forEachIndexed { index, item ->
             when (item) {
                 is ListViewItem.Header -> {
                     stickyHeader(key = item.key) {
+                        // TODO add status bar padding only if it is already sticky
                         item.contents()
                     }
                 }
@@ -51,6 +54,9 @@ fun ListView(
                     }
                 }
             }
+        }
+        item {
+            Spacer(modifier = modifier.windowInsetsPadding(WindowInsets.navigationBars))
         }
     }
 }

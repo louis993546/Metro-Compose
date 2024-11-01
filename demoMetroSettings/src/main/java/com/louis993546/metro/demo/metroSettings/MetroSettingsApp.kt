@@ -8,9 +8,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -50,7 +53,7 @@ fun MetroSettingsApp(
     modifier: Modifier = Modifier,
     dataSource: MetroSettingsDataSource,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.windowInsetsPadding(WindowInsets.statusBars)) {
         TitleBar(title = "Metro Settings")
 
         Pages(

@@ -53,12 +53,11 @@ fun DrawerPage(
         }.flatten()
 
     Row(
-        modifier = modifier
-            .padding(horizontal = 6.dp)
-            .windowInsetsPadding(WindowInsets.statusBars)
+        modifier = modifier.padding(horizontal = 6.dp)
     ) {
         SearchButton(
-            modifier = Modifier.padding(horizontal = 12.dp),
+            modifier = Modifier.padding(horizontal = 12.dp)
+                .windowInsetsPadding(WindowInsets.statusBars),
         ) { onAppClick(Apps.APP_SEARCH) }
 
         ListView(

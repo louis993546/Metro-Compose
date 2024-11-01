@@ -49,7 +49,7 @@ dependencies {
     implementation(composeBom)
     androidTestImplementation(composeBom)
     implementation(libs.androidx.activity.compose)
-    implementation("androidx.compose.ui:ui-tooling")
+    implementation(libs.androidx.ui.tooling)
     implementation(libs.material)
 
     implementation(project(":metro"))

@@ -2,6 +2,9 @@ package com.louis993546.metro.demo.settings
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.louis993546.metro.Pages
@@ -13,7 +16,7 @@ import com.louis993546.metro.TitleBar
 fun Settings(
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.windowInsetsPadding(WindowInsets.statusBars)) {
         TitleBar(title = "SETTINGS")
         Pages(pageTitles = listOf("system", "applications")) { pageNumber ->
             when (pageNumber) {
