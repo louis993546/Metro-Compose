@@ -45,6 +45,7 @@ include(
     ":metro",
     ":verticalTilesGrid",
     ":seattle",
+    "skylight",
     ":demo",
     ":demoAppDrawer",
     ":demoAppRow",

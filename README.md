@@ -50,8 +50,13 @@ And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://dev
 | 0.164.0 to 0.170.0 | 2024.02.01  |
 | 0.171.0 to 0.172.0 | 2024.03.00  |
 | 0.173.0 to 0.174.0 | 2024.04.01  |
-| 0.175.0 to latest  | 2024.05.00  |
-
+| 0.175.0 to 0.192.0 | 2024.05.00  |
+| 0.193.0 to 0.223.0 | 2024.06.00  |
+| 0.224.0 to 0.243.0 | 2024.08.00  |
+| 0.244.0 to 0.247.0 | 2024.09.03  |
+| 0.248.0 to 0.250.0 | 2024.10.00  |
+| 0.251.0 to 0.259.0 | 2024.10.01  |
+| 0.260.0 to latest  | 2024.11.00  |
 
 ## Project Structure
 
@@ -62,6 +67,7 @@ And from 0.80.0 and onwards, it uses the [Compose Bill of Materials](https://dev
 | `verticalTilesGrid` | The thing that makes the 4-column grid thing possible                        |
 | `demoAapps`         | Just a Kotlin class that keeps list of apps. So kinda registry situation     |
 | `seattle`           | A real Android launcher that uses the `metro` theme                          |
+| `skylight`          | A Bluesky client that uses the `metro` theme                                 |
 
 And these are the list of build-in "apps"
 
