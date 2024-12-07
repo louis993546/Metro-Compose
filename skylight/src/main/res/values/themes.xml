@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TODO Metro needs to have a theme I guess -->
+    <style name="Skylight" parent="android:Theme.DeviceDefault.NoActionBar">
+    </style>
+</resources>
