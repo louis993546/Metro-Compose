@@ -16,21 +16,28 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun ApplicationBar(
     modifier: Modifier = Modifier,
+    backgroundColor: Color = LocalAccentColor.current,
+    iconColor: Color = LocalTextOnAccentColor.current,
     count: Int,
     icon: @Composable (index: Int) -> Unit,
     onButtonClicked: (index: Int) -> Unit,
 ) {
-    ApplicationBar(modifier = modifier.defaultMinSize(minHeight = 36.dp)) {
+    ApplicationBar(
+        modifier = modifier.defaultMinSize(minHeight = 36.dp),
+        backgroundColor = backgroundColor,
+    ) {
         (0 until count).forEach { index ->
             CircleButton(
                 modifier = Modifier
                     .size(42.dp)
-                    .clickable { onButtonClicked(index) }
+                    .clickable { onButtonClicked(index) },
+                color = iconColor,
             ) {
                 icon(index)
             }
@@ -45,12 +52,13 @@ fun ApplicationBar(
 @Composable
 fun ApplicationBar(
     modifier: Modifier = Modifier,
+    backgroundColor: Color = LocalAccentColor.current,
     content: @Composable RowScope.() -> Unit,
 ) {
     Row(
         modifier = modifier
             .height(IntrinsicSize.Min)
-            .background(LocalButtonColor.current)
+            .background(backgroundColor)
             .padding(vertical = 10.dp, horizontal = 16.dp)
             .windowInsetsPadding(WindowInsets.navigationBars),
         horizontalArrangement = Arrangement.spacedBy(
