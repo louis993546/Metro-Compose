@@ -54,6 +54,7 @@ dependencies {
 
     implementation(project(":metro"))
     implementation(project(":demoAppRow")) // TODO move it into metro maybe?
+    implementation(project(":verticalTilesGrid"))
 
     implementation(libs.timber)
 
