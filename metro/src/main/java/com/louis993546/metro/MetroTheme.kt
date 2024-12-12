@@ -19,11 +19,12 @@ val LocalTextOnButtonColor = compositionLocalOf<Color> { error("No text on butto
 fun MetroTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     accentColor: Color,
+    onAccentColor: Color? = null,
     content: @Composable () -> Unit
 ) {
     val backgroundColor = if (darkTheme) Color.Black else Color.White
     val textOnBackgroundColor = if (darkTheme) Color.White else Color.Black
-    val textOnAccentColor = accentColor.textColor()
+    val textOnAccentColor = onAccentColor ?: accentColor.textColor()
     val buttonColor = if (darkTheme) Color(0xFF1F1F1F) else Color(0xFFDDDDDD)
 
     CompositionLocalProvider(

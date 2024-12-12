@@ -41,6 +41,7 @@ fun Button(
 @Composable
 fun CircleButton(
     modifier: Modifier = Modifier,
+    color: Color = LocalTextOnBackgroundColor.current,
     content: @Composable () -> Unit,
 ) {
     Box(
@@ -49,7 +50,7 @@ fun CircleButton(
             .background(color = Color.Transparent)
             .border(
                 width = 3.dp,
-                color = LocalTextOnBackgroundColor.current,
+                color = color,
                 shape = CircleShape
             ),
         contentAlignment = Alignment.Center,
