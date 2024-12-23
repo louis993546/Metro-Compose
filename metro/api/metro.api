@@ -1,11 +1,11 @@
 public final class com/louis993546/metro/ApplicationBarKt {
-	public static final fun ApplicationBar (Landroidx/compose/ui/Modifier;ILkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
-	public static final fun ApplicationBar (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun ApplicationBar-3IgeMak (Landroidx/compose/ui/Modifier;JLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun ApplicationBar-qi6gXK8 (Landroidx/compose/ui/Modifier;JJILkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/louis993546/metro/ButtonsKt {
 	public static final fun Button (Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
-	public static final fun CircleButton (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun CircleButton-3IgeMak (Landroidx/compose/ui/Modifier;JLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class com/louis993546/metro/FontFamilyKt {
@@ -87,7 +87,7 @@ public final class com/louis993546/metro/MetroColor$Companion {
 }
 
 public final class com/louis993546/metro/MetroThemeKt {
-	public static final fun MetroTheme-3IgeMak (ZJLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun MetroTheme-bfVYXPE (ZJLandroidx/compose/ui/graphics/Color;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 	public static final fun getLocalAccentColor ()Landroidx/compose/runtime/ProvidableCompositionLocal;
 	public static final fun getLocalBackgroundColor ()Landroidx/compose/runtime/ProvidableCompositionLocal;
 	public static final fun getLocalButtonColor ()Landroidx/compose/runtime/ProvidableCompositionLocal;
@@ -97,7 +97,7 @@ public final class com/louis993546/metro/MetroThemeKt {
 }
 
 public final class com/louis993546/metro/PagesKt {
-	public static final fun Pages (Landroidx/compose/ui/Modifier;Ljava/util/List;Lkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
+	public static final fun Pages-cf5BqRc (Landroidx/compose/ui/Modifier;Ljava/util/List;JLkotlin/jvm/functions/Function4;Landroidx/compose/runtime/Composer;II)V
 	public static final fun TitleBar (Landroidx/compose/ui/Modifier;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)V
 }
 
