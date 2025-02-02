@@ -25,6 +25,7 @@ private const val FAKE_PAGE_COUNT = 256
 fun Pages(
     modifier: Modifier = Modifier,
     pageTitles: List<String>,
+    titleTextColor: Color = LocalTextOnBackgroundColor.current,
     content: @Composable BoxScope.(pageNumber: Int) -> Unit,
 ) {
     Column(
@@ -118,7 +119,7 @@ fun Pages(
                         // Handle duplicates
                         // TODO: Fade in
                         color = if (pagerState.settledPage + pageCount <= it) Color.Transparent
-                        else if (pagerState.settledPage % pageCount == index) LocalTextOnBackgroundColor.current
+                        else if (pagerState.settledPage % pageCount == index) titleTextColor
                         else LocalTextOnBackgroundColor.current.copy(alpha = 0.35f),
                         modifier = Modifier.clickable {
                             // 2 scopes to make sure the animations won't wait for one another

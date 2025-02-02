@@ -54,5 +54,8 @@ dependencies {
 
     implementation(libs.timber)
 
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
     testImplementation(libs.junit)
 }
