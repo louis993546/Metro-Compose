@@ -44,7 +44,8 @@ apiValidation {
             "demoRadio",
             "demoSettings",
             "demoWordle",
-            "seattle"
+            "seattle",
+            "skylight"
         )
     )
 }
