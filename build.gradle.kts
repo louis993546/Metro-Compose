@@ -1,8 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     extra.apply {
-        set("compile_sdk_version", 35)
-        set("build_tool_version", "35.0.0")
+        set("compile_sdk_version", 36)
+        set("build_tool_version", "36.0.0")
         set("min_sdk_version", 23)
     }
     repositories {
@@ -59,10 +59,8 @@ doctor {
     disallowMultipleDaemons = (System.getenv("CI") == "false")
     GCWarningThreshold = 0.10f
     GCFailThreshold = 0.9f
-    failOnEmptyDirectories = true
     warnWhenJetifierEnabled = true
     negativeAvoidanceThreshold = 500
-    warnWhenNotUsingParallelGC = true
     disallowCleanTaskDependencies = true
     warnIfKotlinCompileDaemonFallback = true
     javaHome {
