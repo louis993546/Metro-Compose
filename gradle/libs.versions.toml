@@ -2,7 +2,7 @@
 accompanist = "0.36.0"
 activityCompose = "1.10.1"
 appcompat = "1.7.1"
-binaryCompatabilityValidator = "0.17.0"
+binaryCompatabilityValidator = "0.18.0"
 cameraX = "1.4.2"
 composeBom = "2025.06.01"
 coreKtx = "1.16.0"
