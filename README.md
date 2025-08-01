@@ -15,8 +15,10 @@ It's currently on open testing on Play Store
 
 ### The library
 
-For the time being, the library is published to GitHub Packages
-[over here](https://github.com/louis993546/Metro-Compose/packages/896987)
+~~For the time being, the library is published to GitHub Packages [over here](https://github.com/louis993546/Metro-Compose/packages/896987)~~
+
+Update: Seems like GH has started charging for packages, so package publishing has been disabled, and
+will be migrated soon. 
 
 <details>
 <summary>0.80.0 or older</summary>
