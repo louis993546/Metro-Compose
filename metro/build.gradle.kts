@@ -3,7 +3,7 @@ import java.net.URI
 plugins {
     id("com.android.library")
     alias(libs.plugins.kotlin.android)
-    id("maven-publish")
+//    id("maven-publish")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
@@ -26,11 +26,11 @@ android {
         compose = true
     }
 
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
+//    publishing {
+//        singleVariant("release") {
+//            withSourcesJar()
+//        }
+//    }
 
     lint {
         disable.add("OpaqueUnitKey") // bug in androidGradlePlugin 8.6.0-alpha06
@@ -57,28 +57,28 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestApi("androidx.compose.ui:ui-test-junit4")
 }
-
-afterEvaluate {
-    publishing {
-        publications {
-            register("release", MavenPublication::class.java) {
-                from(components["release"])
-                val number = System.getenv("GITHUB_RUN_NUMBER") ?: 9999
-                groupId = "com.louis993546"
-                artifactId = "metro"
-                version = "0.$number.0"
-            }
-        }
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = URI.create("https://maven.pkg.github.com/louis993546/Metro-Compose")
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR")
-                    password = System.getenv("GITHUB_TOKEN")
-                }
-
-            }
-        }
-    }
-}
+//
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            register("release", MavenPublication::class.java) {
+//                from(components["release"])
+//                val number = System.getenv("GITHUB_RUN_NUMBER") ?: 9999
+//                groupId = "com.louis993546"
+//                artifactId = "metro"
+//                version = "0.$number.0"
+//            }
+//        }
+//        repositories {
+//            maven {
+//                name = "GitHubPackages"
+//                url = URI.create("https://maven.pkg.github.com/louis993546/Metro-Compose")
+//                credentials {
+//                    username = System.getenv("GITHUB_ACTOR")
+//                    password = System.getenv("GITHUB_TOKEN")
+//                }
+//
+//            }
+//        }
+//    }
+//}
