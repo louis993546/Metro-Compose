@@ -24,7 +24,7 @@ jobs:
       - name: "Assemble Debug"
         run: ./gradlew :demo:assembleDebug --no-daemon
       - name: "Upload Debug APK to GitHub"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: demo-debug.apk
           path: demo/build/outputs/apk/debug/demo-debug.apk
@@ -44,7 +44,7 @@ jobs:
       - name: "Assemble Debug"
         run: ./gradlew :seattle:assembleDebug --no-daemon
       - name: "Upload Debug APK to GitHub"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: seattle-debug.apk
           path: demo/build/outputs/apk/debug/seattle-debug.apk
@@ -119,7 +119,7 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: "36.0.0"
       - name: "Upload Release AAB to GitHub"
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: demo-release.aab
           path: demo/build/outputs/bundle/release/demo-release.aab
@@ -155,7 +155,7 @@ jobs:
 #          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
 #          keyPassword: ${{ secrets.KEY_PASSWORD }}
 #      - name: "Upload Release AAB to GitHub"
-#        uses: actions/upload-artifact@v4
+#        uses: actions/upload-artifact@v5
 #        with:
 #          name: Release AAB
 #          path: seattle/build/outputs/bundle/release/seattle-release.aab
