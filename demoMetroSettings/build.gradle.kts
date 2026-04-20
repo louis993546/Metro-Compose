@@ -1,6 +1,6 @@
 plugins {
     id("metro-app-library-convention")
-    id("com.google.protobuf") version "0.9.6"
+    id("com.google.protobuf") version "0.10.0"
 }
 
 android {
