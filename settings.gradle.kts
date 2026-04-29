@@ -5,7 +5,7 @@ pluginManagement {
         mavenCentral()
     }
     plugins {
-        id("com.gradle.develocity") version "4.3.2"
+        id("com.gradle.develocity") version "4.4.1"
     }
 }
 plugins {
