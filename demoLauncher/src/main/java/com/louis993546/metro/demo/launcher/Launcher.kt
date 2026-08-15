@@ -180,10 +180,7 @@ fun HomeTile(
     activate: (() -> Unit)? = null,
 ) {
     Box(
-        modifier = Modifier
-            .clickable {
-                activate?.invoke()
-            }
+        modifier = Modifier.clickable { activate?.invoke() }
     ) {
         Box(
             modifier = Modifier
