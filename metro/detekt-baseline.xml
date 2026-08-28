@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues/>
+  <CurrentIssues>
+    <ID>ExplicitItLambdaParameter:Pages.kt${ it -&gt; // Titles parallax scrolling (eg pivot control) var offset = it.first val page = it.second // Calculate the target at the start of the swipe if (!swipeInProgress &amp;&amp; abs(offset) &gt; 0.01) { isSwipingBackwards = offset &lt; 0f initial = page swipeInProgress = true } if (isSwipingBackwards &amp;&amp; offset &gt; 0f) { offset -= 1f } else if (!isSwipingBackwards &amp;&amp; offset &lt; 0f) { offset += 1f } offset = FastOutSlowInEasing.transform(offset) val targetItem = listState.layoutInfo.visibleItemsInfo.firstOrNull { it.key == initial } ?: listState.layoutInfo.visibleItemsInfo.lastOrNull() if (targetItem == null) { return@collect } // Calculate the scroll offset based on the swipe offset and the size of the target item val scrollOffset = (offset * targetItem.size).roundToInt() // Scroll the label into view with the calculated offset if (scrollOffset != 0) { listState.scrollToItem(initial, scrollOffset) } else { listState.animateScrollToItem(page) } // Reset swipeInProgress and target when swipe ends if (abs(offset) &lt; 0.001) { swipeInProgress = false initial = pagerState.currentPage listState.scrollToItem(page) } }</ID>
+    <ID>ForEachOnRange:ApplicationBar.kt$0 until count</ID>
+    <ID>ForbiddenComment:Pages.kt$// TODO: Fade in</ID>
+    <ID>ForbiddenComment:TextField.kt$// FIXME: Make all of this configurable</ID>
+    <ID>ForbiddenComment:TextField.kt$// FIXME: should only have accent during focus</ID>
+    <ID>LongMethod:Pages.kt$@ExperimentalFoundationApi @Composable fun Pages( modifier: Modifier = Modifier, pageTitles: List&lt;String&gt;, content: @Composable BoxScope.(pageNumber: Int) -&gt; Unit, )</ID>
+    <ID>LongParameterList:Text.kt$( modifier: Modifier = Modifier, text: String, color: Color = LocalTextOnBackgroundColor.current, size: TextUnit = 20.sp, lineHeight: TextUnit = 24.sp, weight: FontWeight = FontWeight.Normal, maxLine: Int = Int.MAX_VALUE, )</ID>
+    <ID>LongParameterList:Text.kt$( modifier: Modifier = Modifier, text: String, color: Color = LocalTextOnBackgroundColor.current.copy(alpha = 0.35f), size: TextUnit = 18.sp, lineHeight: TextUnit = 20.sp, weight: FontWeight = FontWeight.Normal, )</ID>
+    <ID>MagicNumber:MetroTheme.kt$0.5</ID>
+    <ID>MagicNumber:MetroTheme.kt$0xFF1F1F1F</ID>
+    <ID>MagicNumber:MetroTheme.kt$0xFFDDDDDD</ID>
+    <ID>MagicNumber:Pages.kt$0.001</ID>
+    <ID>MagicNumber:Pages.kt$0.01</ID>
+    <ID>MatchingDeclarationName:Colors.kt$MetroColor</ID>
+    <ID>MatchingDeclarationName:ListView.kt$ListViewItem</ID>
+    <ID>NewLineAtEndOfFile:ApplicationBar.kt$com.louis993546.metro.ApplicationBar.kt</ID>
+    <ID>NewLineAtEndOfFile:ExampleUnitTest.kt$com.louis993546.metro.ExampleUnitTest.kt</ID>
+    <ID>NewLineAtEndOfFile:FontFamily.kt$com.louis993546.metro.FontFamily.kt</ID>
+    <ID>NewLineAtEndOfFile:MessageBox.kt$com.louis993546.metro.MessageBox.kt</ID>
+    <ID>NewLineAtEndOfFile:TextField.kt$com.louis993546.metro.TextField.kt</ID>
+    <ID>NewLineAtEndOfFile:Tile.kt$com.louis993546.metro.Tile.kt</ID>
+    <ID>UnusedPrivateClass:TileIndication2.kt$TiltIndicationNode : NodeDrawModifierNode</ID>
+    <ID>UnusedPrivateProperty:TileIndication2.kt$TiltIndicationNode$private val intensity: Float</ID>
+    <ID>UnusedPrivateProperty:TileIndication2.kt$TiltIndicationNode$private val scaleMax: Float</ID>
+    <ID>UnusedPrivateProperty:TileIndication2.kt$TiltIndicationNode$private val scaleMin: Float</ID>
+    <ID>UnusedPrivateProperty:TileIndication2.kt$TiltIndicationNode$private var componentSize = Size.Zero</ID>
+    <ID>UnusedPrivateProperty:TileIndication2.kt$TiltIndicationNode$private var rotation = Offset.Zero</ID>
+    <ID>UtilityClassWithPublicConstructor:Colors.kt$MetroColor</ID>
+    <ID>WildcardImport:ListView.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>WildcardImport:Pages.kt$import androidx.compose.foundation.*</ID>
+    <ID>WildcardImport:Pages.kt$import androidx.compose.foundation.layout.*</ID>
+    <ID>WildcardImport:Pages.kt$import androidx.compose.runtime.*</ID>
+  </CurrentIssues>
+</SmellBaseline>

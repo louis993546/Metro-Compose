@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm")
+    id("metro.jvm.library")
 }
 
 dependencies { }

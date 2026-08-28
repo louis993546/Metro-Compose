@@ -1,6 +1,6 @@
 plugins {
-    id("metro-app-library-convention")
-    id("com.google.protobuf") version "0.10.0"
+    id("metro.android.feature")
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -8,10 +8,6 @@ android {
 
     defaultConfig {
         consumerProguardFiles("proguard-rules.pro")
-    }
-
-    lint {
-        disable.add("OpaqueUnitKey") // bug in androidGradlePlugin 8.6.0-alpha06
     }
 }
 
