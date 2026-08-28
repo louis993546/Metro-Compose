@@ -1,20 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    extra.apply {
-        set("compile_sdk_version", 36)
-        set("build_tool_version", "36.0.0")
-        set("min_sdk_version", 23)
-    }
-    repositories {
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath(libs.android.gradle.plugin)
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.get()}")
-    }
-}
-
 plugins {
     alias(libs.plugins.binary.compatability.validator)
     alias(libs.plugins.doctor)
@@ -22,7 +6,8 @@ plugins {
     alias(libs.plugins.module.graph)
 
     alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.compose) apply false
 }
@@ -45,8 +30,8 @@ apiValidation {
             "demoSettings",
             "demoWordle",
             "seattle",
-            "skylight"
-        )
+            "skylight",
+        ),
     )
 }
 
@@ -75,6 +60,7 @@ moduleGraphConfig {
     heading.set("### Graph")
 }
 
-tasks.register("clean", Delete::class.java) {
+tasks.register<Delete>("clean") {
+    description = "Remove all build folders"
     delete(rootProject.layout.buildDirectory)
 }

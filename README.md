@@ -123,6 +123,7 @@ graph LR
   :demoAppSearch --> :demoApps
   :demoAppSearch --> :demoAppRow
   :demoWordle --> :metro
+  :skylight --> :metro
   :seattle --> :metro
   :seattle --> :demoAppRow
   :demoSettings --> :metro

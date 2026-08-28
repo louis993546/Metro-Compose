@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         gradlePluginPortal()
         google()
@@ -14,18 +15,8 @@ plugins {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google {
-//            content {
-//                includeGroupAndSubgroups("androidx")
-//                includeGroupAndSubgroups("com.android")
-//                includeGroupAndSubgroups("com.google")
-//            }
-        }
+        google()
         mavenCentral()
-        maven("https://androidx.dev/storage/compose-compiler/repository/") {
-            name = "Compose Compiler Snapshots"
-            content { includeGroup("androidx.compose.compiler") }
-        }
     }
 }
 develocity {
@@ -45,7 +36,7 @@ include(
     ":metro",
     ":verticalTilesGrid",
     ":seattle",
-    "skylight",
+    ":skylight",
     ":demo",
     ":demoAppDrawer",
     ":demoAppRow",

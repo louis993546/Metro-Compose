@@ -11,4 +11,4 @@ enum class Apps(val id: String) {
     WORDLE("wordle"),
     CAMERA("camera"),
     // Add new apps here (step 1)
-}
+}
